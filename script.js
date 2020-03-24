@@ -2,193 +2,154 @@ var quiz = {
   user: "Dave",
   questions: [
   {
-    text: "Q1 :Pensez-vous avoir ou avoir eu de la fièvre ces derniers jours (frissons, sueurs) ?",
+    text: " : الرجاء قم بإدخال المعطيات االتالية",
     responses: [
     { text: "Oui" , correct: true },
    
-    { text: "Non" }] },
+    { text: "Non" }],
+    formulaires: [
+      { label: "Nom" , type: "text" , reponse:""},
+     
+      { label: "Prenom", type: "text" , reponse:""}] },
 
 
   {
-    text: "Q2 :Quelle est votre température corporelle ?",
+    text: "هل تعاني من مرض السكري ؟",
     responses: [
-    { text: "37,0degrés", correct: true },
-    { text: "WEB" },
-    { text: "HEAD" },
-    { text: "BODY" }] },
-
-
+    { text: "نعم", correct: true },
+    { text: " لا "}] },
   {
-    text: "Q3 :Ces derniers jours, avez-vous une toux ou une augmentation de votre toux habituelle ?",
-    responses: [
-    { text: "Oui" , correct: true },
-    { text: "NON"}] },
+      text: " هل تعاني من ضغط الدم ؟",
+      responses: [
+        { text: "نعم", correct: true },
+        { text: " لا " }]
+    },
+    {
+      text: "  هل تعاني من  أمراض القلب ؟ ",
+      responses: [
+        { text: "نعم", correct: true },
+        { text: " لا " }]
+    },
+    {
+      text: " هل تعاني من ضيق تنفس مزمن ؟ ",
+      responses: [
+        { text: "نعم", correct: true },
+        { text: " لا " }]
+    },
+    {
+      text: "هل تعاني من  أمراض الكلى ؟ ",
+      responses: [
+        { text: "نعم", correct: true },
+        { text: " لا " }]
+    },
+    {
+      text: "هل أصبت بمرض السرطان أو تتبع   علاجا  بشأنه ؟ ",
+      responses: [
+        { text: "نعم", correct: true },
+        { text: " لا " }]
+    },
+    {
+      text: "هل أصبت بمرض السرطان أو تتبع   علاجا  بشأنه ؟ ",
+      responses: [
+        { text: "نعم", correct: true },
+        { text: " لا " }]
+    },
+    {
+      text: " هل تعاني من أحد أمراض ضعف المانعة ؟ ",
+      responses: [
+        { text: "نعم", correct: true },
+        { text: " لا " }]
+    },    
+    {
+      text: "من يقوم بتعمير هذه الاستمارة ؟ ",
+      responses: [
+        { text: " المريض", correct: true },
+        { text: "شخص آخر" }]
+    },  
 
+    {
+    text: "لماذا يقوم شخص آخر بملأ الإستمارة ؟ ",
+    responses: [
+      { text: " المريض لا يعرف التعامل مع التطبيقة ", correct: true },
+      { text: "حالة المريض  الصحية لا تسمح جراء فقدانه الوعي أو ضيق تنفس حاد" }]
+    },  
+    {
+      text: "هل سافرت خارج البلاد خلال الشهر الفارط ؟ ",
+    responses: [
+      { text: " نعم ", correct: true },
+      { text: " لا  " }]
+    },  
+    {
+      text: " هل كان لك اتصال مباشر بشخص سافر خارج البلاد الشهر الفارط ؟ ",
+    responses: [
+      { text: " نعم ", correct: true },
+      { text: " لا  " }]
+    },  
+    {
+      text: "هل يسكن معك في نفس المنزل ؟",
+    responses: [
+      { text: " نعم ", correct: true },
+      { text: " لا  " }]
+    },  
+    {
+    text: " هل خضعت أنت او الشخص المذكور لتحليل الاصابة بفيروس كورونا ؟",
+    responses: [
+      { text: " نعم ", correct: true },
+      { text: " لا  " }]
+    },
+    {
+      text: "ماهي نتيجة التحليل ؟",
+      responses: [
+        { text: "  مصاب ", correct: true },
+        { text: "غير مصاب" }]
+    },
 
-  {
-    text: "Q4 :Ces derniers jours, avez-vous noté une forte diminution ou perte de votre goût ou de votre odorat ?",
-    responses: [
-    { text: "OUI", correct: true },
-    { text: "NON" } ]},
-
-
-  {
-    text: "Q5 :Ces derniers jours, avez-vous un mal de gorge ?",
-    responses: [
-    { text: "OUI " },
-    
-
-    { text: "NON", correct: true }
-	] },
-
-
-  {
-    text:
-    "Q6 :Ces dernières 24 heures, avez-vous de la diarrhée ? Avec au moins 3 selles molles.",
-    responses: [
-   
-    { text: "OUI", correct: true },
-    { text: "NON" }] },
-
-
-  {
-    text: "Q7 : Ces derniers jours, avez-vous une fatigue inhabituelle ? ",
-    responses: [
-    { text: " OUI", correct: true },
-  
-
-    { text: "NON" }] },
-
-
-  {
-    text: "Q8 :Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de la journée ? ",
-    responses: [
-    { text: "OUI", correct: true },
-    { text: "NON" }] },
-
-
-  {
-    text:
-    "Q9 :Êtes vous dans l'impossibilité de vous alimenter ou de boire DEPUIS 24 HEURES OU PLUS ?",
-    responses: [
- 
-    { text: "OUI", correct: true },
-    { text: "NON" }] },
-
-   {
-    text: 
-    "Q 10 :Dans les dernières 24 heures, avez-vous noté un manque de souffle INHABITUEL lorsque vous parlez ou faites un petit effort ?",
-    responses: [
- 
-    { text: "OUI", correct: true },
-    { text: "NON" }] },
-	
-	{
-    text:
-    "Q11 :Quel est votre âge ? Ceci, afin de calculer un facteur de risque spécifique.",
-    responses: [
- 
-    { text: "24", correct: true },
-    { text: "25" }] },
-	
-	{
-    text:
-    "Q12 :Quel est votre taille ? Afin de calculer l’indice de masse corporelle qui est un facteur influençant le risque de complications de l’infection.",
-    responses: [
- 
-    { text: "170", correct: true },
-    { text: "180" }] },
-	
-	{
-    text:
-    "Q13 :Quel est votre poids ? Afin de calculer l’indice de masse corporelle qui est un facteur influençant le risque de complications de l’infection.",
-    responses: [
- 
-    { text: "50 KG", correct: true },
-    { text: "60 KG" }] },
-	
-	{
-    text:
-    "Q14 :Avez-vous de l’hypertension artérielle mal équilibrée ? Ou avez-vous une maladie cardiaque ou vasculaire ? Ou prenez vous un traitement à visée cardiologique ?",
-    responses: [
- 
-    { text: "OUI", correct: true },
-    { text: "NON" },
-	{ text: "Ne sait pas" }] },
-	
-	{
-    text:
-    "Q15 :Êtes-vous diabétique ?",
-    responses: [
- 
-    { text: "OUI", correct: true },
-    { text: "NON" }] },
-	
-	{
-    text:
-    "Q16 :Avez-vous ou avez-vous eu un cancer ?",
-    responses: [
- 
-    { text: "OUI", correct: true },
-    { text: "NON" }] },
-	
-	{
-    text:
-    "Q17 :Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?",
-    responses: [
- 
-    { text: "OUI", correct: true },
-    { text: "NON" }] },
-	
-	{
-    text:
-    "Q18 :Avez-vous une insuffisance rénale chronique dialysée ?",
-    responses: [
- 
-    { text: "OUI", correct: true },
-    { text: "NON" }] },
-	
-	{
-    text:
-    "Q19 :Avez-vous une maladie chronique du foie ?",
-    responses: [
- 
-    { text: "OUI", correct: true },
-    { text: "NON" }] },
-	
-	
-	{
-    text:
-    "Q20 :Êtes-vous enceinte ?",
-    responses: [
- 
-    { text: "OUI", correct: true },
-	{ text: "NON" },
-    { text: "NON applicable" }] },
-	
-	{
-    text:
-    "Q21 :Avez-vous une maladie connue pour diminuer vos défenses immunitaires ?",
-    responses: [
- 
-    { text: "OUI", correct: true },
-	{ text: "NON" },
-	
-    { text: "Ne sait pas" }] },
-	
-	
-	{
-    text:
-    "Q22 :Prenez-vous un traitement immunosuppresseur ? C’est un traitement qui diminue vos défenses contre les infections. Voici quelques exemples : corticoïdes, méthotrexate, ciclosporine, tacrolimus, azathioprine, cyclophosphamide (liste non exhaustive).?",
-    responses: [
- 
-    { text: "OUI", correct: true },
-	{ text: "NON" },
-	
-    { text: "Ne sait pas" }] },
-	
-   
-   
+    {
+      text: " هل تشكو من ارتفاع في درجة حرارتك (حمى) ؟ ",
+      responses: [
+        { text: " نعم ", correct: true },
+        { text: " لا  " }]
+    }, 
+    {
+      text: " هل لديك سعال او ان درجة السعال التي تشكو منها في العادة ازدادت حدة ؟ ",
+      responses: [
+        { text: " نعم ", correct: true },
+        { text: " لا  " }]
+    }, 
+    {
+      text: " هل تشكو من عدم القدرة على الحديث كما في السابق ؟ ",
+      responses: [
+        { text: " نعم ", correct: true },
+        { text: " لا  " }]
+    }, 
+    {
+      text: " لماذا ؟ ",
+      responses: [
+        { text: " احس بضيق في التنفس ", correct: true },
+        { text: "احس بتعب شديد ", correct: true },
+        { text: "صداع شديد يمنعني من الحديث" },
+        { text: " أسباب أخرى " }]
+    }, 
+    {
+      text: "هل تستطيع الحركة و القيام بحاجياتك دون مساعدة ؟",
+      responses: [
+        { text: " نعم ", correct: true },
+        { text: " لا  " }]
+    }, 
+    {
+      text: "هل تستطيع الحركة و القيام بحاجياتك دون مساعدة ؟",
+      responses: [
+        { text: " نعم ", correct: true },
+        { text: " لا  " }]
+    }, 
+    {
+      text: " منذ متى ؟",
+      responses: [
+        { text: " ايام ", correct: true },
+        { text: "اسابيع ", correct: true },
+        { text: "اشهر " },
+        { text: "سنوات " }]
+    }, 
   {
     text: "Q23 :Quel est votre code postal ? Cette information nous permet de réaliser un suivi épidémiologique",
     responses: [

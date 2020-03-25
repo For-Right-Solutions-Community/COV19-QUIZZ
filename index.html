@@ -3,23 +3,24 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="google-signin-client_id"
-		content="800870054376-enr1h0aovolk65p98o2l23gnna5bnapu.apps.googleusercontent.com">
+	<meta name="google-signin-client_id"		content="vl8npstpli3buld0rhg0o77dnekmj04n.apps.googleusercontent.com">
 	<title>CodePen - VueQuiz [vue2/scss rebuild]</title>
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css'>
 	<link rel="stylesheet" href="./style.css">
+
+
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
-	<meta name="google-signin-client_id"
-		content="800870054376-enr1h0aovolk65p98o2l23gnna5bnapu.apps.googleusercontent.com">
+
 </head>
 
 <body>
 	<!-- partial:index.partial.html -->
 	<!--container-->
 	<section class="container">
-		
+		<div class="g-signin2" data-onsuccess="onSignIn">  </div>
 		<!--questionBox-->
 		<div class="questionBox" id="app">
 
@@ -47,16 +48,19 @@
 
 					<!-- quizOptions -->
 					<div class="optionContainer" align="right">
+
 						<div class="option" v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='ONECHOICE'"
 							v-for="(response, index) in quiz.questions[questionIndex].responses"
 							@click="selectOption(index)"
 							:class="{ 'is-selected': userResponses[questionIndex] == index}" :key="index">
 							{{ response.text }}
 						</div>
+
 						<div class="option" v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='FORMULAIRE'"
 							v-for="(formulaire) in quiz.questions[questionIndex].formulaires">
 							<input type="text" :placeholder="formulaire.label" :value=" quiz.user " />
 						</div>
+
 						<div v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='MULTIPLECHOICES'"
 							v-for="(response, index) in quiz.questions[questionIndex].responses">
 							{{ response.text }} <input type="checkbox" @click="selectMulipleOption(index)"
@@ -114,7 +118,7 @@
 				<!--/quizCompetedResult-->
 
 			</transition>
-			<div class="g-signin2" data-onsuccess="onSignIn"> dddd </div>
+
 		</div>
 		<!--/questionBox-->
 

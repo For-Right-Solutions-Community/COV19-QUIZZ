@@ -3,14 +3,35 @@ var quiz = {
   questions: [
 
     {
+      ID:"ASPHEXIE",
+      QUIZZ_TYPE:"ONECHOICE",
+      text: " هل تشكو من عدم القدرة على الحديث كما في السابق ؟ ",
+      responses: [
+        { text: " نعم ", correct: true  , code: "YES" },
+        { text: " لا  " , code: "NO"}]
+    }, 
+    {
+      ID:"ASPHEXIE_CAUSE",
+      QUIZZ_TYPE:"MULTIPLECHOICES",
+      text: " لماذا ؟ ",
+      responses: [
+        { text: " احس بضيق في التنفس ",         code:"1"  ,selected:false},
+        { text: "احس بتعب شديد ",               code:"2"  ,selected:false},
+        { text: "صداع شديد يمنعني من الحديث" , code:"3"  ,selected:false},
+        { text: " أسباب أخرى " ,                code:"4"  ,selected:false}],
+        isvisible: function(id,code) { return id=="ASPHEXIE" && code=="YES" ? true:false}
+    }, 
+    {
       ID:"USER",  
       text: "من يقوم بتعمير هذه الاستمارة ؟ ",
+      QUIZZ_TYPE:"ONECHOICE",
       responses: [
         { text: " المريض", correct: true  , code: "YES"},
         { text: "شخص آخر" , code: "NO"}]
     },  
     {
     ID:"USERCAUSE",
+    QUIZZ_TYPE:"ONECHOICE",
     text: "لماذا يقوم شخص آخر بملأ الإستمارة ؟ ",
     responses: [
       { text: " المريض لا يعرف التعامل مع التطبيقة ", correct: true },
@@ -19,6 +40,7 @@ var quiz = {
     },  
   {
     ID:"FORMULAIRE",
+    QUIZZ_TYPE:"FORMULAIRE",
     text: " : الرجاء قم بإدخال المعطيات االتالية",
     responses: [
     { text: "Oui" , correct: true },
@@ -30,18 +52,21 @@ var quiz = {
     },
   {
     ID:"DIABETE",
+    QUIZZ_TYPE:"ONECHOICE",
     text: "هل تعاني من مرض السكري ؟",
     responses: [
     { text: "نعم", correct: true , code: "YES"},
     { text: " لا " , code: "NO" }] },
   {
       text: " هل تعاني من ضغط الدم ؟",
+      QUIZZ_TYPE:"ONECHOICE",
       responses: [
         { text: "نعم", correct: true  , code: "YES"},
         { text: " لا ", code: "NO" }]
     },
     {
       ID:"CARDIO",
+      QUIZZ_TYPE:"ONECHOICE",
       text: "  هل تعاني من  أمراض القلب ؟ ",
       responses: [
         { text: "نعم", correct: true  , code: "YES"},
@@ -49,6 +74,7 @@ var quiz = {
     },
     {
       ID:"ASME",
+      QUIZZ_TYPE:"ONECHOICE",
       text: " هل تعاني من ضيق تنفس مزمن ؟ ",
       responses: [
         { text: "نعم", correct: true , code: "YES" },
@@ -56,6 +82,7 @@ var quiz = {
     },
     {
       ID:"RENALE",
+      QUIZZ_TYPE:"ONECHOICE",
       text: "هل تعاني من  أمراض الكلى ؟ ",
       responses: [
         { text: "نعم", correct: true  , code: "YES"},
@@ -63,6 +90,7 @@ var quiz = {
     },
     {
       ID:"CANCER",
+      QUIZZ_TYPE:"ONECHOICE",
       text: "هل أصبت بمرض السرطان أو تتبع   علاجا  بشأنه ؟ ",
       responses: [
         { text: "نعم", correct: true  , code: "YES" },
@@ -70,6 +98,7 @@ var quiz = {
     },
     {
       ID:"IMMUNITY",   
+      QUIZZ_TYPE:"ONECHOICE",
       text: " هل تعاني من أحد أمراض ضعف المانعة ؟ ",
       responses: [
         { text: "نعم", correct: true  , code: "YES" },
@@ -77,6 +106,7 @@ var quiz = {
     },    
     {
       ID:"VOYAGE",
+      QUIZZ_TYPE:"ONECHOICE",
       text: "هل سافرت خارج البلاد خلال الشهر الفارط ؟ ",
     responses: [
       { text: " نعم ", correct: true  , code: "YES"},
@@ -84,6 +114,7 @@ var quiz = {
     },  
     {
       ID:"EXPOSITION_VOYAGE",
+      QUIZZ_TYPE:"ONECHOICE",
       text: " هل كان لك اتصال مباشر بشخص سافر خارج البلاد الشهر الفارط ؟ ",
     responses: [
       { text: " نعم ", correct: true  , code: "YES"},
@@ -92,6 +123,7 @@ var quiz = {
     },  
     {
       ID:"EXPOSITION_HABITAT",
+      QUIZZ_TYPE:"ONECHOICE",
       text: "هل يسكن معك في نفس المنزل ؟",
     responses: [
       { text: " نعم ", correct: true  , code: "YES"},
@@ -100,6 +132,7 @@ var quiz = {
     },  
     {
       ID:"EXPOSITION_ANALYSE",
+      QUIZZ_TYPE:"ONECHOICE",
     text: " هل خضعت أنت او الشخص المذكور لتحليل الاصابة بفيروس كورونا ؟",
     responses: [
       { text: " نعم ", correct: true  , code: "YES"},
@@ -108,6 +141,7 @@ var quiz = {
     },
     {
       ID:"EXPOSITION_RESULTAT_ANALYSE",
+      QUIZZ_TYPE:"ONECHOICE",
       text: "ماهي نتيجة التحليل ؟",
       responses: [
         { text: "  مصاب ", correct: true  , code: "YES"},
@@ -117,6 +151,7 @@ var quiz = {
 
     {
       ID:"FIEVRE",
+      QUIZZ_TYPE:"ONECHOICE",
       text: " هل تشكو من ارتفاع في درجة حرارتك (حمى) ؟ ",
       responses: [
         { text: " نعم ", correct: true  , code: "YES"},
@@ -124,6 +159,7 @@ var quiz = {
     }, 
     {
       ID:"MAUX_GORGE",
+      QUIZZ_TYPE:"ONECHOICE",
       text: " هل تشعر بألم حاد في الحنجرة ؟ ",
       responses: [
         { text: " نعم ", correct: true  , code: "YES"},
@@ -131,29 +167,15 @@ var quiz = {
     },     
     {
       ID:"TOUX",
+      QUIZZ_TYPE:"ONECHOICE",
       text: " هل لديك سعال او ان درجة السعال التي تشكو منها في العادة ازدادت حدة ؟ ",
       responses: [
         { text: " نعم ", correct: true  , code: "YES"},
         { text: " لا  " }]
     }, 
     {
-      ID:"ASPHEXIE",
-      text: " هل تشكو من عدم القدرة على الحديث كما في السابق ؟ ",
-      responses: [
-        { text: " نعم ", correct: true  , code: "YES" },
-        { text: " لا  " , code: "NO"}]
-    }, 
-    {
-      ID:"ASPHEXIE_CAUSE",
-      text: " لماذا ؟ ",
-      responses: [
-        { text: " احس بضيق في التنفس ", correct: true },
-        { text: "احس بتعب شديد ", correct: true },
-        { text: "صداع شديد يمنعني من الحديث" },
-        { text: " أسباب أخرى " }]
-    }, 
-    {
       ID:"ABILYTY",
+      QUIZZ_TYPE:"ONECHOICE",
       text: "هل تستطيع الحركة و القيام بحاجياتك دون مساعدة ؟",
       responses: [
         { text: " نعم ", correct: true  , code: "YES"},
@@ -161,6 +183,7 @@ var quiz = {
     }, 
     {
       ID:"ABILYTY_DURATION",
+      QUIZZ_TYPE:"ONECHOICE",
       text: " منذ متى ؟",
       responses: [
         { text: " ايام ", correct: true },
@@ -203,7 +226,15 @@ var app = new Vue({
         this.quiz.questions[this.questionIndex].selectedcode = selectedcode;
         console.log(this.quiz.questions[this.questionIndex].selectedcode);
       }
-
+      console.log("Check box change "+index);
+    },
+    selectMulipleOption: function (index) {
+      if (!(this.quiz.questions[this.questionIndex].responses[index].code === 'undefined'))
+      {
+        this.quiz.questions[this.questionIndex].responses[index].selected = !this.quiz.questions[this.questionIndex].responses[index].selected
+        console.log("Check box change "+this.quiz.questions[this.questionIndex].responses[index].selected);
+      }
+     
     },
     next: function () {
       if (this.questionIndex < this.quiz.questions.length)

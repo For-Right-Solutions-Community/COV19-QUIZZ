@@ -37,12 +37,17 @@
 
 				<!-- quizOptions -->
 				<div class="optionContainer"  align ="right">
-					<div class="option" v-for="(response, index) in quiz.questions[questionIndex].responses" @click="selectOption(index)" :class="{ 'is-selected': userResponses[questionIndex] == index}" :key="index">
+					<div class="option" v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='ONECHOICE'" 
+						 v-for="(response, index) in quiz.questions[questionIndex].responses" 
+						 @click="selectOption(index)"
+						 :class="{ 'is-selected': userResponses[questionIndex] == index}" :key="index">
 						 {{ response.text }}
-						 <input type="checkbox" v-if=" true == true" />
 					</div>
-					<div class="option" v-for="(formulaire) in quiz.questions[questionIndex].formulaires"  >
+					<div class="option"  v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='FORMULAIRE'" v-for="(formulaire) in quiz.questions[questionIndex].formulaires"  >
 						<input type="text" :placeholder="formulaire.label" :value=" quiz.user " />
+					</div>
+					<div  v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='MULTIPLECHOICES'" v-for="(response, index) in quiz.questions[questionIndex].responses" >
+						{{ response.text }} <input type="checkbox"  @click="selectMulipleOption(index)" checked= no>  
 					</div>
 				</div>
 

@@ -2,17 +2,19 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
+  <meta name="google-signin-client_id" content="800870054376-enr1h0aovolk65p98o2l23gnna5bnapu.apps.googleusercontent.com">
   <title>CodePen - VueQuiz [vue2/scss rebuild]</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css'><link rel="stylesheet" href="./style.css">
-
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="800870054376-enr1h0aovolk65p98o2l23gnna5bnapu.apps.googleusercontent.com">
 </head>
 <body>
 <!-- partial:index.partial.html -->
 <!--container-->
 <section class="container">
-
+	<div class="g-signin2" data-onsuccess="onSignIn"> dddd </div>
 	<!--questionBox-->
 	<div class="questionBox" id="app">
 
@@ -47,7 +49,7 @@
 						<input type="text" :placeholder="formulaire.label" :value=" quiz.user " />
 					</div>
 					<div  v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='MULTIPLECHOICES'" v-for="(response, index) in quiz.questions[questionIndex].responses" >
-						{{ response.text }} <input type="checkbox"  @click="selectMulipleOption(index)" checked= no>  
+						{{ response.text }} <input type="checkbox"  @click="selectMulipleOption(index)" v-model="quiz.questions[questionIndex].responses[index].selected" />  
 					</div>
 				</div>
 

@@ -1,114 +1,144 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="google-signin-client_id" content="800870054376-enr1h0aovolk65p98o2l23gnna5bnapu.apps.googleusercontent.com">
-  <title>CodePen - VueQuiz [vue2/scss rebuild]</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css'><link rel="stylesheet" href="./style.css">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<meta name="google-signin-client_id" content="800870054376-enr1h0aovolk65p98o2l23gnna5bnapu.apps.googleusercontent.com">
+	<meta charset="UTF-8">
+	<meta name="google-signin-client_id"
+		content="800870054376-enr1h0aovolk65p98o2l23gnna5bnapu.apps.googleusercontent.com">
+	<title>CodePen - VueQuiz [vue2/scss rebuild]</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css'>
+	<link rel="stylesheet" href="./style.css">
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id"
+		content="800870054376-enr1h0aovolk65p98o2l23gnna5bnapu.apps.googleusercontent.com">
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
-<!--container-->
-<section class="container">
-	<div class="g-signin2" data-onsuccess="onSignIn"> dddd </div>
-	<!--questionBox-->
-	<div class="questionBox" id="app">
+	<!-- partial:index.partial.html -->
+	<!--container-->
+	<section class="container">
+		<div class="g-signin2" data-onsuccess="onSignIn"> dddd </div>
+		<!--questionBox-->
+		<div class="questionBox" id="app">
 
-		<!-- transition -->
-		<transition :duration="{ enter: 100, leave: 100 }" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut" mode="out-in">
+			<!-- transition -->
+			<transition :duration="{ enter: 100, leave: 100 }" enter-active-class="animated zoomIn"
+				leave-active-class="animated zoomOut" mode="out-in">
 
-			<!--qusetionContainer-->
-			<div class="questionContainer" v-if="questionIndex<quiz.questions.length" v-bind:key="questionIndex">
+				<!--qusetionContainer-->
+				<div class="questionContainer" v-if="questionIndex<quiz.questions.length" v-bind:key="questionIndex">
 
-				<header>
-					<h1 class="title is-6">Test COVID19</h1>
-					<!--progress-->
-					<div class="progressContainer">
-						<progress class="progress is-info is-small" :value="(questionIndex/quiz.questions.length)*100" max="100">{{(quiz.questions.length)*100}}%</progress>
-						
+					<header>
+						<h1 class="title is-6">Test COVID19</h1>
+						<!--progress-->
+						<div class="progressContainer">
+							<progress class="progress is-info is-small"
+								:value="(questionIndex/quiz.questions.length)*100"
+								max="100">{{(quiz.questions.length)*100}}%</progress>
+
+						</div>
+						<!--/progress-->
+					</header>
+
+					<!-- questionTitle -->
+					<h2 class="titleContainer title">{{ quiz.questions[questionIndex].text }}</h2>
+
+					<!-- quizOptions -->
+					<div class="optionContainer" align="right">
+						<div class="option" v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='ONECHOICE'"
+							v-for="(response, index) in quiz.questions[questionIndex].responses"
+							@click="selectOption(index)"
+							:class="{ 'is-selected': userResponses[questionIndex] == index}" :key="index">
+							{{ response.text }}
+						</div>
+						<div class="option" v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='FORMULAIRE'"
+							v-for="(formulaire) in quiz.questions[questionIndex].formulaires">
+							<input type="text" :placeholder="formulaire.label" :value=" quiz.user " />
+						</div>
+						<div v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='MULTIPLECHOICES'"
+							v-for="(response, index) in quiz.questions[questionIndex].responses">
+							{{ response.text }} <input type="checkbox" @click="selectMulipleOption(index)"
+								v-model="quiz.questions[questionIndex].responses[index].selected" />
+						</div>
 					</div>
-					<!--/progress-->
-				</header>
 
-				<!-- questionTitle -->
-				<h2 class="titleContainer title">{{ quiz.questions[questionIndex].text }}</h2>
+					<!--quizFooter: navigation and progress-->
+					<footer class="questionFooter">
 
-				<!-- quizOptions -->
-				<div class="optionContainer"  align ="right">
-					<div class="option" v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='ONECHOICE'" 
-						 v-for="(response, index) in quiz.questions[questionIndex].responses" 
-						 @click="selectOption(index)"
-						 :class="{ 'is-selected': userResponses[questionIndex] == index}" :key="index">
-						 {{ response.text }}
-					</div>
-					<div class="option"  v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='FORMULAIRE'" v-for="(formulaire) in quiz.questions[questionIndex].formulaires"  >
-						<input type="text" :placeholder="formulaire.label" :value=" quiz.user " />
-					</div>
-					<div  v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='MULTIPLECHOICES'" v-for="(response, index) in quiz.questions[questionIndex].responses" >
-						{{ response.text }} <input type="checkbox"  @click="selectMulipleOption(index)" v-model="quiz.questions[questionIndex].responses[index].selected" />  
-					</div>
+						<!--pagination-->
+						<nav class="pagination" role="navigation" aria-label="pagination">
+
+							<!-- back button -->
+							<a class="button" v-on:click="prev();" :disabled="questionIndex < 1">
+								Retour
+							</a>
+
+							<!-- next button -->
+							<a class="button" :class="(userResponses[questionIndex]==null)?'':'is-active'"
+								v-on:click="next();" :disabled="questionIndex>=quiz.questions.length">
+								{{ (userResponses[questionIndex]==null)?'Enregister et Contiuner':'Suivant' }}
+							</a>
+
+						</nav>
+						<!--/pagination-->
+
+					</footer>
+					<!--/quizFooter-->
+
 				</div>
+				<!--/questionContainer-->
 
-				<!--quizFooter: navigation and progress-->
-				<footer class="questionFooter">
+				<!--quizCompletedResult-->
+				<div v-if="questionIndex >= quiz.questions.length" v-bind:key="questionIndex"
+					class="quizCompleted has-text-centered">
 
-					<!--pagination-->
-					<nav class="pagination" role="navigation" aria-label="pagination">
+					<!-- quizCompletedIcon: Achievement Icon -->
+					<span class="icon">
+						<i class="fa" :class="score()>3?'fa-check-circle-o is-active':'fa-times-circle'"></i>
+					</span>
 
-						<!-- back button -->
-						<a class="button" v-on:click="prev();" :disabled="questionIndex < 1">
-                    Retour
-                  </a>
-
-						<!-- next button -->
-						<a class="button" :class="(userResponses[questionIndex]==null)?'':'is-active'" v-on:click="next();" :disabled="questionIndex>=quiz.questions.length">
-                    {{ (userResponses[questionIndex]==null)?'Enregister et Contiuner':'Suivant' }}
-                  </a>
-
-					</nav>
-					<!--/pagination-->
-
-				</footer>
-				<!--/quizFooter-->
-
-			</div>
-			<!--/questionContainer-->
-
-			<!--quizCompletedResult-->
-			<div v-if="questionIndex >= quiz.questions.length" v-bind:key="questionIndex" class="quizCompleted has-text-centered">
-
-				<!-- quizCompletedIcon: Achievement Icon -->
-				<span class="icon">
-                <i class="fa" :class="score()>3?'fa-check-circle-o is-active':'fa-times-circle'"></i>
-              </span>
-
-				<!--resultTitleBlock-->
-				<h2 class="title">
-					Tu {{ (score()>7?'Reste':(score()<4?'a La maison':'Quanfi')) }} job!
-				</h2>
-				<!--<p class="subtitle">
+					<!--resultTitleBlock-->
+					<h2 class="title">
+						Tu {{ (score()>7?'Reste':(score()<4?'a La maison':'Quanfi')) }} job!
+					</h2>
+					<!--<p class="subtitle">
 					Total score: {{ score() }} / {{ quiz.questions.length }}
 				</p>-->
 					<br>
 					<a class="button" @click="restart()">restart <i class="fa fa-refresh"></i></a>
-				<!--/resultTitleBlock-->
+					<!--/resultTitleBlock-->
 
-			</div>
-			<!--/quizCompetedResult-->
+				</div>
+				<!--/quizCompetedResult-->
 
-		</transition>
+			</transition>
 
-	</div>
-	<!--/questionBox-->
+		</div>
+		<!--/questionBox-->
 
-</section>
-<!--/container-->
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script><script  src="./script.js"></script>
+	</section>
+	<!--/container-->
+	<!-- partial -->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+	<script src="./script.js"></script>
 
+	<script>
+		function onSignIn(googleUser) {
+			var profile = googleUser.getBasicProfile();
+			console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+			console.log('Name: ' + profile.getName());
+			console.log('Image URL: ' + profile.getImageUrl());
+			console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+		}
+		function signOut() {
+			var auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut().then(function () {
+				console.log('User signed out.');
+			});
+		}
+	</script>
 </body>
+
 </html>

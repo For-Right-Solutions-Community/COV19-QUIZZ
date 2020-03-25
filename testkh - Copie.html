@@ -1,0 +1,31 @@
+
+
+CREATE OR REPLACE FUNCTION "OpenConcerto68"."INSERT_ARTICLE_FOURNISSEUR"( idfrs NUMERIC)
+  RETURNS SETOF character varying AS
+$BODY$
+DECLARE 
+ v_article "OpenConcerto68"."ARTICLE" %rowtype; 
+ 
+ BEGIN 
+ FOR v_article in (SELECT *
+                   FROM "OpenConcerto68"."ARTICLE" ART Join "OpenConcerto68"."FAMILLE_ARTICLE" FART
+                   on ART."ID_FAMILLE_ARTICLE"=FART."ID" 
+                   Where FART."ID_FAMILLE_ARTICLE_PERE"=80 AND FART."ARCHIVE"=0 AND  ART."ARCHIVE"=0 and ART."ID">1 )
+  loop
+
+	INSERT INTO "OpenConcerto68"."ARTICLE_FOURNISSEUR_SUPPLY"(
+      "ID_ARTICLE", "ID_FOURNISSEUR", "CODE","NOM","ACTIF","DEFAULT")
+    VALUES (v_article."ID", idfrs, v_article."CODE",v_article."NOM",true,true);
+
+
+END loop;
+return NEXT 'inserer les autres articles ';
+END
+  $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION "OpenConcerto68"."INSERT_ARTICLE_FOURNISSEUR_SUPPLY"()
+  OWNER TO postgres;
+
+select * from "OpenConcerto68"."INSERT_ARTICLE_FOURNISSEUR"(79);

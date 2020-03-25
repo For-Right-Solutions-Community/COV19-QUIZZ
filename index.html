@@ -39,6 +39,7 @@
 				<div class="optionContainer"  align ="right">
 					<div class="option" v-for="(response, index) in quiz.questions[questionIndex].responses" @click="selectOption(index)" :class="{ 'is-selected': userResponses[questionIndex] == index}" :key="index">
 						 {{ response.text }}
+						 <input type="checkbox" v-if=" true == true" />
 					</div>
 					<div class="option" v-for="(formulaire) in quiz.questions[questionIndex].formulaires"  >
 						<input type="text" :placeholder="formulaire.label" :value=" quiz.user " />

@@ -1,4 +1,4 @@
-<template>
+<template >
 <section class="container">
 
   <div class="questionBox" id="quizz">
@@ -33,7 +33,7 @@
 
         <!-- quizOptions -->
         <div class="optionContainer" align="right">
-          <div v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='ONECHOICE'">
+          <template v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='ONECHOICE'">
             <div
               class="option"
               v-for="(response, index) in quiz.questions[questionIndex].responses"
@@ -41,7 +41,7 @@
               :class="{ 'is-selected': userResponses[questionIndex] == index}"
               :key="index"
             >{{ response.text }}</div>
-          </div>
+          </template>
 
           <div v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='FORMULAIRE'">
             <div class="option" v-for="(formulaire, index) in quiz.questions[questionIndex].formulaires" :key="index">

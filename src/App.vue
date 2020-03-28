@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-   <Quizz/>
+    <router-view> </router-view>
   </div>
 </template>  
 
 
 <script>
-import Quizz from './components/Quizz.vue'
+
 export default {
   name: 'App',
-  components: {
-    Quizz
+  data ()
+  {
+    return{
+      routingdisabled : false
+    }
   }
 }
 </script>

@@ -5,6 +5,7 @@ import Quizz from './components/Quizz.vue';
 import Rating from './components/Rating.vue';
 import Login from './components/Login.vue';
 import Profile from './components/Profile.vue';
+import SignUp from './components/SignUp.vue';
 Vue.config.productionTip = false
 let isAuthenticated =false;
 Vue.use(VueRouter);
@@ -14,8 +15,9 @@ Vue.use(VueRouter);
 // `Vue.extend()`, or just a component options object.
 // We'll talk about nested routes later.
 const routes = [
-  { path: '/', component: Profile },
+  { path: '/profile', component: Profile },
   { name:'login',path: '/login', component: Login },
+  { name:'signup',path: '/signup', component: SignUp },
   { path: '/quizz', component: Quizz },
   { path: '/rating', component: Rating },
   
@@ -41,7 +43,11 @@ function checkTokens(){
   return isAuthenticated;
 }
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'login' && !isAuthenticated && !checkTokens()) 
+  if(to.name == 'login' || to.name == 'signup')
+  {
+    next();
+  }
+  else if (!isAuthenticated && !checkTokens()) 
   {
     next({ name: 'login' });
   }

@@ -1,18 +1,21 @@
 <template >
   <section class="container">
     <div class="columns grid-xs">
-      <div class="column col-mx-auto col-4 col-xs-12 col-xl-4 col-l-5 col-md-8">
+      <div class="column col-mx-auto col-8 col-xs-12 col-xl-8 col-l-8 col-md-8">
         <div class="questionBox" id="quizz">
           <div class="panel">
             <div class="panel-header">
-              <div class="panel-title column">
-                <h1 class="title is-6 columns col-mx-auto">Fiche de Symptômes</h1>
+              <div class="panel-title column" align="right">
+                <h1
+                  class="title is-6 columns col-mx-auto default label"
+                  align="right"
+                >Fiche de Symptômes</h1>
               </div>
             </div>
             <div class="panel-nav">
               <!-- navigation components: tabs, breadcrumbs or pagination -->
             </div>
-            <div class="panel-body">
+            <div class="panel-body" align="right">
               <!--qusetionContainer-->
               <div
                 class="questionContainer"
@@ -41,18 +44,18 @@
                       class="option"
                       v-for="(response, index) in quiz.questions[questionIndex].responses"
                       @click="selectOption(index)"
-                      :class="{ 'is-selected': userResponses[questionIndex] == index}"
+                      :class="{ 'is-selected': userResponses[questionIndex] == index,'badge':userResponses[questionIndex] == index}"
                       :key="index"
                     >{{ response.text }}</div>
                   </template>
 
                   <div v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='FORMULAIRE'">
                     <div
-                      class="option"
                       v-for="(formulaire, index) in quiz.questions[questionIndex].formulaires"
                       :key="index"
                     >
-                      <input type="text" :placeholder="formulaire.label" :value=" quiz.user " />
+                      <label class="form-label"  for="formulaire.label">{{formulaire.label}}</label>
+                      <input  dir="rtl"  class="form-input" :id="formulaire.label" type="text" :placeholder="formulaire.label" :value=" quiz.user " />
                     </div>
                   </div>
 
@@ -61,12 +64,12 @@
                       v-for="(response, index) in quiz.questions[questionIndex].responses"
                       :key="index"
                     >
-                      {{ response.text }}
-                      <input
-                        type="checkbox"
-                        @click="selectMulipleOption(index)"
-                        v-model="quiz.questions[questionIndex].responses[index].selected"
-                      />
+                        {{ response.text }}
+                        <input
+                          type="checkbox"
+                          @click="selectMulipleOption(index)"
+                          v-model="quiz.questions[questionIndex].responses[index].selected"
+                        />
                     </div>
                   </div>
                 </div>
@@ -100,18 +103,25 @@
             <div class="container">
               <header class="navbar">
                 <section class="navbar-section">
-                  <button v-on:click="prev();" :disabled="questionIndex < 1" class="btn btn-primary">
+                  <button
+                    v-on:click="prev();"
+                    :disabled="questionIndex < 1"
+                    class="btn btn-primary"
+                  >
                     Précedent
                     <i class="icon icon-arrow-left"></i>
                   </button>
                 </section>
                 <section class="navbar-center">
-                  <!-- centered logo or brand -->
+                  <!-- centered logo or brand    || userResponses[questionIndex]==null -->
                 </section>
                 <section class="navbar-section">
-                  <button :class="(userResponses[questionIndex]==null)?'':'is-active'"
+                  <button
+                    :class="(userResponses[questionIndex]==null)?'':'is-active'"
                     v-on:click="next();"
-                    :disabled="questionIndex>=quiz.questions.length || userResponses[questionIndex]==null " class="btn btn-primary">
+                    :disabled="questionIndex>=quiz.questions.length  "
+                    class="btn btn-primary"
+                  >
                     Suivant
                     <i class="icon icon-arrow-right"></i>
                   </button>
@@ -261,7 +271,7 @@ export default {
   }
 };
 var quizz = {
-    user: "Dave",
+    user: "",
     questions: [
       {
         ID: "ASPHEXIE",
@@ -510,8 +520,8 @@ var quizz = {
   border: transparent 1px solid;
 }
 .questionBox .questionContainer .optionContainer .option.is-selected {
-  border-color: rgba(0, 0, 0, 0.25);
-  background-color: white;
+  border-color: rgba(18, 207, 97, 0.25);
+  background-color: rgba(4, 223, 95, 0.25);
 }
 .questionBox .questionContainer .optionContainer .option:hover {
   background-color: rgba(0, 0, 0, 0.1);

@@ -1,0 +1,1 @@
+export  const login_url = "http://localhost:8080/v2/register";

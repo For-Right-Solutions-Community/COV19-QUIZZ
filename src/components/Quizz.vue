@@ -483,14 +483,11 @@ var quizz = {
   userResponseSkelaton = Array(quizz.questions.length).fill(null);
 </script>
 
-<style>
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700");
+<style scoped>
 body {
-  font-family: "Open Sans", sans-serif;
   font-size: 14px;
   height: 100vh;
-  background: #CFD8DC;
+  background: rgb(172, 22, 80);
   /* mocking native UI */
   cursor: default !important;
   /* remove text selection cursor */

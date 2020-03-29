@@ -32,6 +32,9 @@
 <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js" ></script>
 <script>
  
+ import axios from 'axios';
+ import {login_url}  from '../assets/config';
+
 // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyDKM4ptIcoS9ZpHeqpuCNFnMa0w3z3N-4E",

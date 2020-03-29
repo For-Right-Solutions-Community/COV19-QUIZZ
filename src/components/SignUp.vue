@@ -34,6 +34,7 @@
 <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
 <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
 <script>
+ import {ServicesApi}  from '../assets/config'
 export default {
     name : "SignUp",
     data () {
@@ -59,7 +60,11 @@ export default {
             }
             else
             {
-            firebase.auth().createUserWithEmailAndPassword(this.email, this.password1).catch(function(error) {
+                self.password1 = this.password1;
+                self.email= this.email;                
+            firebase.auth().createUserWithEmailAndPassword(this.email, this.password1).then(function(reponse){
+                ServicesApi.createuser(self.email,self.password1);
+            }).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;

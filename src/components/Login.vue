@@ -1,11 +1,29 @@
 <template>
-  <div id="Login">
-    <h1>  Authetification     </h1>
-    <input type="email" v-model="email" /><br>
-    <input type="password" v-model="password" /><br>
-    <button @click="signup()">  Sign Up </button><br>
-    <button @click="signin()"> Sign IN </button><br>
-    <div v-if="signinrror"> {{ signinmsgerror}} </div>
+  <div class="container" id="Login">
+      <div class="columns grid-xs">
+              <div class="column col-mx-auto col-4 col-xs-10 col-xl-4   col-l-5 col-md-8">
+                  <h1>  AMU 190     </h1>
+                  <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-input" id="email" type="text" placeholder="Email" @keyup="signinrror = false " v-model="email">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="password">Mot de passe</label>
+                    <input class="form-input" id="password" type="password" placeholder="Password" @keyup="signinrror = false " v-model="password">
+                    <span v-show="signinrror" class="label label-warning">Login ou mot de passe invalide</span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-checkbox">
+                      <input type="checkbox"><i class="form-icon"></i> Se rappeler de moi
+                    </label>
+                  </div>
+                  <div class="form-group">
+                    <button @click="signin()" class="btn btn-primary">Connexion</button>
+                    <button  @click="signup()" class="btn btn-link ">Créer un compte </button>
+                  </div>
+              </div>
+            </div>
+    
   </div>
 </template>
   

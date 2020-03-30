@@ -54,8 +54,15 @@
                       v-for="(formulaire, index) in quiz.questions[questionIndex].formulaires"
                       :key="index"
                     >
-                      <label class="form-label"  for="formulaire.label">{{formulaire.label}}</label>
-                      <input  dir="rtl"  class="form-input" :id="formulaire.label" type="text" :placeholder="formulaire.label" :value=" quiz.user " />
+                      <label class="form-label" for="formulaire.label">{{formulaire.label}}</label>
+                      <input
+                        dir="rtl"
+                        class="form-input"
+                        :id="formulaire.label"
+                        type="text"
+                        :placeholder="formulaire.label"
+                        :value=" quiz.user "
+                      />
                     </div>
                   </div>
 
@@ -64,12 +71,12 @@
                       v-for="(response, index) in quiz.questions[questionIndex].responses"
                       :key="index"
                     >
-                        {{ response.text }}
-                        <input
-                          type="checkbox"
-                          @click="selectMulipleOption(index)"
-                          v-model="quiz.questions[questionIndex].responses[index].selected"
-                        />
+                      {{ response.text }}
+                      <input
+                        type="checkbox"
+                        @click="selectMulipleOption(index)"
+                        v-model="quiz.questions[questionIndex].responses[index].selected"
+                      />
                     </div>
                   </div>
                 </div>
@@ -128,6 +135,9 @@
                 </section>
               </header>
               <!--/quizFooter-->
+              <div class="form-group">
+                <button @click="exit()" class="btn btn-link">Quitter</button>
+              </div>
             </div>
           </div>
         </div>
@@ -251,6 +261,9 @@ export default {
           console.log(this.questionIndex + " Zapping current retour" + zapnext);
         }
       }
+    },
+    exit: function() {
+      this.$router.push("patients");
     },
     // Return "true" count in userResponses
     score: function() {

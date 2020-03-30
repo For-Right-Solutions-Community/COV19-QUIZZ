@@ -4,7 +4,8 @@ import axios from 'axios';
 export const API_PATH="http://coronna.frsdev.ovh:8081/";
 const LOGIN_URL = "v2/register";
 const SIGNUP_URL = "user/create";
-
+const ADD_PATIEN_URL = "/m/patient/create";
+const FETCH_PATIENT_URL = "/m/patient/";
 const axiosapi = axios.create({
     baseURL: API_PATH,
     timeout: 5000,
@@ -39,7 +40,32 @@ export default Object.assign( {
         .catch ( (error) =>  {
             console.error(error)
         })
-    }
+    },
+    createpatient: function(patient,callback)  {
+        axiosapi.post(ADD_PATIEN_URL,patient).then(() => {
+            //on succes on cree un token
+            callback();
+        })
+        .catch ( (error) =>  {
+            console.error(error)
+        })
+    },
+    fetchpatients: function(callback)  {
+        axiosapi.get(FETCH_PATIENT_URL, {
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json'
+            }}).then((reponse) => {
+            //on succes on cree un token
+          //  console.log(reponse);
+            console.log(reponse.data);
+           callback(reponse.data);
+        })
+        .catch ( (error) =>  {
+            console.error(error)
+        })
+    },
+
 
 
 

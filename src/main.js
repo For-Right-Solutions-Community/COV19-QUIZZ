@@ -8,7 +8,7 @@ import Profile from './components/Profile.vue';
 import SignUp from './components/SignUp.vue';
 import Home from './components/Home.vue';
 import Patients from './components/Patients.vue';
-
+import AddPatient from './components/AddPatient.vue';
 Vue.config.productionTip = false
 let isAuthenticated =false;
 Vue.use(VueRouter);
@@ -22,6 +22,7 @@ const routes = [
   { name:'login',path: '/login', component: Login },
   { name:'home',path: '/home', component: Home },
   { name:'patients',path: '/patients', component: Patients },
+  { name:'addpatient',path: '/addpatient', component: AddPatient },
   { name:'signup',path: '/signup', component: SignUp },
   { path: '/quizz', component: Quizz },
   { path: '/rating', component: Rating },

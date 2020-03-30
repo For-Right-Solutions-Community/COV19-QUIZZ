@@ -21,6 +21,7 @@
                     <button @click="signin()" class="btn btn-primary">Connexion</button>
                     <button  @click="signup()" class="btn btn-link ">Créer un compte </button>
                   </div>
+                  <div class="g-signin2" data-onsuccess="onSignIn"> dddd </div>
               </div>
             </div>
     
@@ -33,7 +34,7 @@
 <script>
  
  import axios from 'axios';
- import {login_url}  from '../assets/config';
+ import config  from '../assets/config';
 
 // Your web app's Firebase configuration
   var firebaseConfig = {

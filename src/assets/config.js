@@ -1,39 +1,40 @@
 import axios from 'axios';
-axios.defaults.headers.common['Authorization'] = `Bearer`;
+//axios.defaults.headers.common['Authorization'] = `Bearer`;
 
-export default {   
-        name : "ServicesApi",
+export const API_PATH="http://coronna.frsdev.ovh:8081/";
+const LOGIN_URL = "v2/register";
+const SIGNUP_URL = "user/create";
+
+const axiosapi = axios.create({
+    baseURL: API_PATH,
+    timeout: 5000,
+    headers: {'Authorization': 'Bearer'}
+  });
+
+export default Object.assign( {   
         user: {
             username:'',
             password:''
-        },
-     login_url : "http://coronna.frsdev.ovh:8081/v2/register",
-     sign_up_url : "http://coronna.frsdev.ovh:8081/user/create",
-     
+        }, 
      registeruser : function(mail,password){
        console.log("Hello"+mail+password);
      },
-     createToken: function() {
-        console.log(this.login_url)
-        axios.post(this.login_url,this.user).then((response) => {
+     createToken: function(callback) {
+        axiosapi.post(LOGIN_URL,this.user).then((response) => {
             localStorage.setItem('samu_token', response.data.token);
-            console.log(response.data.token)
-            this.$router.push('/quizz');
-
+            if(callback!=null) callback(response.data.token);            
         })
         .catch ( (error) =>  {
             console.error(error)
         })
     },
-    createuser : function(login,password) {
+    createuser : function(login,password,callback) {
         this.user.password = password;
         this.user.username = login;
-        console.log(this.sign_up_url)       
-        axios.post(this.sign_up_url,this.user).then((response) => {
-            localStorage.setItem('samu_token', response.data.token);
-            console.log(response.data.token)
-            this.$router.push('/quizz');
-
+        let self  =this;   
+        axiosapi.post(SIGNUP_URL,this.user).then(() => {
+            //on succes on cree un token
+            self.createToken(callback);
         })
         .catch ( (error) =>  {
             console.error(error)
@@ -42,4 +43,4 @@ export default {
 
 
 
-} 
+} )

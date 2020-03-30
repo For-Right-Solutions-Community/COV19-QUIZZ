@@ -34,7 +34,7 @@
 <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
 <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
 <script>
- import {ServicesApi}  from '../assets/config'
+ import config  from '../assets/config'
 export default {
     name : "SignUp",
     data () {
@@ -63,7 +63,11 @@ export default {
                 self.password1 = this.password1;
                 self.email= this.email;                
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password1).then(function(reponse){
-                ServicesApi.createuser(self.email,self.password1);
+                config.createuser(self.email,self.password1,function(token){
+                    console.log("Entering Call back "+token);
+                    localStorage.setItem("tokenid",token);
+                    self.$router.push('quizz') ;                      
+                });
             }).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;

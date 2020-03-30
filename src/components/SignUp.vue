@@ -66,7 +66,7 @@ export default {
                 config.createuser(self.email,self.password1,function(token){
                     console.log("Entering Call back "+token);
                     localStorage.setItem("tokenid",token);
-                    self.$router.push('quizz') ;                      
+                    self.$router.push('home') ;                      
                 });
             }).catch(function(error) {
             // Handle Errors here.
@@ -83,7 +83,7 @@ export default {
             if(token!==null)
             {
                 localStorage.setItem("tokenid",token);
-                this.$router.push('quizz') ;        
+                this.$router.push('home') ;        
             }
         },
         faillogin : function() {

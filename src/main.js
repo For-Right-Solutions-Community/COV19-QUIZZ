@@ -6,6 +6,9 @@ import Rating from './components/Rating.vue';
 import Login from './components/Login.vue';
 import Profile from './components/Profile.vue';
 import SignUp from './components/SignUp.vue';
+import Home from './components/Home.vue';
+import Patients from './components/Patients.vue';
+
 Vue.config.productionTip = false
 let isAuthenticated =false;
 Vue.use(VueRouter);
@@ -17,6 +20,8 @@ Vue.use(VueRouter);
 const routes = [
   { path: '/profile', component: Profile },
   { name:'login',path: '/login', component: Login },
+  { name:'home',path: '/home', component: Home },
+  { name:'patients',path: '/patients', component: Patients },
   { name:'signup',path: '/signup', component: SignUp },
   { path: '/quizz', component: Quizz },
   { path: '/rating', component: Rating },

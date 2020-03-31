@@ -108,7 +108,9 @@
                   <button v-if="questionIndex<quiz.questions.length"
                     :class="(userResponses[questionIndex]==null)?'':'is-active'"
                     v-on:click="next();"
-                    :disabled="questionIndex>=quiz.questions.length  "
+                    :disabled="questionIndex>=quiz.questions.length  
+                    || (userResponses[questionIndex]==null && quiz.questions[questionIndex].QUIZZ_TYPE=='ONECHOICE')
+                    ||(!quiz.questions[questionIndex].minselected && quiz.questions[questionIndex].QUIZZ_TYPE=='MULTIPLECHOICES')"
                     class="btn btn-primary"
                   >
                     Suivant
@@ -117,7 +119,7 @@
 
                    <button v-if="questionIndex>=quiz.questions.length" v-show="!succeenvoie"
                     v-on:click="save();"
-                    :disabled="succeenvoie"
+                    :disabled="succeenvoie  "
                     class="btn btn-success"
                   >
                     Envoyer maintenant
@@ -185,6 +187,7 @@ export default {
     },
     selectOption: function(index) {
       Vue.set(this.userResponses, this.questionIndex, index);
+      this.quiz.questions[this.questionIndex].minselected = true;
       if (
         !(
           this.quiz.questions[this.questionIndex].responses[index].code ===
@@ -196,6 +199,7 @@ export default {
         ].code;
         this.quiz.questions[this.questionIndex].selectedcode = selectedcode;
         console.log(this.quiz.questions[this.questionIndex].selectedcode);
+        
       }
       console.log("Check box change " + index);
     },
@@ -214,6 +218,19 @@ export default {
           "Check box change " +
             this.quiz.questions[this.questionIndex].responses[index].selected
         );
+        let minselected=false;
+        this.quiz.questions[this.questionIndex].minselected  = minselected;
+        for(let i = 0; i < this.quiz.questions[this.questionIndex].responses.length; i++)
+        {
+          let rep  = this.quiz.questions[this.questionIndex].responses[i];
+            if(rep.selected)
+            {
+              minselected = true;
+              this.quiz.questions[this.questionIndex].minselected = true;
+              Vue.set(this.quiz.questions[this.questionIndex], minselected, minselected);
+            }
+        }
+       console.log("Minmum selected "+minselected)
       }
     },
     next: function() {

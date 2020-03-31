@@ -6,6 +6,7 @@ const LOGIN_URL = "v2/register";
 const SIGNUP_URL = "/m/user/create";
 const ADD_PATIEN_URL = "/m/patient/create";
 const FETCH_PATIENT_URL = "/m/patient/";
+const ADD_SYMPTOM_URL = "/m/symptom/create";
 const axiosapi = axios.create({
     baseURL: API_PATH,
     timeout: 5000,
@@ -43,6 +44,15 @@ export default Object.assign( {
     },
     createpatient: function(patient,callback)  {
         axiosapi.post(ADD_PATIEN_URL,patient).then(() => {
+            //on succes on cree un token
+            callback();
+        })
+        .catch ( (error) =>  {
+            console.error(error)
+        })
+    },
+    createsymptom: function(symp,callback)  {
+        axiosapi.post(ADD_SYMPTOM_URL,symp).then(() => {
             //on succes on cree un token
             callback();
         })

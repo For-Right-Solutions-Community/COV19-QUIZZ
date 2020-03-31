@@ -109,7 +109,7 @@
                     class="btn btn-primary"
                   >
                     Suivant
-                    <i class="icon icon-arrow-right"></i>
+                    <i class="icon icon-arrow-right" ></i>
                   </button>
 
                    <button v-if="questionIndex>=quiz.questions.length"
@@ -117,7 +117,7 @@
                     class="btn btn-success"
                   >
                     Envoyer maintenant
-                    <i class="icon icon-mail"></i>
+                    <i class="icon icon-mail" ></i>
                   </button>
 
                 </section>
@@ -134,6 +134,8 @@
 <script>
 import Vue from "vue";
 import questions  from '../assets/questions';
+import config  from '../assets/config';
+
 var quizz = questions;
 let userResponseSkelaton = Array(quizz.questions.length).fill(null);
 export default {
@@ -148,7 +150,9 @@ export default {
       quiz: quizz,
       questionIndex: 0,
       userResponses: userResponseSkelaton,
-      isActive: false
+      isActive: false,
+      succeenvoie: false,
+      pendingevoie:false
     };
   },
   filters: {
@@ -158,6 +162,18 @@ export default {
   },
 
   methods: {
+
+    save: function()
+    {
+      this.pendingevoie = true;
+      let  symptom = {
+         "chronic_respiratory": true,
+         patient : this.patient
+       };
+      config.createsymptom(symptom,function( ){
+                    self.pendingevoie =false;
+                });
+    },
     restart: function() {
       this.questionIndex = 0;
       this.userResponses = Array(this.quiz.questions.length).fill(null);
@@ -200,8 +216,11 @@ export default {
         let zapnext = true;
         while (zapnext) {
           this.questionIndex++;
-          if (
-            typeof this.quiz.questions[this.questionIndex].isvisible ===
+          if(this.questionIndex>= this.quiz.questions.length)
+          {
+            zapnext = false;
+          }
+          else if ( typeof this.quiz.questions[this.questionIndex].isvisible ===
             "undefined"
           ) {
             zapnext = false;

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const API_PATH="http://coronna.frsdev.ovh:8081/";
 const LOGIN_URL = "v2/register";
-const SIGNUP_URL = "user/create";
+const SIGNUP_URL = "/m/user/create";
 const ADD_PATIEN_URL = "/m/patient/create";
 const FETCH_PATIENT_URL = "/m/patient/";
 const axiosapi = axios.create({

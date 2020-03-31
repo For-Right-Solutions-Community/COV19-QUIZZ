@@ -1,8 +1,8 @@
 <template>
-  <div>
+ <div>
     <HeaderNavigation />
+    <div id="PatientList" v-show="patientlistmode">   
     <div v-if="loading" class="loading">Loading...</div>
-
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="post">
     <div v-for=" patient in patients" class="card" :key="patient.id">
@@ -16,18 +16,30 @@
       <div class="card-body">Tel : {{patient.phone}}</div>
       <div class="card-footer">
         <button class="btn btn-primary">Modifier le profil</button>
-        <button class="btn btn-primary" @click="sympthoms">Symptômes</button>
+        <button class="btn btn-primary" @click="sympthoms(patient)">Symptômes</button>
       </div>
     </div>
     </div>
-  </div>
+  </div> <!--Patient List end -->
+  <div id="symptomsdeatils" v-if="symptomsdetailsmode">
+    <Quizz :patient="selectedpatient" />
+    <button class="btn btn btn-link" @click="quitsymptomsdetailsmode()">Retour</button>
+   </div> 
+ </div>  
+
+
 </template>
 <script>
 import HeaderNavigation from "./HeaderNavigation";
+import Quizz from "./Quizz";
 import config from "../assets/config";
 export default {
   data() {
     return {
+      patientlistmode: true,
+      symptomsdetailsmode: false,
+      editprofilemode: false,
+      selectedpatient: {},
       loading: false,
       post: null,
       error: null,
@@ -41,10 +53,20 @@ export default {
   },
   methods: {
      
-    sympthoms()
+    sympthoms(patient)
     {
-        this.$router.push('quizz') ;  
-    } 
+       // this.$router.push('quizz') ;  
+       this.patientlistmode=false;
+       this.symptomsdetailsmode=true;
+       this.selectedpatient=patient;
+    },
+    quitsymptomsdetailsmode()
+    {
+       // this.$router.push('quizz') ;  
+       this.patientlistmode=true;
+       this.symptomsdetailsmode=false;
+       this.selectedpatient={};
+    }  
     ,
     fetchData() {
       this.error = this.post = null;
@@ -70,7 +92,8 @@ export default {
     }
   },
   components: {
-    HeaderNavigation
+    HeaderNavigation,
+    Quizz
   }
 };
 </script>

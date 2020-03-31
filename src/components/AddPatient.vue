@@ -2,7 +2,8 @@
     <div class="container">   
          <div class="columns grid-xs">
               <div class="column col-mx-auto col-4 col-xs-10 col-xl-4   col-l-5 col-md-8">
-                  <h5> Ajouter un patient</h5>
+                  <h5 v-if="!updatemode"> Ajouter un patient</h5>
+                  <h5 v-if="updatemode" v-once > Modifier  le  patient {{ patient.firstname}}</h5>
                   <div class="form-group">
                     <label class="form-label" for="email">Nom</label>
                     <input class="form-input" id="nom" type="text" placeholder="Nom" @keyup="forumalerror = false " v-model="patient.firstname">
@@ -22,8 +23,9 @@
                     </select>   
                   </div>                  
                   <div class="form-group">
-                    <button @click="save()" class="btn btn-primary">Enregistrer</button>
-                    <button  @click="exit()" class="btn btn-link ">Quitter </button>
+                    <button v-if="!updatemode"  @click="save()" class="btn btn-primary">Ajouter et enregistrer</button>                    
+                    <button v-if="!updatemode"  @click="exit()" class="btn btn-link ">Quitter </button>
+                    <button v-if="updatemode"   @click="update()" class="btn btn-primary">Enregistrer</button>
                   </div>
               </div>
             </div>
@@ -32,7 +34,7 @@
 
 <script>
 import config  from '../assets/config'
-let patient = {
+let ipatient = {
     "firstname": "",
     "lastname": "",
     "cin": "",
@@ -60,16 +62,32 @@ let patient = {
     "covidTestResult": ""
 }
 export default {
+    props:
+    {
+        patient : {
+            type: Object,
+            default : function get(){
+                return ipatient;
+            }},
+        updatemode : {
+            type: Boolean,
+            default : false}
+    },
     data()
     {
         return{
-            patient : patient,
             forumalerror: false
         }
     }
     ,
     methods :{
 
+            update : function(){
+                //let self = this;
+                config.updatepatient(this.patient,function( ){
+                   console.log("Update patient succes");
+                })
+            },
             save : function(){
                  let self = this;
                 config.createpatient(this.patient,function( ){

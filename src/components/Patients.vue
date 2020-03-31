@@ -15,7 +15,7 @@
       </div>
       <div class="card-body">Tel : {{patient.phone}}</div>
       <div class="card-footer">
-        <button class="btn btn-primary">Modifier le profil</button>
+        <button class="btn btn-primary" @click="profilemode(patient)" >Modifier le profil</button>
         <button class="btn btn-primary" @click="sympthoms(patient)">Symptômes</button>
       </div>
     </div>
@@ -25,6 +25,10 @@
     <Quizz :patient="selectedpatient" />
     <button class="btn btn btn-link" @click="quitsymptomsdetailsmode()">Retour</button>
    </div> 
+    <div id="patientdetails" v-if="editprofilemode">
+    <AddPatient :patient="selectedpatient" :updatemode="true" />
+    <button class="btn btn btn-link" @click="quitprofilemode()">Retour</button>
+   </div>
  </div>  
 
 
@@ -32,6 +36,7 @@
 <script>
 import HeaderNavigation from "./HeaderNavigation";
 import Quizz from "./Quizz";
+import AddPatient from "./AddPatient";
 import config from "../assets/config";
 export default {
   data() {
@@ -66,7 +71,23 @@ export default {
        this.patientlistmode=true;
        this.symptomsdetailsmode=false;
        this.selectedpatient={};
-    }  
+       this.refreshdata();
+    },
+    profilemode(patient)
+    {
+       // this.$router.push('quizz') ;  
+       this.patientlistmode=false;
+       this.editprofilemode=true;
+        Object.assign(this.selectedpatient,patient); //clone le objet a modifier lor de update
+    },
+    quitprofilemode()
+    {
+       // this.$router.push('quizz') ;  
+       this.patientlistmode=true;
+       this.editprofilemode=false;
+       this.selectedpatient={};
+       this.refreshdata();
+    }    
     ,
     fetchData() {
       this.error = this.post = null;
@@ -89,11 +110,19 @@ export default {
             }
         });
         */
+    },
+    refreshdata(){
+      let self = this;
+      config.fetchpatients(function(data) {
+        self.patients = data;
+        });
     }
+
   },
   components: {
     HeaderNavigation,
-    Quizz
+    Quizz,
+    AddPatient
   }
 };
 </script>

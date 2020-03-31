@@ -78,7 +78,9 @@
                 </span>
 
                 <!--resultTitleBlock-->
-                <h4 class="title" align="left">Votre questionnaire et terminé vous pouvez envoyer le formaulaire maintenant</h4>
+                <h4 v-if="!succeenvoie" class="title" align="left">Votre questionnaire et terminé vous pouvez envoyer le formaulaire maintenant</h4>
+                <span v-if="succeenvoie" class="label label-success"> Formulaire envoyé avec succes ! </span>
+                
                 <!--<p class="subtitle">
 					Total score: {{ score() }} / {{ quiz.questions.length }}
                 </p>-->
@@ -90,6 +92,7 @@
               <header class="navbar">
                 <section class="navbar-section">
                   <button
+                    v-show="!succeenvoie"
                     v-on:click="prev();"
                     :disabled="questionIndex < 1"
                     class="btn btn-primary"
@@ -112,8 +115,9 @@
                     <i class="icon icon-arrow-right" ></i>
                   </button>
 
-                   <button v-if="questionIndex>=quiz.questions.length"
+                   <button v-if="questionIndex>=quiz.questions.length" v-show="!succeenvoie"
                     v-on:click="save();"
+                    :disabled="succeenvoie"
                     class="btn btn-success"
                   >
                     Envoyer maintenant
@@ -151,9 +155,8 @@ export default {
       questionIndex: 0,
       userResponses: userResponseSkelaton,
       isActive: false,
-      succeenvoie: false,
-      pendingevoie:false
-    };
+      succeenvoie: false
+      };
   },
   filters: {
     charIndex: function(i) {
@@ -165,13 +168,15 @@ export default {
 
     save: function()
     {
-      this.pendingevoie = true;
+      this.succeenvoie = false;
       let  symptom = {
          "chronic_respiratory": true,
          patient : this.patient
        };
+       let self = this;
       config.createsymptom(symptom,function( ){
-                    self.pendingevoie =false;
+                    console.log("Mesage envoyé avec succes")
+                    self.succeenvoie =true;
                 });
     },
     restart: function() {

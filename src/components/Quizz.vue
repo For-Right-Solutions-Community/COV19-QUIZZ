@@ -179,6 +179,7 @@ export default {
       config.createsymptom(symptom,function( ){
                     console.log("Mesage envoyé avec succes")
                     self.succeenvoie =true;
+                    self.$router.push("home");
                 });
     },
     restart: function() {

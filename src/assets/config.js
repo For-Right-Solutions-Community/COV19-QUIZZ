@@ -44,9 +44,9 @@ export default Object.assign( {
         })
     },
     createpatient: function(patient,callback)  {
-        axiosapi.post(ADD_PATIEN_URL,patient).then(() => {
+        axiosapi.post(ADD_PATIEN_URL,patient).then((reponse) => {
             //on succes on cree un token
-            callback();
+            callback(reponse.data);
         })
         .catch ( (error) =>  {
             console.error(error)

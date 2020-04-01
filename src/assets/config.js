@@ -8,6 +8,7 @@ const ADD_PATIEN_URL = "/m/patient/create";
 const UPDATE_PATIEN_URL = "/m/patient/";
 const FETCH_PATIENT_URL = "/m/patient/";
 const ADD_SYMPTOM_URL = "/m/symptom/create";
+const ADD_ANTECEDENT_URL = "/m/antecedent/create";
 const axiosapi = axios.create({
     baseURL: API_PATH,
     timeout: 50000,
@@ -50,7 +51,6 @@ export default Object.assign( {
         })
     },
     createpatient: function(patient,callback)  {
-        axiosapi.
         axiosapi.post(ADD_PATIEN_URL,patient,this.getHeaderConfig()).then((reponse) => {
             //on succes on cree un token
             callback(reponse.data);
@@ -73,6 +73,18 @@ export default Object.assign( {
             //on succes on cree un token
             callback();
         })
+        .catch ( (error) =>  {
+            console.error(error)
+        })
+    },
+    createantecedent: function(antecendt){
+        return axiosapi.post(ADD_ANTECEDENT_URL,antecendt,this.getHeaderConfig());
+    },
+    createsymantecedent: function(symp,antecendt,callback)  {
+        axiosapi.post(ADD_SYMPTOM_URL,symp,this.getHeaderConfig()).then(this.createantecedent(antecendt))
+        .then( ()=>{
+            console.log("second call succes add antecedant");
+            callback();})
         .catch ( (error) =>  {
             console.error(error)
         })

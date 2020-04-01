@@ -172,15 +172,27 @@ export default {
     {
       this.succeenvoie = false;
       let  symptom = {
-         "chronic_respiratory": true,
          patient : this.patient
        };
+
+       let  antecedent = {
+         patient : this.patient
+       };
+       for(let i=0;i<this.quiz.questions.length;i++)
+       {
+          if ( !(typeof this.quiz.questions[i].constructsymptom ==="undefined"))
+           this.quiz.questions[i].constructsymptom(symptom);
+
+           if ( !(typeof this.quiz.questions[i].constructantecedent ==="undefined"))
+            this.quiz.questions[i].constructantecedent(antecedent);
+         
+       }
        let self = this;
-      config.createsymptom(symptom,function( ){
+      config.createsymantecedent(symptom,antecedent,function( ){                    
                     console.log("Mesage envoyé avec succes")
                     self.succeenvoie =true;
                     self.$router.push("home");
-                });
+                })
     },
     restart: function() {
       this.questionIndex = 0;

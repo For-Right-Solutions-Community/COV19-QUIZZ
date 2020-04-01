@@ -8,7 +8,11 @@ var  questions = {
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
           { text: " لا  ", code: "NO" }
-        ]
+        ],
+        constructsymptom: function (reponse){
+          if(this.selectedcode=="YES") reponse.dyspnea = true
+           else reponse.dyspnea = false;
+        }
       },
       {
         ID: "ASPHEXIE_CAUSE",
@@ -55,7 +59,11 @@ var  questions = {
         responses: [
           { text: "نعم", correct: true, code: "YES" },
           { text: " لا ", code: "NO" }
-        ]
+        ],
+        constructantecedent: function (reponse){
+          if(this.selectedcode=="YES") reponse.diabetic = true
+           else reponse.diabetic=false;
+        }
       },
       {
         text: " هل تعاني من ضغط الدم ؟",
@@ -63,7 +71,11 @@ var  questions = {
         responses: [
           { text: "نعم", correct: true, code: "YES" },
           { text: " لا ", code: "NO" }
-        ]
+        ],
+        constructantecedent: function (reponse){
+          if(this.selectedcode=="YES") reponse.hypertension = true
+           else reponse.hypertension=false;
+        }
       },
       {
         ID: "CARDIO",
@@ -72,7 +84,11 @@ var  questions = {
         responses: [
           { text: "نعم", correct: true, code: "YES" },
           { text: " لا ", code: "NO" }
-        ]
+        ],
+        constructantecedent: function (reponse){
+          if(this.selectedcode=="YES") reponse.heart_disease = true
+           else reponse.heart_disease=false;
+        }
       },
       {
         ID: "ASME",
@@ -81,7 +97,11 @@ var  questions = {
         responses: [
           { text: "نعم", correct: true, code: "YES" },
           { text: " لا ", code: "NO" }
-        ]
+        ],
+        constructantecedent: function (reponse){
+          if(this.selectedcode=="YES") reponse.respiratory = true
+           else reponse.respiratory=false;
+        }
       },
       {
         ID: "RENALE",
@@ -90,7 +110,11 @@ var  questions = {
         responses: [
           { text: "نعم", correct: true, code: "YES" },
           { text: " لا ", code: "NO" }
-        ]
+        ],
+        constructantecedent: function (reponse){
+          if(this.selectedcode=="YES") reponse.renal_failure = true
+           else reponse.renal_failure=false;
+        }
       },
       {
         ID: "CANCER",
@@ -99,7 +123,11 @@ var  questions = {
         responses: [
           { text: "نعم", correct: true, code: "YES" },
           { text: " لا ", code: "NO" }
-        ]
+        ],
+        constructantecedent: function (reponse){
+          if(this.selectedcode=="YES") reponse.cancer = true
+           else reponse.cancer=false;
+        }
       },
       {
         ID: "IMMUNITY",
@@ -108,7 +136,11 @@ var  questions = {
         responses: [
           { text: "نعم", correct: true, code: "YES" },
           { text: " لا ", code: "NO" }
-        ]
+        ],
+        constructantecedent: function (reponse){
+          if(this.selectedcode=="YES") reponse.immune_disease = true
+           else reponse.immune_disease=false;
+        }
       },
       {
         ID: "VOYAGE",
@@ -117,7 +149,11 @@ var  questions = {
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
           { text: " لا  ", code: "NO" }
-        ]
+        ],
+        constructsymptom: function (reponse){
+          if(this.selectedcode=="YES") reponse.exposure = true
+        }
+
       },
       {
         ID: "EXPOSITION_VOYAGE",
@@ -129,6 +165,9 @@ var  questions = {
         ],
         isvisible: function(id, code) {
           return id == "VOYAGE" && code == "NO" ? true : false;
+        },
+        constructsymptom: function (reponse){
+          if(this.selectedcode=="YES") reponse.exposure = true
         }
       },
       {
@@ -137,10 +176,13 @@ var  questions = {
         text: "هل يسكن معك في نفس المنزل ؟",
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
-          { text: " لا  ", code: "NO" }
+          { text: " لا  ", code: "NO" },
         ],
         isvisible: function(id, code) {
           return id == "EXPOSITION_VOYAGE" && code == "YES" ? true : false;
+        },
+        constructsymptom: function (reponse){
+          if(this.selectedcode=="YES") reponse.exposure = true
         }
       },
       {
@@ -175,7 +217,11 @@ var  questions = {
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
           { text: " لا  ", code: "NO" }
-        ]
+        ],
+        constructsymptom: function (reponse){
+          if(this.selectedcode=="YES") reponse.fever = true
+           else reponse.fever = false;
+        }
       },
       {
         ID: "MAUX_GORGE",
@@ -185,6 +231,11 @@ var  questions = {
           { text: " نعم ", correct: true, code: "YES" },
           { text: " لا  ", code: "NO" }
         ]
+        ,
+        constructsymptom: function (reponse){
+          if(this.selectedcode=="YES") reponse.sore_throat = true
+           else reponse.sore_throat = false;
+        }
       },
       {
         ID: "TOUX",
@@ -194,7 +245,11 @@ var  questions = {
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
           { text: " لا  " }
-        ]
+        ],
+        constructsymptom: function (reponse){
+          if(this.selectedcode=="YES") reponse.cough = true
+           else reponse.cough = false;
+        }
       },
       {
         ID: "ABILYTY",

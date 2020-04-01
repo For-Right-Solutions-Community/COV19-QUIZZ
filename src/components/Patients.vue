@@ -1,5 +1,5 @@
 <template>
- <div>
+ <div align="right">
     <HeaderNavigation />
     <div id="PatientList" v-show="patientlistmode">   
     <div v-if="loading" class="loading">... جاري التحميل </div>
@@ -11,11 +11,11 @@
       </div>
       <div class="card-header">
         <div class="card-title h5">{{patient.firstname }} {{ " " }}  {{patient.lastname}}</div>
-        <div class="card-subtitle text-gray"> {{patient.gender=="MALE"?"Homme":"Femme"}}  {{patient.age}} ans</div>
+        <div class="card-subtitle text-gray"> {{patient.gender=="MALE"?" ذكر ":" أنثى"}}  {{patient.age}}  سنة</div>
       </div>
       <div class="card-body">Tel : {{patient.phone}}</div>
       <div class="card-footer">
-        <button class="btn btn-primary" @click="profilemode(patient)" > تغيير المعطيات</button>
+        <button class="btn " @click="profilemode(patient)" > تغيير المعطيات</button>
         <button class="btn btn-primary" @click="sympthoms(patient)"> تتبع الأعراض</button>
       </div>
     </div>

@@ -1,12 +1,12 @@
 <template>
-  <div class="container">
+  <div class="container" align="right">
      <Quizz v-if="addsucces && !updatemode" :patient="selectedpatient"/><!--lancer la quizz une fois le client est enregistré la premiere fois-->
     <div v-if="!addsucces" class="columns grid-xs">
       <div class="column col-mx-auto col-4 col-xs-10 col-xl-4 col-l-5 col-md-8">
-        <h5 v-if="!updatemode">Ajouter un patient</h5>
-        <h5 v-if="updatemode" v-once>Modifier le patient {{ patient.firstname}}</h5>
+        <h5 v-if="!updatemode">إضافة مريض</h5>
+        <h5 v-if="updatemode" v-once> تغيير بيانات {{ patient.firstname}}</h5>
         <div class="form-group">
-          <label class="form-label" for="email">Nom</label>
+          <label class="form-label" for="email"> الإسم </label>
           <input
             class="form-input"
             id="nom"
@@ -15,7 +15,7 @@
             @keyup="forumalerror = false "
             v-model="patient.firstname"
           />
-          <label class="form-label" for="lastname">Prénom</label>
+          <label class="form-label" for="lastname"> اللقب</label>
           <input
             class="form-input"
             id="lastname"
@@ -25,7 +25,7 @@
             v-model="patient.lastname"
           />
 
-          <label class="form-label" for="phone">Téléphone</label>
+          <label class="form-label" for="phone"> رقم الجوال </label>
           <input
             class="form-input"
             id="phone"
@@ -35,7 +35,7 @@
             v-model="patient.phone"
           />
 
-          <label class="form-label" for="age">Age</label>
+          <label class="form-label" for="age"> العمر</label>
           <input
             class="form-input"
             id="nom"
@@ -45,21 +45,21 @@
             v-model="patient.age"
           />
 
-          <label class="form-label" for="sexe">Sexe</label>
+          <label class="form-label" for="sexe"> الجنس</label>
           <select
             class="form-select"
             placeholder="sexe"
             @keyup="forumalerror = false "
             v-model="patient.gender"
           >
-            <option value="MALE">Homme</option>
-            <option value="FEMALE">Femme</option>
+            <option value="MALE"> ذكر </option>
+            <option value="FEMALE"> أنثى</option>
           </select>
         </div>
         <div class="form-group">
-          <button v-if="!updatemode" @click="save()" class="btn btn-primary">Ajouter et enregistrer</button>
-          <button v-if="!updatemode" @click="exit()" class="btn btn-link">Quitter</button>
-          <button v-if="updatemode" @click="update()" class="btn btn-primary">Enregistrer</button>
+          <button v-if="!updatemode" @click="save()" class="btn btn-primary"> تسجيل </button>
+          <button v-if="!updatemode" @click="exit()" class="btn btn-link"> خروج </button>
+          <button v-if="updatemode" @click="update()" class="btn btn-primary">تسجيل</button>
         </div>
       </div>
     </div>

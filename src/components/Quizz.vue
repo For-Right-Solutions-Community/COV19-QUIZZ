@@ -78,7 +78,11 @@
                 </span>
 
                 <!--resultTitleBlock-->
-                <h4 v-if="!succeenvoie" class="title" align="left">Votre questionnaire et terminé vous pouvez envoyer le formaulaire maintenant</h4>
+                <h4 v-if="!succeenvoie" class="title" align="left">
+                  <p> 
+                   تم الإنتهاء من تعمير البيانات.
+هل تريد إرسالها إلى خدمة الإستعجالي ؟  
+                  </p></h4>
                 <span v-if="succeenvoie" class="label label-success"> Formulaire envoyé avec succes ! </span>
                 
                 <!--<p class="subtitle">
@@ -88,22 +92,10 @@
                 <!--/resultTitleBlock-->
               </div>
             </div>
-            <div class="container">
+            <div class="container" align="right">
               <header class="navbar">
-                <section class="navbar-section">
-                  <button
-                    v-show="!succeenvoie"
-                    v-on:click="prev();"
-                    :disabled="questionIndex < 1"
-                    class="btn btn-primary"
-                  >
-                    Précedent
-                    <i class="icon icon-arrow-left"></i>
-                  </button>
-                </section>
-                <section class="navbar-center">
-                  <!-- centered logo or brand    || userResponses[questionIndex]==null -->
-                </section>
+              
+
                 <section class="navbar-section">
                   <button v-if="questionIndex<quiz.questions.length"
                     :class="(userResponses[questionIndex]==null)?'':'is-active'"
@@ -112,9 +104,9 @@
                     || (userResponses[questionIndex]==null && quiz.questions[questionIndex].QUIZZ_TYPE=='ONECHOICE')
                     ||(!quiz.questions[questionIndex].minselected && quiz.questions[questionIndex].QUIZZ_TYPE=='MULTIPLECHOICES')"
                     class="btn btn-primary"
-                  >
-                    Suivant
-                    <i class="icon icon-arrow-right" ></i>
+                  >                   
+                    <i class="icon icon-arrow-left" ></i>
+                      الموالي
                   </button>
 
                    <button v-if="questionIndex>=quiz.questions.length" v-show="!succeenvoie"
@@ -122,11 +114,28 @@
                     :disabled="succeenvoie  "
                     class="btn btn-success"
                   >
-                    Envoyer maintenant
-                    <i class="icon icon-mail" ></i>
+                   <i class="icon icon-mail" ></i>
+                     أرسل البيانات الآن
+                   
                   </button>
 
                 </section>
+                <section class="navbar-center">
+                  <!-- centered logo or brand    || userResponses[questionIndex]==null -->
+                </section>
+                  <section class="navbar-section">
+                  <button
+                    v-show="!succeenvoie"
+                    v-on:click="prev();"
+                    :disabled="questionIndex < 1"
+                    class="btn "
+                  >
+                   السابق
+                    <i class="icon icon-arrow-right"></i>
+                      
+                  </button>
+                </section>
+
               </header>
               <!--/quizFooter-->
             </div>

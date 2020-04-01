@@ -79,29 +79,21 @@ export default {
                         if(!self.signinrror)
                         {
                            console.log("No error");
-                          config.user.login = self.email;
-                          config.user.password = self.password;
-                          self.succeslogin("mysecrettoken");
-                          /*
+                          config.user.username = self.email;
+                          config.user.password = self.password;                          
                           config.createToken(function(token){
-                              self.succeslogin(token);
-                          })
-                          .catch ( (error) =>  {
-                              console.error(error);
-                              self.succeslogin(token);
-                          });
-                          */
+                          self.succeslogin(token);
+                          })                          
                         }
-                    }).catch(function(error) {
-                      /*
-                      console.log("errur found" + error);
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                     self.signinrror = true;
-                     self.signinmsgerror = errorCode + errorMessage;
-                      self.faillogin()
-                      */
+                    }).catch(function(error) {                      
+                          console.log("errur found" + error);
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        self.signinrror = true;
+                        self.signinmsgerror = errorCode + errorMessage;
+                          self.faillogin();
+                      
                     })
 
               }

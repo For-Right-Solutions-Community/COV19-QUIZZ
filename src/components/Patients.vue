@@ -2,7 +2,7 @@
  <div>
     <HeaderNavigation />
     <div id="PatientList" v-show="patientlistmode">   
-    <div v-if="loading" class="loading">Loading...</div>
+    <div v-if="loading" class="loading">... جاري التحميل </div>
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="post">
     <div v-for=" patient in patients" class="card" :key="patient.id">
@@ -15,19 +15,19 @@
       </div>
       <div class="card-body">Tel : {{patient.phone}}</div>
       <div class="card-footer">
-        <button class="btn btn-primary" @click="profilemode(patient)" >Modifier le profil</button>
-        <button class="btn btn-primary" @click="sympthoms(patient)">Symptômes</button>
+        <button class="btn btn-primary" @click="profilemode(patient)" > تغيير المعطيات</button>
+        <button class="btn btn-primary" @click="sympthoms(patient)"> تتبع الأعراض</button>
       </div>
     </div>
     </div>
   </div> <!--Patient List end -->
   <div id="symptomsdeatils" v-if="symptomsdetailsmode">
     <Quizz :patient="selectedpatient" />
-    <button class="btn btn btn-link" @click="quitsymptomsdetailsmode()">Retour</button>
+    <button class="btn btn btn-link" @click="quitsymptomsdetailsmode()"> رجوع</button>
    </div> 
     <div id="patientdetails" v-if="editprofilemode">
     <AddPatient :patient="selectedpatient" :updatemode="true" />
-    <button class="btn btn btn-link" @click="quitprofilemode()">Retour</button>
+    <button class="btn btn btn-link" @click="quitprofilemode()"> رجوع</button>
    </div>
  </div>  
 

@@ -48,7 +48,7 @@ export default Object.assign( {
             self.createToken(callback);
         })
         .catch ( (error) =>  {
-            console.error(error)
+            callback(null,null,error);
         })
     },
     createpatient: function(patient,callback)  {

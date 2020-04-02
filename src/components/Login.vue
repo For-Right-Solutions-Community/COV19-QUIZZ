@@ -87,7 +87,7 @@ export default {
                             {
                               self.loading = false;
                               self.signinrror = true;
-                              self.signinmsgerror="Erreur de connexion service indisponible"                       
+                              self.signinmsgerror="Service indisponible essayer plus tard"                       
                               self.faillogin();
                             }
                             else

@@ -1,8 +1,12 @@
 <template>
   <div class="container" id="Login">
+
       <div class="columns grid-xs">
               <div class="column col-mx-auto col-4 col-xs-10 col-xl-4   col-l-5 col-md-8">
-                  <h1>  AMU 190     </h1>
+                
+                  <div align="center" >
+                  <img src="img/AMU190.png" alt="AMU 190 "  style="width:256px;height:256px;" class="img-responsive">
+                 </div> 
                   <div class="form-group">
                     <label class="form-label" for="email">Email</label>
                     <input class="form-input" id="email" type="text" placeholder="Email" @keyup="signinrror = false " v-model="email">

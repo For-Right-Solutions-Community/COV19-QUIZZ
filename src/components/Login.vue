@@ -21,7 +21,7 @@
                     <button @click="signin()" class="btn btn-primary">Connexion</button>
                     <button  @click="signup()" class="btn btn-link ">Créer un compte </button>
                   </div>
-                  <div class="g-signin2" data-onsuccess="onSignIn" data-> dddd </div>
+                  <div class="g-signin2" data-onsuccess="onSignIn">  </div>
               </div>
             </div>
     

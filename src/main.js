@@ -18,6 +18,7 @@ Vue.use(VueRouter);
 // `Vue.extend()`, or just a component options object.
 // We'll talk about nested routes later.
 const routes = [
+  { path: '/', exact:true, component: Home },
   { path: '/profile', component: Profile },
   { name:'login',path: '/login', component: Login },
   { name:'home',path: '/home', component: Home },

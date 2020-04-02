@@ -21,13 +21,13 @@
     </div>
     </div>
   </div> <!--Patient List end -->
-  <div id="symptomsdeatils" v-if="symptomsdetailsmode">
+  <div id="symptomsdeatils" v-if="symptomsdetailsmode" align="center">
     <Quizz :patient="selectedpatient" />
-    <button class="btn btn btn-link" @click="quitsymptomsdetailsmode()"> رجوع</button>
+    <button class="btn btn btn-link" @click="quitsymptomsdetailsmode()"> إلغاء </button>
    </div> 
-    <div id="patientdetails" v-if="editprofilemode">
+    <div id="patientdetails" v-if="editprofilemode" align="center">
     <AddPatient :patient="selectedpatient" :updatemode="true" />
-    <button class="btn btn btn-link" @click="quitprofilemode()"> رجوع</button>
+    <button class="btn btn btn-link" @click="quitprofilemode()"> إلغاء </button>
    </div>
  </div>  
 

@@ -33,9 +33,9 @@
                 <!--/progress-->
 
                 <!-- questionTitle -->
-                <h2
+                <h4
                   class="titleContainer title label label-rounded label-primary"
-                >{{ quiz.questions[questionIndex].text }}</h2>
+                >{{ quiz.questions[questionIndex].text }}</h4>
 
                 <!-- quizOptions -->
                 <div class="optionContainer" align="right">

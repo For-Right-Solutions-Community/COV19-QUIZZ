@@ -1,10 +1,25 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700");
+<template>
+  <div>
+    <h1>{{ rate }}</h1>
+    <input v-model="rate"/>
+    <span @click="rate = index+1" :class="{'fa fa-star':index<rate,'fa fa-star-o':index>=rate}" v-for="(item,index) in 10 " :key="index"></span>
+  </div>
+</template>
+<script>
+export default {
+  name: "Rating",
+  data() {
+    return{
+        rate : 3
+    }
+  }
+};
+</script>
+<style scoped>
 body {
-  font-family: "Open Sans", sans-serif;
   font-size: 14px;
   height: 100vh;
-  background: #CFD8DC;
+  background: rgb(172, 22, 80);
   /* mocking native UI */
   cursor: default !important;
   /* remove text selection cursor */
@@ -210,3 +225,4 @@ body {
     border-radius: 6px 6px 0px 0px;
   }
 }
+</style>

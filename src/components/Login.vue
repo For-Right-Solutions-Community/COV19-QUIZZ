@@ -34,7 +34,7 @@
  
  import axios from 'axios';
  import config  from '../assets/config';
-
+ import Vue from 'vue' ;
 // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyDKM4ptIcoS9ZpHeqpuCNFnMa0w3z3N-4E",
@@ -93,7 +93,8 @@ export default {
                             else
                             {
                               self.loading = false;
-                              self.succeslogin(token);
+                              self.succeslogin(token,user);
+                             
                             }
 
                           });                          
@@ -120,15 +121,17 @@ export default {
               }
 
         },
-        succeslogin : function (token){
+        succeslogin : function (token,user){
             if(token!==null)
             {
                 localStorage.setItem("tokenid",token);
+                localStorage.setItem('user', JSON.stringify(user));
                 this.$router.push('home') ;        
             }
         },
         faillogin : function() {
-            localStorage.removeItem("tokenid")
+            localStorage.removeItem("tokenid");
+             localStorage.removeItem("user")
         }
     }
     

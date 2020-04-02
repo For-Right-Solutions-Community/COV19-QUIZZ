@@ -5,12 +5,13 @@
         <div class="input-group input-inline">          
           <div class="dropdown">
             <a href="#" class="btn btn-link dropdown-toggle" tabindex="0">
-              الحساب
+                الحساب
               <i class="icon icon-caret"></i>
             </a>
             <!-- menu component -->
             <ul class="menu">
               <button class="btn btn-link input-group-btn" @click="logout()"><i class="icon icon-shutdown"></i>   خروج</button>
+              <label class="label label-default" > {{ username }} </label>
             </ul>
           </div>
         </div>
@@ -24,13 +25,29 @@
 </template>
 <script>
 export default {
-  
+      data () {
+        return{
+            userconnected : this.$user,
+            password:'',
+            signinrror : false,
+            signinmsgerror:'',
+            loading : false,
+        }
+    },
   methods :{
 
     logout : function (){
       localStorage.removeItem("tokenid");
       localStorage.removeItem("samu_token");
+      localStorage.removeItem("user");
       this.$router.push('login') ;    
+    }
+  }
+  ,
+  computed:{
+    username(){
+     let user = JSON.parse(localStorage.getItem("user"));
+      return user.username;
     }
   }
 }

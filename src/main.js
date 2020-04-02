@@ -9,6 +9,7 @@ import SignUp from './components/SignUp.vue';
 import Home from './components/Home.vue';
 import Patients from './components/Patients.vue';
 import AddPatient from './components/AddPatient.vue';
+import store from './store/store';
 Vue.config.productionTip = false
 let isAuthenticated =false;
 Vue.use(VueRouter);
@@ -65,5 +66,6 @@ router.beforeEach((to, from, next) => {
 })
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount('#app')

@@ -52,20 +52,24 @@ export default Object.assign( {
         })
     },
     createpatient: function(patient,callback)  {
+        patient.user = {"id": this.getuser().id};//passer tous l objet user cree un probleme
         axiosapi.post(ADD_PATIEN_URL,patient,this.getHeaderConfig()).then((reponse) => {
             //on succes on cree un token
             callback(reponse.data);
         })
         .catch ( (error) =>  {
+            console.error(error.response);
             console.error(error)
         })
     },
     updatepatient: function(patient,callback)  {
+        patient.user = {"id": this.getuser().id};//passer tous l objet user cree un probleme
         axiosapi.put(UPDATE_PATIEN_URL+patient.id,patient,this.getHeaderConfig()).then(() => {
             //on succes on cree un token
             callback();
         })
         .catch ( (error) =>  {
+            console.error(error.response);
             console.error(error)
         })
     },
@@ -94,13 +98,20 @@ export default Object.assign( {
         })
     },
     fetchpatients: function(callback)  {
-        console.log("Header Config");
-        console.log(this.getHeaderConfig());
+        let userid= this.getuser().id
+        //passer tous l objet user cree un probleme
         axiosapi.get(FETCH_PATIENT_URL,this.getHeaderConfig()).then((reponse) => {
             //on succes on cree un token
           //  console.log(reponse);
             console.log(reponse.data);
-           callback(reponse.data);
+           let patientslist  =  reponse.data.filter(function (e) {
+                if(e.user==null)
+                {
+                    return false;
+                }
+                return e.user == userid || e.user.id == userid;
+            });
+           callback(patientslist);
         })
         .catch ( (error) =>  {
             console.error(error)
@@ -112,7 +123,12 @@ export default Object.assign( {
        };    
        return config;
     }
-
+    ,
+    getuser(){
+       let user = JSON.parse(localStorage.getItem("user"));
+       console.log(user);
+       return user;
+    }
 
 
 

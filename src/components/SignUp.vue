@@ -94,6 +94,7 @@ export default {
               else{
                 self.loading = false;
                 localStorage.setItem("tokenid", token);
+                localStorage.setItem('user', JSON.stringify(user));
                 self.$router.push("home");
               }
             });

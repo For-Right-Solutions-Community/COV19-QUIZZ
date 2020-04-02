@@ -1,7 +1,7 @@
 import axios from 'axios';
 //axios.defaults.headers.common['Authorization'] = `Bearer`;
 
-export const API_PATH="http://coronna.frsdev.ovh:8081/";
+export const API_PATH="https://api.amu190.maodao.xyz/";
 const LOGIN_URL = "/v2/register";
 const SIGNUP_URL = "/m/user/create";
 const ADD_PATIEN_URL = "/m/patient/create";
@@ -81,12 +81,15 @@ export default Object.assign( {
         return axiosapi.post(ADD_ANTECEDENT_URL,antecendt,this.getHeaderConfig());
     },
     createsymantecedent: function(symp,antecendt,callback)  {
+        console.log(symp);
+        console.log(antecendt);
         axiosapi.post(ADD_SYMPTOM_URL,symp,this.getHeaderConfig()).then(this.createantecedent(antecendt))
         .then( ()=>{
             console.log("second call succes add antecedant");
             callback();})
         .catch ( (error) =>  {
-            console.error(error)
+            console.error(error.details);
+            console.log(error)
         })
     },
     fetchpatients: function(callback)  {

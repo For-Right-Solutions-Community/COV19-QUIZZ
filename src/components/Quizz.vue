@@ -6,10 +6,10 @@
           <div class="panel">
             <div class="panel-header">
               <div class="panel-title column" align="right">
-                <h1 v-if="patient!=null"
+                <h4 v-if="patient!=null"
                   class="title is-6 columns col-mx-auto default label"
                   align="right"
-                > {{patient.firstname + " "+patient.lastname + " "+ new Date().toISOString().slice(0,10)}}</h1>
+                > {{patient.firstname + " "+patient.lastname + " "+ new Date().toISOString().slice(0,10)}}</h4>
               </div>
             </div>
             <div class="panel-nav">
@@ -83,7 +83,7 @@
                    تم الإنتهاء من تعمير البيانات.
 هل تريد إرسالها إلى خدمة الإستعجالي ؟  
                   </p></h4>
-                <span v-if="succeenvoie" class="label label-success"> Formulaire envoyé avec succes ! </span>
+                <span v-if="succeenvoie" class="label label-success"> تم إرسال البيانات بنجاح !  </span>
                 
                 <!--<p class="subtitle">
 					Total score: {{ score() }} / {{ quiz.questions.length }}

@@ -10,7 +10,7 @@
                   <div class="form-group">
                     <label class="form-label" for="password">Mot de passe</label>
                     <input class="form-input" id="password" type="password" placeholder="Password" @keyup="signinrror = false " v-model="password">
-                    <span v-show="signinrror" class="label label-warning">Login ou mot de passe invalide</span>
+                    <span v-show="signinrror" class="label label-warning"> {{signinmsgerror}}</span>
                   </div>
                   <div class="form-group">
                     <label class="form-checkbox">
@@ -18,10 +18,9 @@
                     </label>
                   </div>
                   <div class="form-group">
-                    <button @click="signin()" class="btn btn-primary">Connexion</button>
+                    <button @click="signin()"   :class="{loading:loading}" class="btn btn-primary">Connexion</button>
                     <button  @click="signup()" class="btn btn-link ">Créer un compte </button>
                   </div>
-                  <div class="g-signin2" data-onsuccess="onSignIn">  </div>
               </div>
             </div>
     
@@ -58,8 +57,8 @@ export default {
             email : '',
             password:'',
             signinrror : false,
-            signinmsgerror:''
-
+            signinmsgerror:'',
+            loading : false,
         }
     },
     methods :{
@@ -72,38 +71,52 @@ export default {
             let self =this;
             self.signinrror = false;
             self.signinmsgerror = '';
+            self.loading = true;
+            self.connexionerror = false;
             console.log (this.email);
-             console.log (this.password);
+            console.log (this.password);
               try {
                     firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(function (){
                         if(!self.signinrror)
                         {
-                           console.log("No error");
+                          console.log("No error");
                           config.user.username = self.email;
                           config.user.password = self.password;                          
-                          config.createToken(function(token){
-                          self.succeslogin(token);
-                          })                          
+                          config.createToken(function(token,user,error){
+                            if(error!=null)
+                            {
+                              self.loading = false;
+                              self.signinrror = true;
+                              self.signinmsgerror="Erreur de connexion service indisponible"                       
+                              self.faillogin();
+                            }
+                            else
+                            {
+                              self.loading = false;
+                              self.succeslogin(token);
+                            }
+
+                          });                          
                         }
-                    }).catch(function(error) {                      
-                          console.log("errur found" + error);
-                        // Handle Errors here.
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
-                        self.signinrror = true;
-                        self.signinmsgerror = errorCode + errorMessage;
-                          self.faillogin();
+                    }).catch(function(error) {              
                       
+                        self.loading = false;
+                        self.signinrror = true;
+                        self.signinmsgerror="Login ou mot de passe invalide"
+                       if(error.code!="auth/wrong-password")
+                       {
+                          self.signinmsgerror="Problème de connexion"
+                       }
+                        self.faillogin();                      
                     })
 
               }
               catch(error)
               {
-                console.log("ereur "+error);
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                     self.signinrror = true;
-                     self.signinmsgerror = errorCode + errorMessage;
+                        self.loading = false;
+                        self.signinrror = true;
+                        self.signinmsgerror="Problème de connexion"                       
+                        self.faillogin();      
               }
 
         },

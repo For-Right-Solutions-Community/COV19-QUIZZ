@@ -35,6 +35,7 @@ export default Object.assign( {
         .catch ( (error) =>  {
             console.log("Token creation error");
             console.error(error)
+            callback(null,null,error);
             self.signeduser = null;
         })
     },

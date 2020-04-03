@@ -1,17 +1,18 @@
 <template >
-  <section class="container">
+  <section class="container topspace">
+    <div>
+      <div align="center">
+        <h4 v-if="patient!=null">{{patient.firstname + " "+patient.lastname }}</h4>
+        <div>
+        {{ ""+new Date().toISOString().slice(0,10) }}
+          </div>
+      </div>
+    </div>
+
     <div class="columns grid-xs">
       <div class="column col-mx-auto col-8 col-xs-12 col-xl-8 col-l-8 col-md-8">
         <div class="questionBox" id="quizz">
           <div class="panel">
-            <div class="panel-header">
-              <div class="panel-title column" align="right">
-                <h4 v-if="patient!=null"
-                  class="title is-6 columns col-mx-auto default label"
-                  align="right"
-                > {{patient.firstname + " "+patient.lastname + " "+ new Date().toISOString().slice(0,10)}}</h4>
-              </div>
-            </div>
             <div class="panel-nav">
               <!-- navigation components: tabs, breadcrumbs or pagination -->
             </div>
@@ -77,14 +78,26 @@
                   <i class="fa" :class="score()>3?'fa-check-circle-o is-active':'fa-times-circle'"></i>
                 </span>
 
-                <!--resultTitleBlock-->
-                <h4 v-if="!succeenvoie" class="title" align="left">
-                  <p> 
-                   تم الإنتهاء من تعمير البيانات.
-هل تريد إرسالها إلى خدمة الإستعجالي ؟  
-                  </p></h4>
-                <span v-if="succeenvoie" class="label label-success"> تم إرسال البيانات بنجاح !  </span>
-                
+                <div class="container">
+                  <div class="columns">
+                    <div class="column col-4 col-mx-auto">
+                      <!--resultTitleBlock-->
+                      <h4 v-if="!succeenvoie" class="title" align="left">
+                        <p>
+                          تم الإنتهاء من تعمير البيانات.
+                          هل تريد إرسالها إلى خدمة الإستعجالي ؟
+                        </p>
+                      </h4>
+
+                      <span v-if="succeenvoie" class="label label-success">تم إرسال البيانات بنجاح !</span>
+                      <span
+                        v-if="errorwhilesending"
+                        class="label label-error"
+                      >خلل في الإرسال حاول مرة أخرى</span>
+                    </div>
+                  </div>
+                </div>
+
                 <!--<p class="subtitle">
 					Total score: {{ score() }} / {{ quiz.questions.length }}
                 </p>-->
@@ -94,48 +107,46 @@
             </div>
             <div class="container" align="right">
               <header class="navbar">
-              
-
                 <section class="navbar-section">
-                  <button v-if="questionIndex<quiz.questions.length"
+                  <button
+                    v-if="questionIndex<quiz.questions.length"
                     :class="(userResponses[questionIndex]==null)?'':'is-active'"
                     v-on:click="next();"
                     :disabled="questionIndex>=quiz.questions.length  
                     || (userResponses[questionIndex]==null && quiz.questions[questionIndex].QUIZZ_TYPE=='ONECHOICE')
                     ||(!quiz.questions[questionIndex].minselected && quiz.questions[questionIndex].QUIZZ_TYPE=='MULTIPLECHOICES')"
                     class="btn btn-primary"
-                  >                   
-                    <i class="icon icon-arrow-left" ></i>
-                      الموالي
+                  >
+                    <i class="icon icon-arrow-left"></i>
+                    الموالي
                   </button>
 
-                   <button v-if="questionIndex>=quiz.questions.length" v-show="!succeenvoie"
+                  <button
+                    v-if="questionIndex>=quiz.questions.length"
+                    v-show="!succeenvoie"
                     v-on:click="save();"
                     :disabled="succeenvoie  "
                     class="btn btn-success"
                   >
-                   <i class="icon icon-mail" ></i>
-                     أرسل البيانات الآن
-                   
-                  </button>
+                    <i class="icon icon-mail"></i>
 
+                    أرسل البيانات الآن
+                  </button>
                 </section>
                 <section class="navbar-center">
                   <!-- centered logo or brand    || userResponses[questionIndex]==null -->
                 </section>
-                  <section class="navbar-section">
+                <section class="navbar-section">
                   <button
                     v-show="!succeenvoie"
                     v-on:click="prev();"
                     :disabled="questionIndex < 1"
-                    class="btn "
+                    class="btn"
                   >
-                   السابق
+                    السابق
                     <i class="icon icon-arrow-right"></i>
-                      
                   </button>
                 </section>
-
               </header>
               <!--/quizFooter-->
             </div>
@@ -148,26 +159,26 @@
 
 <script>
 import Vue from "vue";
-import questions  from '../assets/questions';
-import config  from '../assets/config';
+import questions from "../assets/questions";
+import config from "../assets/config";
 
 var quizz = questions;
 let userResponseSkelaton = Array(quizz.questions.length).fill(null);
 export default {
   name: "Quizz",
-  props:
-  {
-    patient : Object
+  props: {
+    patient: Object
   },
   data() {
     return {
       message: "hello",
       quiz: quizz,
-      questionIndex: 0,
+      questionIndex: 15,
       userResponses: userResponseSkelaton,
       isActive: false,
-      succeenvoie: false
-      };
+      succeenvoie: false,
+      errorwhilesending: false
+    };
   },
   filters: {
     charIndex: function(i) {
@@ -176,32 +187,37 @@ export default {
   },
 
   methods: {
-
-    save: function()
-    {
+    save: function() {
       this.succeenvoie = false;
-      let  symptom = {
-         patient : this.patient
-       };
+      this.errorwhilesending = false;
+      let symptom = {
+        patient: this.patient
+      };
 
-       let  antecedent = {
-         patient : this.patient
-       };
-       for(let i=0;i<this.quiz.questions.length;i++)
-       {
-          if ( !(typeof this.quiz.questions[i].constructsymptom ==="undefined"))
-           this.quiz.questions[i].constructsymptom(symptom);
+      let antecedent = {
+        patient: this.patient
+      };
+      for (let i = 0; i < this.quiz.questions.length; i++) {
+        if (!(typeof this.quiz.questions[i].constructsymptom === "undefined"))
+          this.quiz.questions[i].constructsymptom(symptom);
 
-           if ( !(typeof this.quiz.questions[i].constructantecedent ==="undefined"))
-            this.quiz.questions[i].constructantecedent(antecedent);
-         
-       }
-       let self = this;
-      config.createsymantecedent(symptom,antecedent,function( ){                    
-                    console.log("Mesage envoyé avec succes")
-                    self.succeenvoie =true;
-                    self.$router.push("home");
-                })
+        if (
+          !(typeof this.quiz.questions[i].constructantecedent === "undefined")
+        )
+          this.quiz.questions[i].constructantecedent(antecedent);
+      }
+      let self = this;
+      config.createsymantecedent(symptom, antecedent, function(error) {
+        if (error == null) {
+          console.log("Mesage envoyé avec succes");
+          self.errorwhilesending = false;
+          self.succeenvoie = true;
+           self.$emit('sendsucces')
+        } else {
+          self.errorwhilesending = true;
+          self.succeenvoie = false;
+        }
+      });
     },
     restart: function() {
       this.questionIndex = 0;
@@ -221,7 +237,6 @@ export default {
         ].code;
         this.quiz.questions[this.questionIndex].selectedcode = selectedcode;
         console.log(this.quiz.questions[this.questionIndex].selectedcode);
-        
       }
       console.log("Check box change " + index);
     },
@@ -240,19 +255,25 @@ export default {
           "Check box change " +
             this.quiz.questions[this.questionIndex].responses[index].selected
         );
-        let minselected=false;
-        this.quiz.questions[this.questionIndex].minselected  = minselected;
-        for(let i = 0; i < this.quiz.questions[this.questionIndex].responses.length; i++)
-        {
-          let rep  = this.quiz.questions[this.questionIndex].responses[i];
-            if(rep.selected)
-            {
-              minselected = true;
-              this.quiz.questions[this.questionIndex].minselected = true;
-              Vue.set(this.quiz.questions[this.questionIndex], minselected, minselected);
-            }
+        let minselected = false;
+        this.quiz.questions[this.questionIndex].minselected = minselected;
+        for (
+          let i = 0;
+          i < this.quiz.questions[this.questionIndex].responses.length;
+          i++
+        ) {
+          let rep = this.quiz.questions[this.questionIndex].responses[i];
+          if (rep.selected) {
+            minselected = true;
+            this.quiz.questions[this.questionIndex].minselected = true;
+            Vue.set(
+              this.quiz.questions[this.questionIndex],
+              minselected,
+              minselected
+            );
+          }
         }
-       console.log("Minmum selected "+minselected)
+        console.log("Minmum selected " + minselected);
       }
     },
     next: function() {
@@ -260,11 +281,10 @@ export default {
         let zapnext = true;
         while (zapnext) {
           this.questionIndex++;
-          if(this.questionIndex>= this.quiz.questions.length)
-          {
+          if (this.questionIndex >= this.quiz.questions.length) {
             zapnext = false;
-          }
-          else if ( typeof this.quiz.questions[this.questionIndex].isvisible ===
+          } else if (
+            typeof this.quiz.questions[this.questionIndex].isvisible ===
             "undefined"
           ) {
             zapnext = false;
@@ -335,7 +355,6 @@ export default {
     }
   }
 };
-
 </script>
 
 <style scoped>

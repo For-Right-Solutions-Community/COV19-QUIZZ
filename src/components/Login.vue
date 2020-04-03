@@ -123,6 +123,7 @@ export default {
                 if (error != null) {
                   self.loading = false;
                   self.signinrror = true;
+                  console.log(error.response);
                   self.signinmsgerror =
                     "Service indisponible essayer plus tard";
                   self.faillogin();
@@ -134,6 +135,7 @@ export default {
             }
           })
           .catch(function(error) {
+             console.log(error.response);
             self.loading = false;
             self.signinrror = true;
             self.signinmsgerror = "Login ou mot de passe invalide";

@@ -35,6 +35,7 @@ export default Object.assign( {
         .catch ( (error) =>  {
             console.log("Token creation error");
             console.error(error)
+            console.log(error.response);
             callback(null,null,error);
             self.signeduser = null;
         })
@@ -102,7 +103,8 @@ export default Object.assign( {
             callback();})
         .catch ( (error) =>  {
             console.error(error.response);
-            console.log(error)
+            console.log(error);
+            callback(error);
         })
     },
     fetchpatients: function(callback)  {

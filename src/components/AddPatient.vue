@@ -1,7 +1,7 @@
 <template>
   <div class="container" align="right">
-     <HeaderNavigation />
-     <Quizz v-if="addsucces && !updatemode" :patient="selectedpatient"/><!--lancer la quizz une fois le client est enregistré la premiere fois-->
+     <HeaderNavigation v-if="!updatemode" />
+     <Quizz v-if="addsucces && !updatemode" :patient="selectedpatient"  v-on:sendsucces="exit()" /><!--lancer la quizz une fois le client est enregistré la premiere fois-->
     <div v-if="!addsucces" class="columns grid-xs">
       <div class="column col-mx-auto col-4 col-xs-10 col-xl-4 col-l-5 col-md-8">
         <h5 v-if="!updatemode">إضافة مريض</h5>
@@ -125,8 +125,10 @@ export default {
   methods: {
     update: function() {
       //let self = this;
+       let self = this;
       config.updatepatient(this.patient, function() {
         console.log("Update patient succes");
+        self.$emit("sendsucces");
       });
     },
     save: function() {
@@ -137,7 +139,7 @@ export default {
       });
     },
     exit: function() {
-      this.$router.push("home");
+      this.$router.push("patients");
     }
   }
 };

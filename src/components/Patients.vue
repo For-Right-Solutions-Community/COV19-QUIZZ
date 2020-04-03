@@ -22,11 +22,11 @@
     </div>
   </div> <!--Patient List end -->
   <div id="symptomsdeatils" v-if="symptomsdetailsmode" align="center">
-    <Quizz :patient="selectedpatient" />
+    <Quizz :patient="selectedpatient" v-on:sendsucces="quitsymptomsdetailsmode()" />
     <button class="btn btn btn-link" @click="quitsymptomsdetailsmode()"> إلغاء </button>
    </div> 
     <div id="patientdetails" v-if="editprofilemode" align="center">
-    <AddPatient :patient="selectedpatient" :updatemode="true" />
+    <AddPatient :patient="selectedpatient" :updatemode="true" v-on:sendsucces="quitprofilemode()" />
     <button class="btn btn btn-link" @click="quitprofilemode()"> إلغاء </button>
    </div>
  </div>  

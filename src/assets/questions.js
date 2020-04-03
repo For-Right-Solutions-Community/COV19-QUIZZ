@@ -2,6 +2,151 @@ var  questions = {
     user: "",
     questions: [
       {
+        ID: "USER",
+        text: "من يقوم بتعمير هذه الاستمارة ؟ ",
+        QUIZZ_TYPE: "ONECHOICE",
+        responses: [
+          { text: " المريض", correct: true, code: "YES" },
+          { text: "شخص آخر", code: "NO" }
+        ]
+      },
+      {
+        ID: "USERCAUSE",
+        QUIZZ_TYPE: "ONECHOICE",
+        text: "لماذا يقوم شخص آخر بملأ الإستمارة ؟ ",
+        responses: [
+          { text: " المريض لا يعرف التعامل مع التطبيقة ", correct: true },
+          {
+            text:
+              "حالة المريض  الصحية لا تسمح جراء فقدانه الوعي أو ضيق تنفس حاد"
+          }
+        ],
+        isvisible: function(id, code) {
+          return id == "USER" && code == "NO" ? true : false;
+        }
+      },
+      {
+        ID: "VOYAGE",
+        QUIZZ_TYPE: "ONECHOICE",
+        text: "هل سافرت خارج البلاد خلال الشهر الفارط ؟ ",
+        responses: [
+          { text: " نعم ", correct: true, code: "YES" },
+          { text: " لا  ", code: "NO" }
+        ]
+
+      },
+      {
+        ID: "EXPOSITION_VOYAGE",
+        QUIZZ_TYPE: "ONECHOICE",
+        text: " هل كان لك اتصال مباشر بشخص سافر خارج البلاد الشهر الفارط ؟ ",
+        responses: [
+          { text: " نعم ", correct: true, code: "YES" },
+          { text: " لا  ", code: "NO" }
+        ],
+        isvisible: function(id, code) {
+          return id == "VOYAGE" && code == "NO" ? true : false;
+        }
+      },
+      {
+        ID: "EXPOSITION_HABITAT",
+        QUIZZ_TYPE: "ONECHOICE",
+        text: "هل يسكن معك في نفس المنزل ؟",
+        responses: [
+          { text: " نعم ", correct: true, code: "YES" },
+          { text: " لا  ", code: "NO" },
+        ],
+        isvisible: function(id, code) {
+          return id == "EXPOSITION_VOYAGE" && code == "YES" ? true : false;
+        }
+      },
+      {
+        ID: "EXPOSITION_ANALYSE",
+        QUIZZ_TYPE: "ONECHOICE",
+        text: " هل خضعت أنت او الشخص المذكور لتحليل الاصابة بفيروس كورونا ؟",
+        responses: [
+          { text: " نعم ", correct: true, code: "YES" },
+          { text: " لا  ", code: "NO" }
+        ],
+        isvisible: function(id, code) {
+          return id == "EXPOSITION_VOYAGE" && code == "YES" ? true : false;
+        }
+      },
+      {
+        ID: "EXPOSITION_RESULTAT_ANALYSE",
+        QUIZZ_TYPE: "ONECHOICE",
+        text: "ماهي نتيجة التحليل ؟",
+        responses: [
+          { text: "  مصاب ", correct: true, code: "YES" },
+          { text: "غير مصاب", code: "NO" }
+        ],
+        isvisible: function(id, code) {
+          return id == "EXPOSITION_ANALYSE" && code == "YES" ? true : false;
+        }
+      },
+      {
+        ID: "EPEDEMIC_LOCATION",
+        QUIZZ_TYPE: "ONECHOICE",
+        text: "هل كنت في احدى المناطق التي اعلنت عنها وزارة الصحة كبؤرة لانتشار المرض خلال الاسبوعين الفارطين",
+        responses: [
+          { text: "  نعم ", correct: true, code: "YES" },
+          { text: "لا  ", code: "NO" }
+        ]
+      },
+      {
+        ID: "FIEVRE",
+        QUIZZ_TYPE: "ONECHOICE",
+        text: " هل تشكو من ارتفاع في درجة حرارتك (حمى) ؟ ",
+        responses: [
+          { text: " نعم ", correct: true, code: "YES" },
+          { text: " لا  ", code: "NO" }
+        ],
+        constructsymptom: function (reponse){
+          if(this.selectedcode=="YES") reponse.fever = true
+           else reponse.fever = false;
+        }
+      },
+      {
+        ID: "MAUX_GORGE",
+        QUIZZ_TYPE: "ONECHOICE",
+        text: " هل تشعر بألم حاد في الحنجرة ؟ ",
+        responses: [
+          { text: " نعم ", correct: true, code: "YES" },
+          { text: " لا  ", code: "NO" }
+        ]
+        ,
+        constructsymptom: function (reponse){
+          if(this.selectedcode=="YES") reponse.sore_throat = true
+           else reponse.sore_throat = false;
+        }
+      },
+      {
+        ID: "TOUX",
+        QUIZZ_TYPE: "ONECHOICE",
+        text:
+          " هل لديك سعال او ان درجة السعال التي تشكو منها في العادة ازدادت حدة ؟ ",
+        responses: [
+          { text: " نعم ", correct: true, code: "YES" },
+          { text: " لا  " }
+        ],
+        constructsymptom: function (reponse){
+          if(this.selectedcode=="YES") reponse.cough = true
+           else reponse.cough = false;
+        }
+      },
+      {
+        ID: "ASPHEXIE",
+        QUIZZ_TYPE: "ONECHOICE",
+        text: " هل تشكو من ضيق تنفس او تعكر في قدرتك على التنفس مقارنة بالسابق ",
+        responses: [
+          { text: " نعم ", correct: true, code: "YES" },
+          { text: " لا  ", code: "NO" }
+        ],
+        constructsymptom: function (reponse){
+          if(this.selectedcode=="YES") reponse.dyspnea = true
+           else reponse.dyspnea = false;
+        }
+      },  
+      {
         ID: "ASPHEXIE",
         QUIZZ_TYPE: "ONECHOICE",
         text: " هل تشكو من عدم القدرة على الحديث كما في السابق ؟ ",
@@ -29,27 +174,26 @@ var  questions = {
         }
       },
       {
-        ID: "USER",
-        text: "من يقوم بتعمير هذه الاستمارة ؟ ",
+        ID: "ABILYTY",
         QUIZZ_TYPE: "ONECHOICE",
+        text: "هل تستطيع الحركة و القيام بحاجياتك دون مساعدة ؟",
         responses: [
-          { text: " المريض", correct: true, code: "YES" },
-          { text: "شخص آخر", code: "NO" }
+          { text: " نعم ", correct: true, code: "YES" },
+          { text: " لا  ", code: "NO" }
         ]
       },
       {
-        ID: "USERCAUSE",
+        ID: "ABILYTY_DURATION",
         QUIZZ_TYPE: "ONECHOICE",
-        text: "لماذا يقوم شخص آخر بملأ الإستمارة ؟ ",
+        text: " منذ متى ؟",
         responses: [
-          { text: " المريض لا يعرف التعامل مع التطبيقة ", correct: true },
-          {
-            text:
-              "حالة المريض  الصحية لا تسمح جراء فقدانه الوعي أو ضيق تنفس حاد"
-          }
+          { text: " ايام ", correct: true },
+          { text: "اسابيع ", correct: true },
+          { text: "اشهر " },
+          { text: "سنوات " }
         ],
         isvisible: function(id, code) {
-          return id == "USER" && code == "NO" ? true : false;
+          return id == "ABILYTY" && code == "NO" ? true : false;
         }
       },
       {
@@ -140,129 +284,6 @@ var  questions = {
         constructantecedent: function (reponse){
           if(this.selectedcode=="YES") reponse.immune_disease = true
            else reponse.immune_disease=false;
-        }
-      },
-      {
-        ID: "VOYAGE",
-        QUIZZ_TYPE: "ONECHOICE",
-        text: "هل سافرت خارج البلاد خلال الشهر الفارط ؟ ",
-        responses: [
-          { text: " نعم ", correct: true, code: "YES" },
-          { text: " لا  ", code: "NO" }
-        ]
-
-      },
-      {
-        ID: "EXPOSITION_VOYAGE",
-        QUIZZ_TYPE: "ONECHOICE",
-        text: " هل كان لك اتصال مباشر بشخص سافر خارج البلاد الشهر الفارط ؟ ",
-        responses: [
-          { text: " نعم ", correct: true, code: "YES" },
-          { text: " لا  ", code: "NO" }
-        ],
-        isvisible: function(id, code) {
-          return id == "VOYAGE" && code == "NO" ? true : false;
-        }
-      },
-      {
-        ID: "EXPOSITION_HABITAT",
-        QUIZZ_TYPE: "ONECHOICE",
-        text: "هل يسكن معك في نفس المنزل ؟",
-        responses: [
-          { text: " نعم ", correct: true, code: "YES" },
-          { text: " لا  ", code: "NO" },
-        ],
-        isvisible: function(id, code) {
-          return id == "EXPOSITION_VOYAGE" && code == "YES" ? true : false;
-        }
-      },
-      {
-        ID: "EXPOSITION_ANALYSE",
-        QUIZZ_TYPE: "ONECHOICE",
-        text: " هل خضعت أنت او الشخص المذكور لتحليل الاصابة بفيروس كورونا ؟",
-        responses: [
-          { text: " نعم ", correct: true, code: "YES" },
-          { text: " لا  ", code: "NO" }
-        ],
-        isvisible: function(id, code) {
-          return id == "EXPOSITION_VOYAGE" && code == "YES" ? true : false;
-        }
-      },
-      {
-        ID: "EXPOSITION_RESULTAT_ANALYSE",
-        QUIZZ_TYPE: "ONECHOICE",
-        text: "ماهي نتيجة التحليل ؟",
-        responses: [
-          { text: "  مصاب ", correct: true, code: "YES" },
-          { text: "غير مصاب", code: "NO" }
-        ],
-        isvisible: function(id, code) {
-          return id == "EXPOSITION_ANALYSE" && code == "YES" ? true : false;
-        }
-      },
-
-      {
-        ID: "FIEVRE",
-        QUIZZ_TYPE: "ONECHOICE",
-        text: " هل تشكو من ارتفاع في درجة حرارتك (حمى) ؟ ",
-        responses: [
-          { text: " نعم ", correct: true, code: "YES" },
-          { text: " لا  ", code: "NO" }
-        ],
-        constructsymptom: function (reponse){
-          if(this.selectedcode=="YES") reponse.fever = true
-           else reponse.fever = false;
-        }
-      },
-      {
-        ID: "MAUX_GORGE",
-        QUIZZ_TYPE: "ONECHOICE",
-        text: " هل تشعر بألم حاد في الحنجرة ؟ ",
-        responses: [
-          { text: " نعم ", correct: true, code: "YES" },
-          { text: " لا  ", code: "NO" }
-        ]
-        ,
-        constructsymptom: function (reponse){
-          if(this.selectedcode=="YES") reponse.sore_throat = true
-           else reponse.sore_throat = false;
-        }
-      },
-      {
-        ID: "TOUX",
-        QUIZZ_TYPE: "ONECHOICE",
-        text:
-          " هل لديك سعال او ان درجة السعال التي تشكو منها في العادة ازدادت حدة ؟ ",
-        responses: [
-          { text: " نعم ", correct: true, code: "YES" },
-          { text: " لا  " }
-        ],
-        constructsymptom: function (reponse){
-          if(this.selectedcode=="YES") reponse.cough = true
-           else reponse.cough = false;
-        }
-      },
-      {
-        ID: "ABILYTY",
-        QUIZZ_TYPE: "ONECHOICE",
-        text: "هل تستطيع الحركة و القيام بحاجياتك دون مساعدة ؟",
-        responses: [
-          { text: " نعم ", correct: true, code: "YES" },
-          { text: " لا  ", code: "NO" }
-        ]
-      },
-      {
-        ID: "ABILYTY_DURATION",
-        QUIZZ_TYPE: "ONECHOICE",
-        text: " منذ متى ؟",
-        responses: [
-          { text: " ايام ", correct: true },
-          { text: "اسابيع ", correct: true },
-          { text: "اشهر " },
-          { text: "سنوات " }
-        ],
-        isvisible: function(id, code) {
-          return id == "ABILYTY" && code == "NO" ? true : false;
         }
       }
     ]

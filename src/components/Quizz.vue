@@ -173,7 +173,7 @@ export default {
     return {
       message: "hello",
       quiz: quizz,
-      questionIndex: 15,
+      questionIndex: 0,
       userResponses: userResponseSkelaton,
       isActive: false,
       succeenvoie: false,

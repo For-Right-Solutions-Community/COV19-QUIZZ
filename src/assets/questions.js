@@ -149,10 +149,7 @@ var  questions = {
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
           { text: " لا  ", code: "NO" }
-        ],
-        constructsymptom: function (reponse){
-          if(this.selectedcode=="YES") reponse.exposure = true
-        }
+        ]
 
       },
       {
@@ -165,9 +162,6 @@ var  questions = {
         ],
         isvisible: function(id, code) {
           return id == "VOYAGE" && code == "NO" ? true : false;
-        },
-        constructsymptom: function (reponse){
-          if(this.selectedcode=="YES") reponse.exposure = true
         }
       },
       {
@@ -180,9 +174,6 @@ var  questions = {
         ],
         isvisible: function(id, code) {
           return id == "EXPOSITION_VOYAGE" && code == "YES" ? true : false;
-        },
-        constructsymptom: function (reponse){
-          if(this.selectedcode=="YES") reponse.exposure = true
         }
       },
       {

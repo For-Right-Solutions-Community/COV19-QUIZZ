@@ -1,5 +1,6 @@
 <template>
   <div class="container" align="right">
+     <HeaderNavigation />
      <Quizz v-if="addsucces && !updatemode" :patient="selectedpatient"/><!--lancer la quizz une fois le client est enregistré la premiere fois-->
     <div v-if="!addsucces" class="columns grid-xs">
       <div class="column col-mx-auto col-4 col-xs-10 col-xl-4 col-l-5 col-md-8">
@@ -69,6 +70,7 @@
 <script>
 import config from "../assets/config";
 import Quizz from "./Quizz";
+import HeaderNavigation from "./HeaderNavigation";
 let ipatient = {
   firstname: "",
   lastname: "",
@@ -98,7 +100,8 @@ let ipatient = {
 };
 export default {
     components: {
-        Quizz
+        Quizz,
+        HeaderNavigation
     },
   props: {
     patient: {

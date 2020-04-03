@@ -70,4 +70,16 @@ export default {
     background: #a32505;
     color: #fff;
 }
+
+ .justifyparagraph {
+  text-align: justify;
+  text-justify:auto;
+  padding-top: 50px;
+ } 
+ .topspace{
+   padding-top: 10px;
+ }
+  .leftspace{
+   padding-left:10px;
+ }
 </style>

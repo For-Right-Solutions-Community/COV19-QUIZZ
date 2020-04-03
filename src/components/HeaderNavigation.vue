@@ -17,8 +17,19 @@
         </div>
       </section>
       <section class="navbar-section">
-        <a href="/patients" class="btn btn-primary">قائمة المرضى</a>
-        <a href="/home" class="navbar mr-2">الرئيسية</a>
+        <div class="navabrspace">
+          <a href="/addpatient" class="btn btn-primary">إضافة مريض</a>
+        </div>
+         <div class="navabrspace">
+           <a href="/patients" class="btn btn-primary">قائمة المرضى</a>
+        </div> 
+               
+         <div class="navabrspace">
+           <a href="/home" class="navbar mr-2">الرئيسية</a>
+        </div>  
+        
+        
+        
       </section>
     </header>
   </div>
@@ -52,3 +63,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+ .navabrspace{
+   padding-left:10px;
+   padding-top:5px;
+ }
+</style>

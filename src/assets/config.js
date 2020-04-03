@@ -53,6 +53,7 @@ export default Object.assign( {
     },
     createpatient: function(patient,callback)  {
         patient.user = {"id": this.getuser().id};//passer tous l objet user cree un probleme
+        console.log(patient);
         axiosapi.post(ADD_PATIEN_URL,patient,this.getHeaderConfig()).then((reponse) => {
             //on succes on cree un token
             callback(reponse.data);
@@ -64,6 +65,10 @@ export default Object.assign( {
     },
     updatepatient: function(patient,callback)  {
         patient.user = {"id": this.getuser().id};//passer tous l objet user cree un probleme
+        
+       // delete patient.user ;
+        console.log(patient);
+     //   patient.user = {"id": this.getuser().id};//passer tous l objet user cree un probleme
         axiosapi.put(UPDATE_PATIEN_URL+patient.id,patient,this.getHeaderConfig()).then(() => {
             //on succes on cree un token
             callback();
@@ -86,6 +91,9 @@ export default Object.assign( {
         return axiosapi.post(ADD_ANTECEDENT_URL,antecendt,this.getHeaderConfig());
     },
     createsymantecedent: function(symp,antecendt,callback)  {
+        let patient = {"id":symp.patient.id};
+        symp.patient = patient;//passer tous l objet user cree un probleme
+        antecendt.patient = patient;//passer tous l objet user cree un probleme
         console.log(symp);
         console.log(antecendt);
         axiosapi.post(ADD_SYMPTOM_URL,symp,this.getHeaderConfig()).then(this.createantecedent(antecendt))
@@ -93,7 +101,7 @@ export default Object.assign( {
             console.log("second call succes add antecedant");
             callback();})
         .catch ( (error) =>  {
-            console.error(error.details);
+            console.error(error.response);
             console.log(error)
         })
     },

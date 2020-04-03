@@ -5,7 +5,7 @@
     <div v-if="loading" class="loading">... جاري التحميل </div>
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="post">
-    <div v-for=" patient in patients" class="card" :key="patient.id">
+    <div v-for=" patient in patients" class="card  topspace" :key="patient.id">
       <div class="card-image">
         <img :src="patient.gender=='MALE'?'img/sick128.png':'img/sickf128.png'" class="img-responsive" />
       </div>

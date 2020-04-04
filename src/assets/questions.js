@@ -115,8 +115,8 @@ var  questions = {
         ]
         ,
         constructsymptom: function (reponse){
-          if(this.selectedcode=="YES") reponse.sore_throat = true
-           else reponse.sore_throat = false;
+          if(this.selectedcode=="YES") reponse.soreThroat = true
+           else reponse.soreThroat = false;
         }
       },
       {
@@ -230,8 +230,8 @@ var  questions = {
           { text: " لا ", code: "NO" }
         ],
         constructantecedent: function (reponse){
-          if(this.selectedcode=="YES") reponse.heart_disease = true
-           else reponse.heart_disease=false;
+          if(this.selectedcode=="YES") reponse.heartDisease = true
+           else reponse.heartDisease=false;
         }
       },
       {
@@ -256,8 +256,8 @@ var  questions = {
           { text: " لا ", code: "NO" }
         ],
         constructantecedent: function (reponse){
-          if(this.selectedcode=="YES") reponse.renal_failure = true
-           else reponse.renal_failure=false;
+          if(this.selectedcode=="YES") reponse.renalFailure = true
+           else reponse.renalFailure=false;
         }
       },
       {
@@ -282,8 +282,8 @@ var  questions = {
           { text: " لا ", code: "NO" }
         ],
         constructantecedent: function (reponse){
-          if(this.selectedcode=="YES") reponse.immune_disease = true
-           else reponse.immune_disease=false;
+          if(this.selectedcode=="YES") reponse.immuneDisease = true
+           else reponse.immuneDisease=false;
         }
       }
     ]

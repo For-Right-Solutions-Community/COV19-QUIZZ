@@ -1,14 +1,15 @@
 import axios from 'axios';
 //axios.defaults.headers.common['Authorization'] = `Bearer`;
 
-export const API_PATH="https://api.amu190.maodao.xyz/";
+//export const API_PATH="https://api.amu190.maodao.xyz/";
+export const API_PATH="http://localhost:8080/";
 const LOGIN_URL = "/v2/register";
 const SIGNUP_URL = "/m/user/create";
 const ADD_PATIEN_URL = "/m/patient/create";
 const UPDATE_PATIEN_URL = "/m/patient/";
 const FETCH_PATIENT_URL = "/m/patient/";
 const ADD_SYMPTOM_URL = "/m/symptom/create";
-const ADD_ANTECEDENT_URL = "/m/antecedent/create";
+const UPDATE_ANTECEDENT_URL = "/m/antecedent/";
 const axiosapi = axios.create({
     baseURL: API_PATH,
     timeout: 50000,
@@ -88,8 +89,10 @@ export default Object.assign( {
             console.error(error)
         })
     },
-    createantecedent: function(antecendt){
-        return axiosapi.post(ADD_ANTECEDENT_URL,antecendt,this.getHeaderConfig());
+    updateantecedent: function(antecendt){
+        console.log("update antecedent");
+        console.log(antecendt);
+        return axiosapi.put(UPDATE_ANTECEDENT_URL+antecendt.id,antecendt,this.getHeaderConfig());
     },
     createsymantecedent: function(symp,antecendt,callback)  {
         let patient = {"id":symp.patient.id};
@@ -97,7 +100,7 @@ export default Object.assign( {
         antecendt.patient = patient;//passer tous l objet user cree un probleme
         console.log(symp);
         console.log(antecendt);
-        axiosapi.post(ADD_SYMPTOM_URL,symp,this.getHeaderConfig()).then(this.createantecedent(antecendt))
+        axiosapi.post(ADD_SYMPTOM_URL,symp,this.getHeaderConfig()).then(this.updateantecedent(antecendt))
         .then( ()=>{
             console.log("second call succes add antecedant");
             callback();})

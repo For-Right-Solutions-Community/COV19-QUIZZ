@@ -187,16 +187,19 @@ export default {
   },
 
   methods: {
-    save: function() {
+    updatesymptoms: function()
+    {
+
+    },
+    createfirstquizz: function()
+    {
       this.succeenvoie = false;
       this.errorwhilesending = false;
       let symptom = {
         patient: this.patient
       };
 
-      let antecedent = {
-        patient: this.patient
-      };
+      let antecedent = this.patient.antecedentRecord;
       for (let i = 0; i < this.quiz.questions.length; i++) {
         if (!(typeof this.quiz.questions[i].constructsymptom === "undefined"))
           this.quiz.questions[i].constructsymptom(symptom);
@@ -218,6 +221,9 @@ export default {
           self.succeenvoie = false;
         }
       });
+    },
+    save: function() {
+      this.createfirstquizz();
     },
     restart: function() {
       this.questionIndex = 0;

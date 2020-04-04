@@ -81,53 +81,57 @@
           </select>
 
           <div v-if="patient.address!=null">
-          <label class="form-label" for="ville">الولاية</label>
-          <select
-            class="form-select"
-            placeholder="ville"
-            @keyup="forumalerror = false "
-            v-model="patient.address.state"
-          >
-            <option value="ARIANA">ولاية أريانة</option>
-            <option value="BEJA">ولاية باجة</option>
-            <option value="BENAROURS">ولاية بن عروس</option>
-            <option value="BIZERTE">ولاية بنزرت</option>
-            <option value="TATOUINE">ولاية تطاوين</option>
-            <option value="TOUZUER">ولاية توزر</option>
-            <option value="TUNIS">ولاية تونس</option>
-            <option value="JANDOUBA">ولاية جندوبة</option>
-            <option value="ZAGHOUIN">ولاية زغوان</option>
-            <option value="SILIANA">ولاية سليانة</option>
-            <option value="SOUSSE">ولاية سوسة</option>
-            <option value="SIDIBOUZID">ولاية سيدي بوزيد</option>
-            <option value="SFAX">ولاية صفاقس</option>
-            <option value="GABES">ولاية قابس</option>
-            <option value="KBELLI">ولاية قبلي</option>
-            <option value="GASSERINE">ولاية القصرين</option>
-            <option value="GAFSA">ولاية قفصة</option>
-            <option value="KAIROIN">ولاية القيروان</option>
-            <option value="ELKEF">ولاية الكاف</option>
-            <option value="MEDINE">ولاية مدنين</option>
-            <option value="MONASTIR">ولاية المنستير</option>
-            <option value="MANNOUBA">ولاية منوبة</option>
-            <option value="MAHDIA">ولاية المهدية</option>
-            <option value="NABEUL">ولاية نابل</option>
-          </select>
+            <label class="form-label" for="ville">الولاية</label>
+            <select
+              class="form-select"
+              placeholder="ville"
+              @keyup="forumalerror = false "
+              v-model="patient.address.state"
+            >
+              <option value="ARIANA">ولاية أريانة</option>
+              <option value="BEJA">ولاية باجة</option>
+              <option value="BENAROURS">ولاية بن عروس</option>
+              <option value="BIZERTE">ولاية بنزرت</option>
+              <option value="TATOUINE">ولاية تطاوين</option>
+              <option value="TOUZUER">ولاية توزر</option>
+              <option value="TUNIS">ولاية تونس</option>
+              <option value="JANDOUBA">ولاية جندوبة</option>
+              <option value="ZAGHOUIN">ولاية زغوان</option>
+              <option value="SILIANA">ولاية سليانة</option>
+              <option value="SOUSSE">ولاية سوسة</option>
+              <option value="SIDIBOUZID">ولاية سيدي بوزيد</option>
+              <option value="SFAX">ولاية صفاقس</option>
+              <option value="GABES">ولاية قابس</option>
+              <option value="KBELLI">ولاية قبلي</option>
+              <option value="GASSERINE">ولاية القصرين</option>
+              <option value="GAFSA">ولاية قفصة</option>
+              <option value="KAIROIN">ولاية القيروان</option>
+              <option value="ELKEF">ولاية الكاف</option>
+              <option value="MEDINE">ولاية مدنين</option>
+              <option value="MONASTIR">ولاية المنستير</option>
+              <option value="MANNOUBA">ولاية منوبة</option>
+              <option value="MAHDIA">ولاية المهدية</option>
+              <option value="NABEUL">ولاية نابل</option>
+            </select>
 
-            <label class="form-label" for="adresse"> عنوان الإقامة </label>
+            <label class="form-label" for="adresse">عنوان الإقامة</label>
             <input
-            class="form-input"
-            id="nom"
-            type="number"
-            placeholder="Adresse"
-            @keyup="forumalerror = false "
-            v-model="patient.address.avenue">      
-            <button @click="geolocalisation()" class="btn btn-primary"> تحديد الموقع</button>   
-            <span v-if="patient.location.lat!=null"> {{patient.location.lat }}  : {{ patient.location.lng}} </span>
-          </div> 
-          
+              class="form-input"
+              id="nom"
+              type="number"
+              placeholder="Adresse"
+              @keyup="forumalerror = false "
+              v-model="patient.address.avenue"
+            />
+            <div v-if="patient.location!=null">
+              <button @click="geolocalisation()" class="btn btn-primary">تحديد الموقع</button>
+              <span
+                v-if="patient.location.lat!=null"
+              >{{patient.location.lat }} : {{ patient.location.lng}}</span>
+            </div>
+          </div>
         </div>
-        
+
         <div class="form-group">
           <button v-if="!updatemode" @click="save()" class="btn btn-primary">تسجيل</button>
           <button v-if="!updatemode" @click="exit()" class="btn btn-link">خروج</button>
@@ -171,11 +175,23 @@ let ipatient = {
   covidTestResult: "",
   address: {
     state: "",
-    avenue:""
+    avenue: ""
   },
-  location:{
-    lat:0,
-    lng:0
+  location: {
+    lat: 0,
+    lng: 0
+  },
+  antecedentRecord: {},
+  exposure: {
+    visitedCoutry: "Tunisie",
+    contactWithTraveler: false,
+    sameHomePersonReturningFromTrip: false,
+    countryPersonReturningFromTrip: "",
+    contactedTravellerTestResult: false,
+    visitedRegion: "",
+    visitDate: new Date(),
+    contactWithInfectedPerson: false,
+    visited_regwithSuspiciousGroupion: false
   }
 };
 export default {
@@ -199,24 +215,26 @@ export default {
     return {
       forumalerror: false,
       selectedpatient: {},
-      addsucces: false,
+      addsucces: false
     };
   },
   methods: {
-    geolocalisation : function(){
-        let sel = this;
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position){
-                    sel.patient.location.lat =  position.coords.latitude;
-                    sel.patient.location.lng = position.coords.longitude;
-            });
-          } else { 
-           console.log("Geolocation is not supported by this browser.");
-          }
+    geolocalisation: function() {
+      let sel = this;
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          sel.patient.location.lat = position.coords.latitude;
+          sel.patient.location.lng = position.coords.longitude;
+        });
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
     },
     update: function() {
       //let self = this;
       let self = this;
+      console.log("Patient before update");
+     console.log(this.patient);
       config.updatepatient(this.patient, function() {
         console.log("Update patient succes");
         self.$emit("sendsucces");

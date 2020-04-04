@@ -1,13 +1,14 @@
 <template>
   <div class="container" align="right">
-     <HeaderNavigation v-if="!updatemode" />
-     <Quizz v-if="addsucces && !updatemode" :patient="selectedpatient"  v-on:sendsucces="exit()" /><!--lancer la quizz une fois le client est enregistré la premiere fois-->
+    <HeaderNavigation v-if="!updatemode" />
+    <Quizz v-if="addsucces && !updatemode" :patient="selectedpatient" v-on:sendsucces="exit()" />
+    <!--lancer la quizz une fois le client est enregistré la premiere fois-->
     <div v-if="!addsucces" class="columns grid-xs">
       <div class="column col-mx-auto col-4 col-xs-10 col-xl-4 col-l-5 col-md-8">
         <h5 v-if="!updatemode">إضافة مريض</h5>
-        <h5 v-if="updatemode" v-once> تغيير بيانات {{ patient.firstname}}</h5>
+        <h5 v-if="updatemode" v-once>تغيير بيانات {{ patient.firstname}}</h5>
         <div class="form-group">
-          <label class="form-label" for="email"> الإسم </label>
+          <label class="form-label" for="email">الإسم</label>
           <input
             class="form-input"
             id="nom"
@@ -16,7 +17,7 @@
             @keyup="forumalerror = false "
             v-model="patient.firstname"
           />
-          <label class="form-label" for="lastname"> اللقب</label>
+          <label class="form-label" for="lastname">اللقب</label>
           <input
             class="form-input"
             id="lastname"
@@ -26,7 +27,7 @@
             v-model="patient.lastname"
           />
 
-          <label class="form-label" for="phone"> رقم الجوال </label>
+          <label class="form-label" for="phone">رقم الجوال</label>
           <input
             class="form-input"
             id="phone"
@@ -36,7 +37,17 @@
             v-model="patient.phone"
           />
 
-          <label class="form-label" for="age"> العمر</label>
+          <label class="form-label" for="backup_phone">رقم هاتف احد الاقارب في حالة عدم التحصل عليك</label>
+          <input
+            class="form-input"
+            id="backup_phone"
+            type="number"
+            placeholder="Numéro de téléphone"
+            @keyup="forumalerror = false "
+            v-model="patient.backup_phone"
+          />
+
+          <label class="form-label" for="age">العمر</label>
           <input
             class="form-input"
             id="nom"
@@ -46,20 +57,80 @@
             v-model="patient.age"
           />
 
-          <label class="form-label" for="sexe"> الجنس</label>
+          <label class="form-label" for="sexe">الجنس</label>
           <select
             class="form-select"
             placeholder="sexe"
             @keyup="forumalerror = false "
             v-model="patient.gender"
           >
-            <option value="MALE"> ذكر </option>
-            <option value="FEMALE"> أنثى</option>
+            <option value="MALE">ذكر</option>
+            <option value="FEMALE">أنثى</option>
           </select>
+
+          <label class="form-label" for="sexe">الحالة المدنية</label>
+          <select
+            class="form-select"
+            placeholder="status"
+            @keyup="forumalerror = false "
+            v-model="patient.civilStatus"
+          >
+            <option value="SINGLE">أعزب / عزباء</option>
+            <option value="MARRIED">متزوج / ة</option>
+            <option value="WIDOWED">أرملة</option>
+          </select>
+
+          <div v-if="patient.address!=null">
+          <label class="form-label" for="ville">الولاية</label>
+          <select
+            class="form-select"
+            placeholder="ville"
+            @keyup="forumalerror = false "
+            v-model="patient.address.state"
+          >
+            <option value="ARIANA">ولاية أريانة</option>
+            <option value="BEJA">ولاية باجة</option>
+            <option value="BENAROURS">ولاية بن عروس</option>
+            <option value="BIZERTE">ولاية بنزرت</option>
+            <option value="TATOUINE">ولاية تطاوين</option>
+            <option value="TOUZUER">ولاية توزر</option>
+            <option value="TUNIS">ولاية تونس</option>
+            <option value="JANDOUBA">ولاية جندوبة</option>
+            <option value="ZAGHOUIN">ولاية زغوان</option>
+            <option value="SILIANA">ولاية سليانة</option>
+            <option value="SOUSSE">ولاية سوسة</option>
+            <option value="SIDIBOUZID">ولاية سيدي بوزيد</option>
+            <option value="SFAX">ولاية صفاقس</option>
+            <option value="GABES">ولاية قابس</option>
+            <option value="KBELLI">ولاية قبلي</option>
+            <option value="GASSERINE">ولاية القصرين</option>
+            <option value="GAFSA">ولاية قفصة</option>
+            <option value="KAIROIN">ولاية القيروان</option>
+            <option value="ELKEF">ولاية الكاف</option>
+            <option value="MEDINE">ولاية مدنين</option>
+            <option value="MONASTIR">ولاية المنستير</option>
+            <option value="MANNOUBA">ولاية منوبة</option>
+            <option value="MAHDIA">ولاية المهدية</option>
+            <option value="NABEUL">ولاية نابل</option>
+          </select>
+
+            <label class="form-label" for="adresse"> عنوان الإقامة </label>
+            <input
+            class="form-input"
+            id="nom"
+            type="number"
+            placeholder="Adresse"
+            @keyup="forumalerror = false "
+            v-model="patient.address.avenue">      
+            <button @click="geolocalisation()" class="btn btn-primary"> تحديد الموقع</button>   
+            <span v-if="patient.location.lat!=null"> {{patient.location.lat }}  : {{ patient.location.lng}} </span>
+          </div> 
+          
         </div>
+        
         <div class="form-group">
-          <button v-if="!updatemode" @click="save()" class="btn btn-primary"> تسجيل </button>
-          <button v-if="!updatemode" @click="exit()" class="btn btn-link"> خروج </button>
+          <button v-if="!updatemode" @click="save()" class="btn btn-primary">تسجيل</button>
+          <button v-if="!updatemode" @click="exit()" class="btn btn-link">خروج</button>
           <button v-if="updatemode" @click="update()" class="btn btn-primary">تسجيل</button>
         </div>
       </div>
@@ -76,6 +147,7 @@ let ipatient = {
   lastname: "",
   cin: "",
   phone: "",
+  backup_phone: "",
   email: "",
   age: 0,
   weight: 0,
@@ -96,13 +168,21 @@ let ipatient = {
   visitedCountry: "",
   countryPersonReturningFromTrip: "",
   sameHomePersonReturningFromTrip: false,
-  covidTestResult: ""
+  covidTestResult: "",
+  address: {
+    state: "",
+    avenue:""
+  },
+  location:{
+    lat:0,
+    lng:0
+  }
 };
 export default {
-    components: {
-        Quizz,
-        HeaderNavigation
-    },
+  components: {
+    Quizz,
+    HeaderNavigation
+  },
   props: {
     patient: {
       type: Object,
@@ -118,14 +198,25 @@ export default {
   data() {
     return {
       forumalerror: false,
-      selectedpatient:{},
-      addsucces:false
+      selectedpatient: {},
+      addsucces: false,
     };
   },
   methods: {
+    geolocalisation : function(){
+        let sel = this;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position){
+                    sel.patient.location.lat =  position.coords.latitude;
+                    sel.patient.location.lng = position.coords.longitude;
+            });
+          } else { 
+           console.log("Geolocation is not supported by this browser.");
+          }
+    },
     update: function() {
       //let self = this;
-       let self = this;
+      let self = this;
       config.updatepatient(this.patient, function() {
         console.log("Update patient succes");
         self.$emit("sendsucces");
@@ -134,7 +225,7 @@ export default {
     save: function() {
       let self = this;
       config.createpatient(this.patient, function(data) {
-        self.selectedpatient  = data;
+        self.selectedpatient = data;
         self.addsucces = true;
       });
     },

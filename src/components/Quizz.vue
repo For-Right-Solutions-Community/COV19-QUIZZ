@@ -200,6 +200,7 @@ export default {
       };
 
       let antecedent = this.patient.antecedentRecord;
+      let exposure = this.patient.exposure;
       for (let i = 0; i < this.quiz.questions.length; i++) {
         if (!(typeof this.quiz.questions[i].constructsymptom === "undefined"))
           this.quiz.questions[i].constructsymptom(symptom);
@@ -208,9 +209,22 @@ export default {
           !(typeof this.quiz.questions[i].constructantecedent === "undefined")
         )
           this.quiz.questions[i].constructantecedent(antecedent);
+
+        if (
+        !(typeof this.quiz.questions[i].constructexposure === "undefined")
+        )
+          this.quiz.questions[i].constructexposure(exposure);
+        
+       if (
+        !(typeof this.quiz.questions[i].constructpatient === "undefined")
+        )
+          this.quiz.questions[i].constructpatient(this.patient);
       }
+      console.log("update exposure");
+      console.log(exposure);
+
       let self = this;
-      config.createsymantecedent(symptom, antecedent, function(error) {
+      config.createsymantecedent(this.patient,symptom, antecedent, function(error) {
         if (error == null) {
           console.log("Mesage envoyé avec succes");
           self.errorwhilesending = false;

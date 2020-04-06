@@ -8,21 +8,29 @@ var  questions = {
         responses: [
           { text: " المريض", correct: true, code: "YES" },
           { text: "شخص آخر", code: "NO" }
-        ]
+        ],
+        constructpatient: function (reponse){
+          if(this.selectedcode=="YES") reponse.forumlaother = true
+           else reponse.forumlaother = false;
+        }
       },
       {
         ID: "USERCAUSE",
         QUIZZ_TYPE: "ONECHOICE",
         text: "لماذا يقوم شخص آخر بملأ الإستمارة ؟ ",
         responses: [
-          { text: " المريض لا يعرف التعامل مع التطبيقة ", correct: true },
+          { text: " المريض لا يعرف التعامل مع التطبيقة ", correct: true , code: "YES"},
           {
-            text:
-              "حالة المريض  الصحية لا تسمح جراء فقدانه الوعي أو ضيق تنفس حاد"
+            text: "حالة المريض  الصحية لا تسمح جراء فقدانه الوعي أو ضيق تنفس حاد"
+            , code: "NO"
           }
         ],
         isvisible: function(id, code) {
           return id == "USER" && code == "NO" ? true : false;
+        },
+        constructpatient: function (reponse){
+          if(this.selectedcode=="NO") reponse.gravestatuation = true
+           else reponse.gravestatuation = false;
         }
       },
       {
@@ -33,6 +41,11 @@ var  questions = {
           { text: " نعم ", correct: true, code: "YES" },
           { text: " لا  ", code: "NO" }
         ]
+        ,
+        constructexposure: function (reponse){
+          if(this.selectedcode=="YES") reponse.traveler = true
+           else reponse.traveler = false;
+        }
 
       },
       {
@@ -45,6 +58,10 @@ var  questions = {
         ],
         isvisible: function(id, code) {
           return id == "VOYAGE" && code == "NO" ? true : false;
+        },
+        constructexposure: function (reponse){
+          if(this.selectedcode=="YES") reponse.contactWithTraveler = true
+           else reponse.contactWithTraveler = false;
         }
       },
       {
@@ -57,6 +74,10 @@ var  questions = {
         ],
         isvisible: function(id, code) {
           return id == "EXPOSITION_VOYAGE" && code == "YES" ? true : false;
+        },
+        constructexposure: function (reponse){
+          if(this.selectedcode=="YES") reponse.sameHomePersonReturningFromTrip = true
+           else reponse.sameHomePersonReturningFromTrip = false;
         }
       },
       {
@@ -68,7 +89,11 @@ var  questions = {
           { text: " لا  ", code: "NO" }
         ],
         isvisible: function(id, code) {
-          return id == "EXPOSITION_VOYAGE" && code == "YES" ? true : false;
+          return  (id == "EXPOSITION_VOYAGE" || id== "VOYAGE" )&& code == "YES" ? true : false;
+        },
+        constructexposure: function (reponse){
+          if(this.selectedcode=="YES") reponse.hasmakingtest = true
+           else reponse.hasmakingtest = false;
         }
       },
       {
@@ -81,6 +106,10 @@ var  questions = {
         ],
         isvisible: function(id, code) {
           return id == "EXPOSITION_ANALYSE" && code == "YES" ? true : false;
+        },
+        constructexposure: function (reponse){
+          if(this.selectedcode=="YES") reponse.contactedTravellerTestResult = true
+           else reponse.contactedTravellerTestResult = false;
         }
       },
       {
@@ -90,7 +119,11 @@ var  questions = {
         responses: [
           { text: "  نعم ", correct: true, code: "YES" },
           { text: "لا  ", code: "NO" }
-        ]
+        ],
+        constructexposure: function (reponse){
+          if(this.selectedcode=="YES") reponse.withSuspiciousGroup = true
+           else reponse.withSuspiciousGroup = false;
+        }
       },
       {
         ID: "FIEVRE",
@@ -136,27 +169,14 @@ var  questions = {
       {
         ID: "ASPHEXIE",
         QUIZZ_TYPE: "ONECHOICE",
-        text: " هل تشكو من ضيق تنفس او تعكر في قدرتك على التنفس مقارنة بالسابق ",
-        responses: [
-          { text: " نعم ", correct: true, code: "YES" },
-          { text: " لا  ", code: "NO" }
-        ],
-        constructsymptom: function (reponse){
-          if(this.selectedcode=="YES") reponse.dyspnea = true
-           else reponse.dyspnea = false;
-        }
-      },  
-      {
-        ID: "ASPHEXIE",
-        QUIZZ_TYPE: "ONECHOICE",
         text: " هل تشكو من عدم القدرة على الحديث كما في السابق ؟ ",
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
           { text: " لا  ", code: "NO" }
         ],
         constructsymptom: function (reponse){
-          if(this.selectedcode=="YES") reponse.dyspnea = true
-           else reponse.dyspnea = false;
+          if(this.selectedcode=="YES") reponse.unableToSpeak = true
+           else reponse.unableToSpeak = false;
         }
       },
       {
@@ -171,6 +191,11 @@ var  questions = {
         ],
         isvisible: function(id, code) {
           return id == "ASPHEXIE" && code == "YES" ? true : false;
+        },
+        constructsymptom: function (reponse){
+          if(this.responses[0].selected) reponse.severeDyspnea = true;
+          if(this.responses[1].selected) reponse.chestPain = true;
+          if(this.responses[2].selected) reponse.mauxtete = true;
         }
       },
       {
@@ -181,19 +206,28 @@ var  questions = {
           { text: " نعم ", correct: true, code: "YES" },
           { text: " لا  ", code: "NO" }
         ]
+        ,
+        constructpatient: function (reponse){
+          if(this.selectedcode=="YES") reponse.missingability = true
+           else reponse.missingability = false;
+        }
       },
       {
         ID: "ABILYTY_DURATION",
         QUIZZ_TYPE: "ONECHOICE",
         text: " منذ متى ؟",
         responses: [
-          { text: " ايام ", correct: true },
-          { text: "اسابيع ", correct: true },
-          { text: "اشهر " },
-          { text: "سنوات " }
+          { text: " ايام ", correct: true ,code:"DAYS"},
+          { text: "اسابيع ", correct: true ,code:"WEEK"},
+          { text: "اشهر " ,code:"MONTHS"},
+          { text: "سنوات " ,code:"YEAR"}
         ],
         isvisible: function(id, code) {
           return id == "ABILYTY" && code == "NO" ? true : false;
+        },
+        constructpatient: function (reponse){
+          if(this.selectedcode!=null)
+          reponse.abilitytime = this.selectedcode;
         }
       },
       {

@@ -1,8 +1,8 @@
 import axios from 'axios';
 //axios.defaults.headers.common['Authorization'] = `Bearer`;
 
-//export const API_PATH="https://api.amu190.maodao.xyz/";
-export const API_PATH="http://localhost:8080/";
+export const API_PATH="https://api.amu190.maodao.xyz/";
+//export const API_PATH="http://localhost:8080/";
 const LOGIN_URL = "/v2/register";
 const SIGNUP_URL = "/m/user/create";
 const ADD_PATIEN_URL = "/m/patient/create";
@@ -94,13 +94,21 @@ export default Object.assign( {
         console.log(antecendt);
         return axiosapi.put(UPDATE_ANTECEDENT_URL+antecendt.id,antecendt,this.getHeaderConfig());
     },
-    createsymantecedent: function(symp,antecendt,callback)  {
-        let patient = {"id":symp.patient.id};
+    updatepatientlight: function(patient){
+        console.log("update patient");
+        console.log(patient);
+        patient.user = {"id": this.getuser().id};//passer tous l objet user cree un probleme
+        return axiosapi.put(UPDATE_PATIEN_URL+patient.id,patient,this.getHeaderConfig());
+    },
+    createsymantecedent: function(patientin,symp,antecendt,callback)  {
+        let patient = {"id":patientin.id};
         symp.patient = patient;//passer tous l objet user cree un probleme
         antecendt.patient = patient;//passer tous l objet user cree un probleme
         console.log(symp);
         console.log(antecendt);
-        axiosapi.post(ADD_SYMPTOM_URL,symp,this.getHeaderConfig()).then(this.updateantecedent(antecendt))
+        axiosapi.post(ADD_SYMPTOM_URL,symp,this.getHeaderConfig())
+        .then(this.updateantecedent(antecendt))
+        .then(this.updatepatientlight(patientin))
         .then( ()=>{
             console.log("second call succes add antecedant");
             callback();})

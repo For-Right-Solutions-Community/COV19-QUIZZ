@@ -310,7 +310,7 @@ var  questions = {
       {
         ID: "IMMUNITY",
         QUIZZ_TYPE: "ONECHOICE",
-        text: " هل تعاني من أحد أمراض ضعف المانعة ؟ ",
+        text: " هل تعاني من أحد أمراض ضعف المناعة ؟ ",
         responses: [
           { text: "نعم", correct: true, code: "YES" },
           { text: " لا ", code: "NO" }

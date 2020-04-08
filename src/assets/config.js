@@ -1,8 +1,8 @@
 import axios from 'axios';
 //axios.defaults.headers.common['Authorization'] = `Bearer`;
 
-//export const API_PATH="https://api.amu190.maodao.xyz/";
-export const API_PATH="http://192.168.1.14:8080/";
+export const API_PATH="https://api.amu190.maodao.xyz/";
+//export const API_PATH="http://192.168.1.14:8080/";
 const LOGIN_URL = "/v2/register";
 const SIGNUP_URL = "/m/user/create";
 const ADD_PATIEN_URL = "/m/patient/create";

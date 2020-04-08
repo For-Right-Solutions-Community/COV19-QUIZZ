@@ -4,7 +4,7 @@
       <div align="center">
         <h4 v-if="patient!=null">{{patient.firstname + " "+patient.lastname }}</h4>
         <div>
-        {{ ""+new Date().toISOString().slice(0,10) }}
+        {{ ""+new Date().toISOString()  }}
           </div>
       </div>
     </div>
@@ -193,6 +193,8 @@ export default {
     },
     createfirstquizz: function()
     {
+       console.log("Patient Before quizz update");
+        console.log(this.patient);
       this.succeenvoie = false;
       this.errorwhilesending = false;
       let symptom = {
@@ -222,7 +224,8 @@ export default {
       }
       console.log("update exposure");
       console.log(exposure);
-
+      symptom.date  = new Date();
+      console.log(symptom);
       let self = this;
       config.createsymantecedent(this.patient,symptom, antecedent, function(error) {
         if (error == null) {

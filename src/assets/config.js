@@ -1,8 +1,8 @@
 import axios from 'axios';
 //axios.defaults.headers.common['Authorization'] = `Bearer`;
 
-export const API_PATH="https://api.amu190.maodao.xyz/";
-//export const API_PATH="http://localhost:8080/";
+//export const API_PATH="https://api.amu190.maodao.xyz/";
+export const API_PATH="http://localhost:8080/";
 const LOGIN_URL = "/v2/register";
 const SIGNUP_URL = "/m/user/create";
 const ADD_PATIEN_URL = "/m/patient/create";
@@ -44,6 +44,7 @@ export default Object.assign( {
     createuser : function(login,password,callback) {
         this.user.password = password;
         this.user.username = login;
+        this.user.date=new Date();
         let self  =this;   
         axiosapi.post(SIGNUP_URL,this.user).then(() => {
             //on succes on cree un token

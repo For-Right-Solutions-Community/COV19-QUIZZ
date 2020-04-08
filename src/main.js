@@ -10,6 +10,7 @@ import Home from './components/Home.vue';
 import Patients from './components/Patients.vue';
 import AddPatient from './components/AddPatient.vue';
 import store from './store/store';
+
 Vue.config.productionTip = false
 let isAuthenticated =false;
 Vue.use(VueRouter);

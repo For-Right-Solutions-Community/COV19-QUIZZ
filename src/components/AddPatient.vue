@@ -3,14 +3,14 @@
     <HeaderNavigation v-if="!updatemode" />
     <Quizz v-if="addsucces && !updatemode" :patient="selectedpatient" v-on:sendsucces="exit()" />
     <!--lancer la quizz une fois le client est enregistré la premiere fois-->
-
-    <div v-if="!addsucces" class="columns grid-xs">
+        <div align="center">
+           <h5 v-if="!updatemode">إضافة مريض</h5>
+            <h5 v-if="updatemode" v-once>تغيير بيانات {{ patient.firstname}}</h5> 
+         </div> 
+       <ValidationObserver ref="observer" v-slot="{ invalid }">
+    <div v-if="!addsucces" class="columns grid-xs"  align="right">                  
       <div class="column col-mx-auto col-4 col-xs-10 col-xl-4 col-l-5 col-md-8">
-        <h5 v-if="!updatemode">إضافة مريض</h5>
-        <h5 v-if="updatemode" v-once>تغيير بيانات {{ patient.firstname}}</h5>        
-        <ValidationObserver ref="observer" v-slot="{ invalid }">
-        <div class="form-group">
-         <ValidationProvider rules="required|min:3" v-slot="{ errors }">
+    <ValidationProvider rules="required|min:3" immediate v-slot="{ errors }">
          <label class="form-label" for="email"> * الإسم</label>
           <input
             class="form-input"
@@ -27,7 +27,7 @@
          
         </ValidationProvider>
           <label class="form-label" for="lastname">* اللقب</label>
-         <ValidationProvider rules="required|min:3" v-slot="{ errors }">
+         <ValidationProvider rules="required|min:3" immediate  v-slot="{ errors }">
           <input
             class="form-input"
             id="lastname"
@@ -40,7 +40,7 @@
              <label class="label label-warning" v-if="errors[0]">   {{ errors[0]}} </label> 
           </div>
      </ValidationProvider>
-          <ValidationProvider rules="required|telephone" v-slot="{ errors }">
+          <ValidationProvider rules="required|telephone" immediate v-slot="{ errors }">
           <label class="form-label" for="phone">* رقم الجوال</label>
           <input
             class="form-input"
@@ -64,7 +64,7 @@
             v-model="patient.backup_phone"
           />
 
-          <ValidationProvider rules="required|age" v-slot="{ errors }">
+          <ValidationProvider rules="required|age" immediate v-slot="{ errors }">
           <label class="form-label" for="age">* العمر</label>
           <input
             class="form-input"
@@ -79,7 +79,14 @@
           </div>
          </ValidationProvider>
 
-          <ValidationProvider rules="required" v-slot="{ errors }">
+      </div> 
+      <div class="column col-mx-auto col-4 col-xs-10 col-xl-4 col-l-5 col-md-8">
+
+  
+        <div class="form-group">
+        
+
+          <ValidationProvider rules="required" immediate v-slot="{ errors }">
           <label class="form-label" for="sexe">* الجنس</label>
           <select
             class="form-select"
@@ -95,6 +102,7 @@
           </div>
           </ValidationProvider>
 
+          <ValidationProvider rules="required" immediate v-slot="{ errors }">
           <label class="form-label" for="sexe">* الحالة المدنية</label>
           <select
             class="form-select"
@@ -107,9 +115,14 @@
             <option value="WIDOWED"> أرمل / أرملة</option>
             <option value="DIVORDECED"> مطلق / مطلقة </option>
           </select>
+          <div align="left">
+             <label class="label label-warning" v-if="errors[0]">   {{ errors[0]}} </label> 
+          </div>
+          </ValidationProvider>
 
           <div v-if="patient.address!=null">
             <label class="form-label" for="ville">* الولاية</label>
+             <ValidationProvider rules="required" immediate v-slot="{ errors }">
             <select
               class="form-select"
               placeholder="ville"
@@ -141,7 +154,11 @@
               <option value="MAHDIA">ولاية المهدية</option>
               <option value="NABEUL">ولاية نابل</option>
             </select>
-
+            <div align="left">
+              <label class="label label-warning" v-if="errors[0]">   {{ errors[0]}} </label> 
+            </div>
+            </ValidationProvider>
+             <ValidationProvider rules="required" immediate v-slot="{ errors }">
             <label class="form-label" for="adresse">* عنوان الإقامة</label>
             <input
               class="form-input"
@@ -151,6 +168,11 @@
               @keyup="forumalerror = false "
               v-model="patient.address.avenue"
             />
+            <div align="left">
+              <label class="label label-warning" v-if="errors[0]">   {{ errors[0]}} </label> 
+            </div>
+            </ValidationProvider>
+
             <div v-if="patient.location!=null">
             <button @click="geolocalisation()" class="btn btn-primary"> <i class="icon icon-location"> </i> تحديد الموقع  </button>
 
@@ -162,9 +184,11 @@
           <button v-if="!updatemode" @click="exit()" class="btn btn-link">خروج</button>
           <button v-if="updatemode" @click="update()" :disabled=" invalid == true " class="btn btn-primary">تسجيل</button>
         </div>
-        </ValidationObserver>
+       
       </div>
+      
     </div>
+     </ValidationObserver>
   </div>
 </template>
 
@@ -209,10 +233,8 @@ let ipatient = {
   age: 0,
   weight: 0,
   height: 0,
-  gender: 1,
-  civilStatus: 1,
-  condition: 1,
-  profession: 1,
+  gender: "",
+  civilStatus: "",
   liveAlone: false,
   liveWithFamily: false,
   fmailySize: 1,

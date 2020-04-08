@@ -6,7 +6,7 @@ var  questions = {
         text: "من يقوم بتعمير هذه الاستمارة ؟ ",
         QUIZZ_TYPE: "ONECHOICE",
         responses: [
-          { text: " المريض", correct: true, code: "YES" },
+          { text: "المريض (ة)", correct: true, code: "YES" },
           { text: "شخص آخر", code: "NO" }
         ],
         constructpatient: function (reponse){
@@ -19,9 +19,9 @@ var  questions = {
         QUIZZ_TYPE: "ONECHOICE",
         text: "لماذا يقوم شخص آخر بملأ الإستمارة ؟ ",
         responses: [
-          { text: " المريض لا يعرف التعامل مع التطبيقة ", correct: true , code: "YES"},
+          { text: "لا يعرف/تعرف التعامل مع التطبيقة", correct: true , code: "YES"},
           {
-            text: "حالة المريض  الصحية لا تسمح جراء فقدانه الوعي أو ضيق تنفس حاد"
+            text: " حالته(ا) الصحية لا تسمح : فقدان وعي/ضيق تنفس حاد"
             , code: "NO"
           }
         ],
@@ -128,7 +128,7 @@ var  questions = {
       {
         ID: "FIEVRE",
         QUIZZ_TYPE: "ONECHOICE",
-        text: " هل تشكو من ارتفاع في درجة حرارتك (حمى) ؟ ",
+        text: " هل يشكو/تشكو المريض(ة) من ارتفاع في درجة الحرارة (حمى)",
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
           { text: " لا  ", code: "NO" }
@@ -156,7 +156,7 @@ var  questions = {
         ID: "TOUX",
         QUIZZ_TYPE: "ONECHOICE",
         text:
-          " هل لديك سعال او ان درجة السعال التي تشكو منها في العادة ازدادت حدة ؟ ",
+          " هل لدى المريض(ة) سعال او ان درجة السعال التي يشكو/تشكو منها في العادة ازدادت حدة ",
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
           { text: " لا  " }
@@ -169,7 +169,7 @@ var  questions = {
       {
         ID: "ASPHEXIE",
         QUIZZ_TYPE: "ONECHOICE",
-        text: " هل تشكو من عدم القدرة على الحديث كما في السابق ؟ ",
+        text: " هل يشكو/تشكو من عدم القدرة على الحديث كما في السابق ",
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
           { text: " لا  ", code: "NO" }
@@ -201,7 +201,7 @@ var  questions = {
       {
         ID: "ABILYTY",
         QUIZZ_TYPE: "ONECHOICE",
-        text: "هل تستطيع الحركة و القيام بحاجياتك دون مساعدة ؟",
+        text: " هل يستطيع/تستطيع المريض(ة) الحركة و القيام بحاجياته(ا) دون مساعدة",
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
           { text: " لا  ", code: "NO" }

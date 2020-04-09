@@ -119,7 +119,7 @@ export default Object.assign( {
             callback(error);
         })
     },
-    fetchpatients: function(callback)  {
+    fetchallpatients: function(callback)  {
         let userid= this.getuser().id
         //passer tous l objet user cree un probleme
         axiosapi.get(FETCH_PATIENT_URL,this.getHeaderConfig()).then((reponse) => {
@@ -133,6 +133,20 @@ export default Object.assign( {
                 }
                 return e.user == userid || e.user.id == userid;
             });
+           callback(patientslist);
+        })
+        .catch ( (error) =>  {
+            console.error(error)
+        })
+    },
+    fetchpatients: function(callback)  {
+        let userid= this.getuser().id
+        //passer tous l objet user cree un probleme
+        axiosapi.get("/m/user/"+userid+"/patients",this.getHeaderConfig()).then((reponse) => {
+            //on succes on cree un token
+          //  console.log(reponse);
+            console.log(reponse.data);
+           let patientslist  =  reponse.data
            callback(patientslist);
         })
         .catch ( (error) =>  {

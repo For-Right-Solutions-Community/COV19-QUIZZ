@@ -36,7 +36,7 @@
                 <!-- questionTitle -->
                 <h4
                   class="titleContainer title label label-rounded label-primary"
-                >{{ quiz.questions[questionIndex].text }}</h4>
+                >{{ questiontext(questionIndex) }}</h4>
 
                 <!-- quizOptions -->
                 <div class="optionContainer" align="right">
@@ -47,7 +47,7 @@
                       @click="selectOption(index)"
                       :class="{ 'is-selected': userResponses[questionIndex] == index,'badge':userResponses[questionIndex] == index}"
                       :key="index"
-                    >{{ response.text }}</div>
+                    >{{ reponsetext(response) }}</div>
                   </template>
 
                   <div v-if="quiz.questions[questionIndex].QUIZZ_TYPE=='MULTIPLECHOICES'">
@@ -55,7 +55,7 @@
                       v-for="(response, index) in quiz.questions[questionIndex].responses"
                       :key="index"
                     >
-                      {{ response.text }}
+                      {{ reponsetext(response) }}
                       <input
                         type="checkbox"
                         @click="selectMulipleOption(index)"
@@ -187,6 +187,36 @@ export default {
   },
 
   methods: {
+     questiontext : function(questionIndex)
+    {
+      if(this.patient.gender=="FEMALE")
+      {
+        if(!(typeof this.quiz.questions[questionIndex].textf === "undefined"))
+        {
+           return this.quiz.questions[questionIndex].textf; 
+        }
+        else{
+          return this.quiz.questions[questionIndex].text; 
+        }
+      }
+      else
+      return this.quiz.questions[questionIndex].text; 
+    },
+    reponsetext : function(reponse)
+    {
+      if(this.patient.gender=="FEMALE")
+      {
+        if(!(typeof reponse.textf === "undefined"))
+        {
+           return reponse.textf; 
+        }
+        else{
+          return reponse.text; 
+        }
+      }
+      else
+      return reponse.text; 
+    },
     updatesymptoms: function()
     {
 

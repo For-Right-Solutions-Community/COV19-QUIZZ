@@ -121,8 +121,8 @@
           { text: "لا  ", code: "NO" }
         ],
         constructexposure: function (reponse){
-          if(this.selectedcode=="YES") reponse.withSuspiciousGroup = true
-           else reponse.withSuspiciousGroup = false;
+          if(this.selectedcode=="YES") reponse.visitRegion = true
+           else reponse.visitRegion = false;
         }
       },
       {
@@ -147,8 +147,8 @@
           { text: "لا  ", code: "NO" }
         ],
         constructexposure: function (reponse){
-          if(this.selectedcode=="YES") reponse.smallclusterinfected = true
-           else reponse.smallclusterinfected = false;
+          if(this.selectedcode=="YES") reponse.withSuspiciousGroup = true
+           else reponse.withSuspiciousGroup = false;
         }
       },
       {
@@ -274,8 +274,8 @@
         ]
         ,
         constructpatient: function (reponse){
-          if(this.selectedcode=="YES") reponse.missingability = true
-           else reponse.missingability = false;
+          if(this.selectedcode=="YES") reponse.deteriorationOfGC= true
+           else reponse.deteriorationOfGC = false;
         }
       },
       {
@@ -420,9 +420,9 @@
         isvisible: function(id, code) {
           return id == "USER" && code == "NO" ? true : false;
         },
-        constructpatient: function (reponse){
-          if(this.selectedcode=="NO") reponse.gravestatuation = true
-           else reponse.gravestatuation = false;
+        constructsymptom: function (reponse){
+          if(this.selectedcode=="NO") reponse.severeDyspnea = true;
+           else reponse.severeDyspnea = false;
         }
       }
     ]

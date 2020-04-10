@@ -63,8 +63,8 @@
           return  (id == "EXPOSITION_VOYAGE")&& code == "YES" ? true : false;
         },
         constructexposure: function (reponse){
-          if(this.selectedcode=="YES") reponse.Travellerhasmakingtest = true
-           else reponse.Travellerhasmakingtest = false;
+          if(this.selectedcode=="YES") reponse.travellerhasmakingtest = true
+           else reponse.travellerhasmakingtest = false;
         }
       },
       {
@@ -108,8 +108,8 @@
           return id == "COVID_ANALYSE" && code == "YES" ? true : false;
         },
         constructexposure: function (reponse){
-          if(this.selectedcode=="YES") reponse.TestResult = true
-           else reponse.TestResult = false;
+          if(this.selectedcode=="YES") reponse.testResult = true
+           else reponse.testResult = false;
         }
       },
       {

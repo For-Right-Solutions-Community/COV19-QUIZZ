@@ -95,7 +95,14 @@ export default {
                 self.loading = false;
                 localStorage.setItem("tokenid", token);
                 localStorage.setItem('user', JSON.stringify(user));
-                self.$router.push("home");
+                if(user.patients.length==0)
+                {
+                  self.$router.push("addpatient");
+                }
+                else
+                {
+                  self.$router.push("home");
+                }
               }
             });
           })
@@ -115,12 +122,6 @@ export default {
               self.signupmailerrormsg = "Votre mail est non valide";
             }
           });
-      }
-    },
-    succeslogin: function(token) {
-      if (token !== null) {
-        localStorage.setItem("tokenid", token);
-        this.$router.push("home");
       }
     },
     faillogin: function() {

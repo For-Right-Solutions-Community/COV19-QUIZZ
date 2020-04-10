@@ -1,8 +1,8 @@
 import axios from 'axios';
 //axios.defaults.headers.common['Authorization'] = `Bearer`;
 
-export const API_PATH="https://api.amu190.maodao.xyz/";
-//export const API_PATH="http://localhost:8080/";
+//export const API_PATH="https://api.amu190.maodao.xyz/";
+export const API_PATH="http://localhost:8080/";
 const LOGIN_URL = "/v2/register";
 const SIGNUP_URL = "/m/user/create";
 const ADD_PATIEN_URL = "/m/patient/create";
@@ -119,7 +119,7 @@ export default Object.assign( {
             callback(error);
         })
     },
-    fetchallpatients: function(callback)  {
+    fetchpatientsall: function(callback)  {
         let userid= this.getuser().id
         //passer tous l objet user cree un probleme
         axiosapi.get(FETCH_PATIENT_URL,this.getHeaderConfig()).then((reponse) => {

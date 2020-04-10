@@ -155,7 +155,15 @@ export default {
       if (token !== null) {
         localStorage.setItem("tokenid", token);
         localStorage.setItem("user", JSON.stringify(user));
-        this.$router.push("home");
+        if(user.patients.length==0)
+        {
+          this.$router.push("addpatient");
+        }
+        else
+        {
+          this.$router.push("patients");
+        }
+     
       }
     },
     faillogin: function() {

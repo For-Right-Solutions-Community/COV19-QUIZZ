@@ -1,4 +1,7 @@
-var  questions = {
+ function initquestions()
+ {
+  
+    var obj = {
     user: "",
     questions: [    
       {
@@ -424,5 +427,8 @@ var  questions = {
       }
     ]
   }
+  return obj;
+ }
+    
 
-  export default questions;
+  export default initquestions;

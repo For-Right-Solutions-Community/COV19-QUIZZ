@@ -223,7 +223,9 @@ extend('required', {
   message: ' الرجاء تعمير هذه الخانة '
 });
 Vue.component("ValidationProvider", ValidationProvider);
-let ipatient = {
+
+function getInitialData() {
+  return {
   firstname: "",
   lastname: "",
   cin: "",
@@ -268,7 +270,8 @@ let ipatient = {
     contactWithInfectedPerson: false,
     visited_regwithSuspiciousGroupion: false
   }
-};
+}
+}
 export default {
   components: {
     Quizz,
@@ -280,7 +283,7 @@ export default {
     patient: {
       type: Object,
       default: function get() {
-        return ipatient;
+        return getInitialData();
       }
     },
     updatemode: {

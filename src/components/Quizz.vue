@@ -159,11 +159,10 @@
 
 <script>
 import Vue from "vue";
-import questions from "../assets/questions";
+import initquestions from "../assets/questions";
 import config from "../assets/config";
 
-var quizz = questions;
-let userResponseSkelaton = Array(quizz.questions.length).fill(null);
+let userResponseSkelaton = Array(initquestions().questions.length).fill(null);
 export default {
   name: "Quizz",
   props: {
@@ -172,7 +171,7 @@ export default {
   data() {
     return {
       message: "hello",
-      quiz: quizz,
+      quiz: initquestions(),
       questionIndex: 0,
       userResponses: userResponseSkelaton,
       isActive: false,
@@ -185,7 +184,6 @@ export default {
       return String.fromCharCode(97 + i);
     }
   },
-
   methods: {
      questiontext : function(questionIndex)
     {

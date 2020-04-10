@@ -42,6 +42,7 @@
         <div class="form-group">
           <button @click="signin()" :class="{loading:loading}" class="btn btn-primary">Connexion</button>
           <button @click="signup()" class="btn btn-link">Créer un compte</button>
+          <button v-if="1==2" @click="resetpassword()" class="btn btn-link">J'ai oublié mon mot de passe</button>
         </div>
       </div>
     </div>
@@ -99,6 +100,20 @@ export default {
     };
   },
   methods: {
+
+    resetpassword()
+    {
+      var auth = firebase.auth();
+      let self =this;
+      auth.sendPasswordResetEmail(this.email).then(function() {
+          self.signinrror = false;
+          self.signinmsgerror = "";
+        // Email sent.
+      }).catch(function(error) {
+          self.signinrror = true;
+          self.signinmsgerror = "Erreur d'envoie email vers "+self.email;
+      });
+    },
     signup: function() {
       this.$router.push("signup");
     },

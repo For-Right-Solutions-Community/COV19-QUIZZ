@@ -276,7 +276,7 @@
         },
         constructsymptom: function (reponse){
           if(this.responses[0].selected) reponse.severeDyspnea = true;
-          if(this.responses[1].selected) reponse.chestPain = true;
+          if(this.responses[1].selected) reponse.deteriorationOfGC = true;
           if(this.responses[2].selected) reponse.mauxtete = true;
         }
       },
@@ -451,7 +451,6 @@
         },
         constructsymptom: function (reponse){
           if(this.selectedcode=="NO") reponse.severeDyspnea = true;
-           else reponse.severeDyspnea = false;
         }
       }
     ]

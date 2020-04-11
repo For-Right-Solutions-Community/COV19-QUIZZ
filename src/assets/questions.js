@@ -7,6 +7,7 @@
       {
         ID: "VOYAGE",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: "هل سافرت خارج البلاد خلال الشهر الفارط ؟ ",
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
@@ -22,6 +23,7 @@
       {
         ID: "EXPOSITION_VOYAGE",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: " هل كان لك اتصال مباشر بشخص سافر خارج البلاد الشهر الفارط ؟ ",
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
@@ -38,6 +40,7 @@
       {
         ID: "EXPOSITION_HABITAT",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: "هل يسكن معك في نفس المنزل ؟",
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
@@ -54,6 +57,7 @@
       {
         ID: "EXPOSITION_ANALYSE",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: "هل خضع الشخص المذكور لتحليل الكورونا ؟",
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
@@ -70,6 +74,7 @@
       {
         ID: "EXPOSITION_RESULTAT_ANALYSE",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: "ماهي نتيجة التحليل ؟",
         responses: [
           { text: "  مصاب ", correct: true, code: "YES" },
@@ -86,6 +91,7 @@
       {
         ID: "COVID_ANALYSE",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: " هل خضعت  لتحليل الاصابة بفيروس كورونا ؟",
         responses: [
           { text: " نعم ", correct: true, code: "YES" },
@@ -99,6 +105,7 @@
       {
         ID: "COVID_RESULT",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: "ماهي نتيجة التحليل ؟",
         responses: [
           { text: "  مصاب ", textf: "مصابة",correct: true, code: "YES" },
@@ -115,6 +122,7 @@
       {
         ID: "EPEDEMIC_LOCATION",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: "هل كنت في احدى المناطق التي اعلنت عنها وزارة الصحة كبؤرة لانتشار المرض خلال الاسبوعين الفارطين",
         responses: [
           { text: "  نعم ", correct: true, code: "YES" },
@@ -128,6 +136,7 @@
       {
         ID: "EPEDEMIC_PERSON",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: "هل كان لك اتصال مباشر بمريض(ة) تاكدت اصابته(ا) بفيروس الكورونا خلال الاسبوعين الفارطين",
         responses: [
           { text: "  نعم ", correct: true, code: "YES" },
@@ -141,6 +150,7 @@
       {
         ID: "EPEDEMIC_PEOPLE",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: "هل يوجد في محيطك الاجتماعي (العمل ،المنزل..)أشخاص يعانون نفس الاعراض حمى،سعال،ضيق تنفس, ضيق تنفس شديد",
         responses: [
           { text: "  نعم ", correct: true, code: "YES" },
@@ -154,6 +164,7 @@
       {
         ID: "FIEVRE",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: true,
         text: "هل تشكو من إرتفاع في درجة الحراة (حمى)",
         textf: "هل تشكين من إرتفاع في درجة الحراة (حمى)",
         responses: [
@@ -168,6 +179,7 @@
       {
         ID: "DYPNSEA",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: true,
         text: " هل تشكو من ضيق تنفس أو تعكر في قدرتك على التنفس مقارنة بالسابق ؟ ",
         textf: " هل تشكين من ضيق تنفس أو تعكر في قدرتك على التنفس مقارنة بالسابق ؟",
         responses: [
@@ -182,6 +194,7 @@
       {
         ID: "SYMPTOMS_LIST",
         QUIZZ_TYPE: "MULTIPLECHOICES",
+        ASKGAIN: true,
         text: "هل تشكو من أحد هذه الأعراض ؟ ",
         textf: "هل تشكين من أحد هذه الأعراض ؟",
         responses: [
@@ -205,6 +218,7 @@
       {
         ID: "TOUX",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: true,
         text:
           " هل لديك سعال أو أن درجة السعال التي تشكو منها في العادة إزدادت حدة ؟ ",
         responses: [
@@ -219,6 +233,7 @@
       {
         ID: "SENSDISORDER",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: true,
         text:" هل تشكو من تدهور قدرتك على الشم أو التذوق ؟",
         textf:" هل تشكين من تدهور قدرتك على الشم أو التذوق ؟",
         responses: [
@@ -233,6 +248,7 @@
       {
         ID: "ASPHEXIE",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: true,
         text: " هل تشكو من عدم القدرة على الحديث كما في السابق ؟",
         textf: "هل تشكين من عدم القدرة على الحديث كما في السابق ؟",
         responses: [
@@ -247,6 +263,7 @@
       {
         ID: "ASPHEXIE_CAUSE",
         QUIZZ_TYPE: "MULTIPLECHOICES",
+        ASKGAIN: true,
         text: " لماذا ؟ ",
         responses: [
           { text: " احس بضيق في التنفس ", code: "1", selected: false },
@@ -266,6 +283,7 @@
       {
         ID: "ABILYTY",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: true,
         text: " هل تستطيع  الحركة و القيام بحاجياتك دون مساعدة ؟",
         textf: "هل تستطيعين  الحركة و القيام بحاجياتك دون مساعدة ؟",
         responses: [
@@ -281,6 +299,7 @@
       {
         ID: "ABILYTY_DURATION",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: true,
         text: " منذ متى ؟",
         responses: [
           { text: " ايام ", correct: true ,code:"DAYS"},
@@ -299,6 +318,7 @@
       {
         ID: "DIABETE",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text:  "هل تعاني من مرض السكري ؟",
         textf: "هل تعانين من مرض السكري ؟",
         responses: [
@@ -311,9 +331,11 @@
         }
       },
       {
+        ID: "TENSION",
         text: " هل تعاني من ضغط الدم ؟",
         textf: "هل تعانين من ضغط الدم ؟",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         responses: [
           { text: "نعم", correct: true, code: "YES" },
           { text: " لا ", code: "NO" }
@@ -326,6 +348,7 @@
       {
         ID: "CARDIO",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: "  هل تعاني من  أمراض القلب ؟ ",
         textf: "  هل تعانين من  أمراض القلب ؟ ",
         responses: [
@@ -340,6 +363,7 @@
       {
         ID: "ASME",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: " هل تعاني من ضيق تنفس مزمن ؟ ",
         textf: "هل تعانين من ضيق تنفس مزمن ؟ ",
         responses: [
@@ -354,6 +378,7 @@
       {
         ID: "RENALE",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: "هل تعاني من  أمراض الكلى ؟ ",
         textf: "هل تعانين من  أمراض الكلى ؟ ",
         responses: [
@@ -368,6 +393,7 @@
       {
         ID: "CANCER",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: "هل أصبت بمرض السرطان أو تتبع   علاجا  بشأنه ؟ ",
         textf: "هل أصبت بمرض السرطان أو تتبعين   علاجا  بشأنه ؟ ",
         responses: [
@@ -382,6 +408,7 @@
       {
         ID: "IMMUNITY",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: false,
         text: " هل تعاني من أحد أمراض ضعف المناعة ؟ ",
         textf: " هل تعانين من أحد أمراض ضعف المناعة ؟ ",
         responses: [
@@ -397,6 +424,7 @@
         ID: "USER",
         text: "من يقوم بتعمير هذه الاستمارة ؟ ",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: true,
         responses: [
           { text: " المريض ", textf: " المريضة",  correct: true, code: "YES" },
           { text: "شخص آخر", code: "NO" }
@@ -409,6 +437,7 @@
       {
         ID: "USERCAUSE",
         QUIZZ_TYPE: "ONECHOICE",
+        ASKGAIN: true,
         text: "لماذا يقوم شخص آخر بملأ الإستمارة ؟ ",
         responses: [
           { text: "لا يعرف التعامل مع التطبيقة", textf:"لا  تعرف التعامل مع التطبيقة ", correct: true , code: "YES"},

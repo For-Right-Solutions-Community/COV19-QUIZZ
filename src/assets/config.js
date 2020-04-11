@@ -81,13 +81,19 @@ export default Object.assign( {
             console.error(error)
         })
     },
-    createsymptom: function(symp,callback)  {
-        axiosapi.post(ADD_SYMPTOM_URL,symp,this.getHeaderConfig()).then(() => {
-            //on succes on cree un token
-            callback();
-        })
+    createsymptom: function(patientin,symp,callback)  {
+
+        let patient = {"id":patientin.id};
+        symp.patient = patient;//passer tous l objet user cree un probleme
+        console.log(symp);
+        axiosapi.post(ADD_SYMPTOM_URL,symp,this.getHeaderConfig())
+        .then( ()=>{
+            console.log("second call succes add antecedant");
+            callback();})
         .catch ( (error) =>  {
-            console.error(error)
+            console.error(error.response);
+            console.log(error);
+            callback(error);
         })
     },
     updateantecedent: function(antecendt){

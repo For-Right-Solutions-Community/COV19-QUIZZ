@@ -16,13 +16,15 @@
       <div class="card-body">Tel : {{patient.phone}}</div>
       <div class="card-footer">
         <button class="btn " @click="profilemode(patient)" > تغيير المعطيات</button>
-        <button class="btn btn-primary" @click="sympthoms(patient)"> تتبع الأعراض</button>
+        <button class="btn" @click="sympthoms(patient)">إعادة جميع الأسئلة</button>
+        <button class="btn btn-primary" @click="sympthomslight(patient)"> تتبع الأعراض</button>
+
       </div>
     </div>
     </div>
   </div> <!--Patient List end -->
   <div id="symptomsdeatils" v-if="symptomsdetailsmode" align="center">
-    <Quizz :patient="selectedpatient" v-on:sendsucces="quitsymptomsdetailsmode()" />
+    <Quizz :patient="selectedpatient" :lightquizz="lightquizz" v-on:sendsucces="quitsymptomsdetailsmode()" />
     <button class="btn btn btn-link" @click="quitsymptomsdetailsmode()"> إلغاء </button>
    </div> 
     <div id="patientdetails" v-if="editprofilemode" align="center">
@@ -44,6 +46,7 @@ export default {
       patientlistmode: true,
       symptomsdetailsmode: false,
       editprofilemode: false,
+      lightquizz: false,
       selectedpatient: {},
       loading: false,
       post: null,
@@ -57,11 +60,20 @@ export default {
     this.fetchData();
   },
   methods: {
-     
+    
+    sympthomslight(patient)
+    {
+       // this.$router.push('quizz') ;  
+       this.patientlistmode=false;
+       this.symptomsdetailsmode=true;
+       this.lightquizz = true;
+       this.selectedpatient=patient;
+    },
     sympthoms(patient)
     {
        // this.$router.push('quizz') ;  
        this.patientlistmode=false;
+       this.lightquizz = false;
        this.symptomsdetailsmode=true;
        this.selectedpatient=patient;
     },
@@ -70,6 +82,7 @@ export default {
        // this.$router.push('quizz') ;  
        this.patientlistmode=true;
        this.symptomsdetailsmode=false;
+      this.lightquizz = false;
        this.selectedpatient={};
        this.refreshdata();
     },

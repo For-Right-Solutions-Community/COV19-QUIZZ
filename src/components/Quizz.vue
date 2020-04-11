@@ -3,9 +3,7 @@
     <div>
       <div align="center">
         <h4 v-if="patient!=null">{{patient.firstname + " "+patient.lastname }}</h4>
-        <div>
-        {{ ""+new Date().toISOString()  }}
-          </div>
+        <div>{{ ""+new Date().toISOString() }}</div>
       </div>
     </div>
 
@@ -129,7 +127,6 @@
                     class="btn btn-success"
                   >
                     <i class="icon icon-mail"></i>
-
                     أرسل البيانات الآن
                   </button>
                 </section>
@@ -162,22 +159,45 @@ import Vue from "vue";
 import initquestions from "../assets/questions";
 import config from "../assets/config";
 
-let userResponseSkelaton = Array(initquestions().questions.length).fill(null);
+function getresponses()
+{
+  return Array(initquestions().questions.length).fill(null);
+}
 export default {
   name: "Quizz",
   props: {
-    patient: Object
+    patient: Object,
+    lightquizz:Boolean
   },
   data() {
     return {
       message: "hello",
       quiz: initquestions(),
       questionIndex: 0,
-      userResponses: userResponseSkelaton,
+      userResponses: getresponses(),
       isActive: false,
       succeenvoie: false,
       errorwhilesending: false
     };
+  },
+
+  created: function () {
+    // `this` points to the vm instance   
+     if(this.lightquizz){
+       for(let i=0;i<this.quiz.questions.length;i++){      
+           if(this.quiz.questions[i].ASKGAIN)
+           {
+              this.questionIndex = i;
+              break;
+           }
+        }
+     }      
+     else{
+      this.questionIndex = 0;
+     }
+     
+    console.log('Created');
+      //  this.questionIndex=4;
   },
   filters: {
     charIndex: function(i) {
@@ -218,11 +238,35 @@ export default {
     updatesymptoms: function()
     {
 
+      this.succeenvoie = false;
+      this.errorwhilesending = false;
+      let symptom = {
+        patient: this.patient
+      };
+      symptom.date  = new Date();
+      for (let i = 0; i < this.quiz.questions.length; i++) {
+        if (!(typeof this.quiz.questions[i].constructsymptom === "undefined"))
+          this.quiz.questions[i].constructsymptom(symptom);
+      }
+
+      let self = this;
+      config.createsymptom(this.patient,symptom, function(error) {
+        if (error == null) {
+          console.log("Mesage envoyé avec succes");
+          self.errorwhilesending = false;
+          self.succeenvoie = true;
+          self.$emit('sendsucces')
+        } else {
+          self.errorwhilesending = true;
+          self.succeenvoie = false;
+        }
+      });
+
     },
     createfirstquizz: function()
     {
-       console.log("Patient Before quizz update");
-        console.log(this.patient);
+      console.log("Patient Before quizz update");
+      console.log(this.patient);
       this.succeenvoie = false;
       this.errorwhilesending = false;
       let symptom = {
@@ -268,7 +312,15 @@ export default {
       });
     },
     save: function() {
-      this.createfirstquizz();
+      if(this.lightquizz)
+      {
+        this.updatesymptoms();
+      }
+      else
+      {
+        this.createfirstquizz();
+      }
+      
     },
     restart: function() {
       this.questionIndex = 0;
@@ -334,7 +386,12 @@ export default {
           this.questionIndex++;
           if (this.questionIndex >= this.quiz.questions.length) {
             zapnext = false;
-          } else if (
+          }
+          else if( !this.quiz.questions[this.questionIndex].ASKGAIN && this.lightquizz )
+          {
+            zapnext = true;
+          }
+          else if (
             typeof this.quiz.questions[this.questionIndex].isvisible ===
             "undefined"
           ) {
@@ -364,7 +421,11 @@ export default {
         let zapnext = true;
         while (zapnext) {
           this.questionIndex--;
-          if (
+          if( !this.quiz.questions[this.questionIndex].ASKGAIN && this.lightquizz )
+          {
+            zapnext = true;
+          }
+          else if (
             typeof this.quiz.questions[this.questionIndex].isvisible ===
             "undefined"
           ) {

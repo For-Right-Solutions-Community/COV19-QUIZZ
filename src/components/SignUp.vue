@@ -52,7 +52,7 @@
          <div v-if="waitverificationcode">
              <h1>Valider votre compte AMU190</h1>
              <h4>Un mail est envoyé vers {{ email }}. Veuillez consulter votre boite email et inserer le code de vérifcation</h4>
-             <label class="form-label" for="verficationcode">Confirmer votre mot de passe</label>
+             <label class="form-label" for="verficationcode">Entrer le code de validation </label>
             <input
             class="form-input"
             id="verficationcode"
@@ -96,11 +96,18 @@ export default {
       self.loading = true;
       self.waitverificationcode = false;
       self.signupmailerrormsg = "";
-      if (this.password1 != this.password2) {
+      if (this.password1 != this.password2 || (this.password1.length<6))  {
         self.signuperror = true;
         self.signupmailerrormsg = "Les mots de passes ne sont pas identiques";
         self.loading = false;
-      } else {
+      }
+      else if(this.password1.length<6)
+      {
+        self.signuperror = true;
+        self.signupmailerrormsg = "Mot de passe faible";
+        self.loading = false;
+      }
+      else {
         self.password1 = this.password1;
         self.email = this.email;
         config.subscribeuser(self.email, self.password1, function(error) {
@@ -109,7 +116,7 @@ export default {
                 self.loading = false;
                 self.signuperror = true;
                 self.waitverificationcode = false;
-                self.signupmailerrormsg = "Utilisateur existe déja";
+                self.signupmailerrormsg = "Une erreur est survenue";
                 
               }
               else{

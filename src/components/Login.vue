@@ -42,52 +42,35 @@
         <div class="form-group">
           <button @click="signin()" :class="{loading:loading}" class="btn btn-primary">Connexion</button>
           <button @click="signup()" class="btn btn-link">Créer un compte</button>
-          <button v-if="1==2" @click="resetpassword()" class="btn btn-link">J'ai oublié mon mot de passe</button>
+          <button
+            v-if="1==2"
+            @click="resetpassword()"
+            class="btn btn-link"
+          >J'ai oublié mon mot de passe</button>
         </div>
       </div>
     </div>
 
     <div>
-      <div class="container justifyparagraph" align="center"  >
+      <div class="container justifyparagraph" align="center">
         <div class="columns">
-          <div class="column col-4 col-4 col-xs-10 col-xl-4 col-l-5 col-md-8 col-mx-auto"> 
-                 <p class="label default-label">
-        هذه التطبيقة تم إنشاؤها من قبل مجموعة من الأطباء و المهندسين التونسيين في إطار دعم الجهود الوطنية لمقاومة فيروس كورونا.
-        و تهدف إلى تخفيف العبء المسجل على خطوط 190 التابعة للإنعاش الطبي الاستعجالي و تحديد الحالات المصابة الأكثر خطورة و التي هي بحاجة ماسة لتدخل طبي عاجل و تنسيق ذلك إضافة إلى إرشاد المريض(ة) إلى أنجع الحلول من اجل متابعة حالته(ا) المرضية في حالة وجود أعراض غير خطيرة ..
-        كل المعطيات المسجلة على هذه التطبيقة يتعامل معها فرق الإنعاش الطبي الاستعجالي بالمستشفيات العمومية التابعة لوزارة الصحة التونسية و يتم الاتصال بالمرضى المسجلين في الإبان مع مراعاة درجة خطورة الحالات.
-        يمكن للمسجل على هذا الموقع إضافة أكثر من مريض(ة) و متابعة حالتهم(ن).
-          </p>
-      </div>
+          <div class="column col-4 col-4 col-xs-10 col-xl-4 col-l-5 col-md-8 col-mx-auto">
+            <p class="label default-label">
+              هذه التطبيقة تم إنشاؤها من قبل مجموعة من الأطباء و المهندسين التونسيين في إطار دعم الجهود الوطنية لمقاومة فيروس كورونا.
+              و تهدف إلى تخفيف العبء المسجل على خطوط 190 التابعة للإنعاش الطبي الاستعجالي و تحديد الحالات المصابة الأكثر خطورة و التي هي بحاجة ماسة لتدخل طبي عاجل و تنسيق ذلك إضافة إلى إرشاد المريض(ة) إلى أنجع الحلول من اجل متابعة حالته(ا) المرضية في حالة وجود أعراض غير خطيرة ..
+              كل المعطيات المسجلة على هذه التطبيقة يتعامل معها فرق الإنعاش الطبي الاستعجالي بالمستشفيات العمومية التابعة لوزارة الصحة التونسية و يتم الاتصال بالمرضى المسجلين في الإبان مع مراعاة درجة خطورة الحالات.
+              يمكن للمسجل على هذا الموقع إضافة أكثر من مريض(ة) و متابعة حالتهم(ن).
+            </p>
+          </div>
         </div>
       </div>
-
-
     </div>
   </div>
 </template>
   
-<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js" ></script>
-<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js" ></script>
-<script>
-import axios from "axios";
-import config from "../assets/config";
-import Vue from "vue";
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyDKM4ptIcoS9ZpHeqpuCNFnMa0w3z3N-4E",
-  authDomain: "health-care-app-90ad5.firebaseapp.com",
-  databaseURL: "https://health-care-app-90ad5.firebaseio.com",
-  projectId: "health-care-app-90ad5",
-  storageBucket: "health-care-app-90ad5.appspot.com",
-  messagingSenderId: "800870054376",
-  appId: "1:800870054376:web:1be231f28411a026d0cc5d",
-  measurementId: "G-RTQDG9V7SW"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
 
+<script>
+import config from "../assets/config";
 export default {
   name: "Login",
   data() {
@@ -100,20 +83,6 @@ export default {
     };
   },
   methods: {
-
-    resetpassword()
-    {
-      var auth = firebase.auth();
-      let self =this;
-      auth.sendPasswordResetEmail(this.email).then(function() {
-          self.signinrror = false;
-          self.signinmsgerror = "";
-        // Email sent.
-      }).catch(function(error) {
-          self.signinrror = true;
-          self.signinmsgerror = "Erreur d'envoie email vers "+self.email;
-      });
-    },
     signup: function() {
       this.$router.push("signup");
     },
@@ -125,60 +94,31 @@ export default {
       self.connexionerror = false;
       console.log(this.email);
       console.log(this.password);
-      try {
-        firebase
-          .auth()
-          .signInWithEmailAndPassword(this.email, this.password)
-          .then(function() {
-            if (!self.signinrror) {
-              console.log("No error");
-              config.user.username = self.email;
-              config.user.password = self.password;
-              config.createToken(function(token, user, error) {
-                if (error != null) {
-                  self.loading = false;
-                  self.signinrror = true;
-                  console.log(error.response);
-                  self.signinmsgerror =
-                    "Service indisponible essayer plus tard";
-                  self.faillogin();
-                } else {
-                  self.loading = false;
-                  self.succeslogin(token, user);
-                }
-              });
-            }
-          })
-          .catch(function(error) {
-             console.log(error.response);
-            self.loading = false;
-            self.signinrror = true;
-            self.signinmsgerror = "Login ou mot de passe invalide";
-            if (error.code != "auth/wrong-password") {
-              self.signinmsgerror = "Problème de connexion";
-            }
-            self.faillogin();
-          });
-      } catch (error) {
-        self.loading = false;
-        self.signinrror = true;
-        self.signinmsgerror = "Problème de connexion";
-        self.faillogin();
-      }
+
+      config.user.username = self.email;
+      config.user.password = self.password;
+      config.createToken(function(token, user, error) {
+        if (error != null) {
+          self.loading = false;
+          self.signinrror = true;
+          console.log(error.response);
+          self.signinmsgerror = "Service indisponible essayer plus tard";
+          self.faillogin();
+        } else {
+          self.loading = false;
+          self.succeslogin(token, user);
+        }
+      });
     },
     succeslogin: function(token, user) {
       if (token !== null) {
         localStorage.setItem("tokenid", token);
         localStorage.setItem("user", JSON.stringify(user));
-        if(user.patients.length==0)
-        {
+        if (user.patients.length == 0) {
           this.$router.push("addpatient");
-        }
-        else
-        {
+        } else {
           this.$router.push("patients");
         }
-     
       }
     },
     faillogin: function() {

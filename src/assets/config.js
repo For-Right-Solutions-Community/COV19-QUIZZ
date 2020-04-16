@@ -4,7 +4,8 @@ import axios from 'axios';
 export const API_PATH="https://api.amu190.maodao.xyz/";
 //export const API_PATH="http://localhost:8080/";
 const LOGIN_URL = "/v2/register";
-const SIGNUP_URL = "/m/user/create";
+const SUBSCRIPE_URL =  "/m/account/subscribe";
+const VALIDATE_URL =  "/m/account/validate";
 const ADD_PATIEN_URL = "/m/patient/create";
 const UPDATE_PATIEN_URL = "/m/patient/";
 const FETCH_PATIENT_URL = "/m/patient/";
@@ -41,17 +42,30 @@ export default Object.assign( {
             self.signeduser = null;
         })
     },
-    createuser : function(login,password,callback) {
+    createuser : function(login,password,validationcode,callback) {
         this.user.password = password;
         this.user.username = login;
         this.user.date=new Date();
         let self  =this;   
-        axiosapi.post(SIGNUP_URL,this.user).then(() => {
+        let account = { "user":this.user,"confirmationCode": validationcode};
+        axiosapi.post(VALIDATE_URL,account).then(() => {
             //on succes on cree un token
             self.createToken(callback);
         })
         .catch ( (error) =>  {
             callback(null,null,error);
+        })
+    },
+    subscribeuser : function(login,password,callback) {
+        this.user.password = password;
+        this.user.username = login;
+        this.user.date=new Date();
+        axiosapi.post(SUBSCRIPE_URL,this.user).then(() => {
+            //on succes on cree un token
+            callback();
+        })
+        .catch ( (error) =>  {
+            callback(error);
         })
     },
     createpatient: function(patient,callback)  {

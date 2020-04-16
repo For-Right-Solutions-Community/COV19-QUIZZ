@@ -2,7 +2,8 @@
   <div class="container" id="SignUp">
     <div class="columns grid-xs">
       <div class="column col-mx-auto col-4 col-xs-10 col-xl-4 col-l-5 col-md-8">
-        <h1>Créer un compte dans AMU 190</h1>
+        <div v-if="!waitverificationcode">
+           <h1>Créer un compte dans AMU 190</h1>
         <div class="form-group">
           <label class="form-label" for="email">Votre Email</label>
           <input
@@ -43,9 +44,26 @@
         </div>
 
         <div class="form-group">
-          <button @click="signup()" :class="{loading:loading}" class="btn btn-primary">Enregistrer</button>
+          <button @click="subscribe()" :class="{loading:loading}" class="btn btn-primary">Enregistrer</button>
           <button @click="exit()" class="btn btn-link">Quitter</button>
         </div>
+        </div>        
+
+         <div v-if="waitverificationcode">
+             <h1>Valider votre compte AMU190</h1>
+             <h4>Un mail est envoyé vers {{ email }}. Veuillez consulter votre boite email et inserer le code de vérifcation</h4>
+             <label class="form-label" for="verficationcode">Confirmer votre mot de passe</label>
+            <input
+            class="form-input"
+            id="verficationcode"
+            type="text"
+            placeholder="Code de vérification"
+            @keyup="verficationcodeerror = false "
+            v-model="verficationcode"
+            />
+          <button @click="validate()" :class="{loading:loading}" class="btn btn-primary">Valider</button>
+          <button @click="exit()" class="btn btn-link">Quitter</button>
+         </div> 
       </div>
     </div>
   </div>
@@ -63,12 +81,75 @@ export default {
       email: "",
       password1: "",
       password2: "",
+      verficationcode: "",
+      waitverificationcode: false,
+      verficationcodeerror: false,
       signuperror: false,
       signupmailerrormsg: "",
       loading: false
     };
   },
   methods: {
+    subscribe: function() {
+      let self = this;
+      self.signuperror = false;
+      self.loading = true;
+      self.waitverificationcode = false;
+      self.signupmailerrormsg = "";
+      if (this.password1 != this.password2) {
+        self.signuperror = true;
+        self.signupmailerrormsg = "Les mots de passes ne sont pas identiques";
+        self.loading = false;
+      } else {
+        self.password1 = this.password1;
+        self.email = this.email;
+        config.subscribeuser(self.email, self.password1, function(error) {
+              if (error != null) {
+                console.log(error);
+                self.loading = false;
+                self.signuperror = true;
+                self.waitverificationcode = false;
+                self.signupmailerrormsg = "Utilisateur existe déja";
+                
+              }
+              else{
+                self.loading = false;
+                self.waitverificationcode = true;               
+              }
+            });      
+      }
+    },
+    validate: function() {
+      let self = this;
+      self.signuperror = false;
+      self.loading = true;
+      self.signupmailerrormsg = "";
+      self.password1 = this.password1;
+      self.email = this.email;
+      self.verficationcode = this.verficationcode;
+      config.createuser(self.email, self.password1,self.verficationcode, function(token,user, error) {
+              if (error != null) {
+                console.log(error);
+                self.loading = false;
+                self.signuperror = true;
+                self.signupmailerrormsg = "Service indisponible essayer plus tard";
+                
+              }
+              else{
+                self.loading = false;
+                localStorage.setItem("tokenid", token);
+                localStorage.setItem('user', JSON.stringify(user));
+                if(user.patients.length==0)
+                {
+                  self.$router.push("addpatient");
+                }
+                else
+                {
+                  self.$router.push("home");
+                }
+              }
+            });      
+    },
     signup: function() {
       let self = this;
       self.signuperror = false;

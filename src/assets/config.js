@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export const API_PATH="https://api.amu190.maodao.xyz/";
 //export const API_PATH="http://localhost:8080/";
+//export const API_PATH="http://192.168.1.14:8080/";
 const LOGIN_URL = "/v2/register";
 const SUBSCRIPE_URL =  "/m/account/subscribe";
 const VALIDATE_URL =  "/m/account/validate";

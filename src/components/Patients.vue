@@ -13,7 +13,7 @@
         <div class="card-title h5">{{patient.firstname }} {{ " " }}  {{patient.lastname}}</div>
         <div class="card-subtitle text-gray"> {{patient.gender=="MALE"?" ذكر ":" أنثى"}}  {{patient.age}}  سنة</div>
       </div>
-      <div class="card-body">Tel : {{patient.phone}}</div>
+      <div class="card-body">  {{patient.message}}</div>
       <div class="card-footer">
         <button class="btn " @click="profilemode(patient)" > تغيير المعطيات</button>
         <button class="btn" @click="sympthoms(patient)">إعادة جميع الأسئلة</button>

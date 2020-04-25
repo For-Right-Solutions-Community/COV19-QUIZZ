@@ -3,23 +3,7 @@
     <header class="navbar">
       <section class="navbar-section">
         <div class="input-group input-inline">          
-            <div class="site-logo">
-            <a class="navbar-brand" href="/">
-              <img src="img/AMU190.png" class="img-fluid" alt="Img">
-            </a>
-          </div>
-        </div>
-      </section>
-      <section class="navbar-section">
-        <div class="navabrspace">
-           <a href="/patients" class="btn btn-lg btn-primary">قائمة المرضى</a>
-        </div> 
-        <div class="navabrspace">
-          <a href="/addpatient" class="btn btn-lg btn-primary"><i class="icon icon-plus"></i> إضافة مريض</a>
-        </div>
-        
-  
-         <div class="dropdown">
+          <div class="dropdown">
             <a href="#" class="btn btn-link dropdown-toggle" tabindex="0">
                 الحساب
               <i class="icon icon-caret"></i>
@@ -30,6 +14,20 @@
               <label class="label label-default" > {{ username }} </label>
             </ul>
           </div>
+        </div>
+      </section>
+      <section class="navbar-section">
+        <div class="navabrspace">
+          <a href="/addpatient" class="btn btn-primary">إضافة مريض</a>
+        </div>
+         <div class="navabrspace">
+           <a href="/patients" class="btn btn-primary">قائمة المرضى</a>
+        </div> 
+               
+         <div class="navabrspace">
+           <a href="/home" class="navbar mr-2">الرئيسية</a>
+        </div>  
+        
         
         
       </section>
@@ -80,3 +78,8 @@ export default {
           flex-basis: auto;
         }
 </style>
+<div class="site-logo">
+        <a class="navbar-brand" href="index.html">
+          <img src="img/AMU190.png" class="img-fluid" alt="Img">
+        </a>
+      </div>

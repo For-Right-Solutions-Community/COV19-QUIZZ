@@ -1,7 +1,7 @@
 <template>
- <div align="right">
+ <div class="container grid-lg" >
     <HeaderNavigation />
-    <div id="PatientList" v-show="patientlistmode">   
+    <div id="PatientList" v-show="patientlistmode" style="margin-top:30px">   
     <div v-if="loading" class="loading">... جاري التحميل </div>
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="post">

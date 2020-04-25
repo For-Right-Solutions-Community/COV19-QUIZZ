@@ -1,22 +1,22 @@
 <template>
-  <div class="container" align="right">
+  <div class="container grid-lg" >
     <HeaderNavigation v-if="!updatemode" />
     <Quizz v-if="addsucces && !updatemode" :patient="selectedpatient" v-on:sendsucces="exit()" />
     <!--lancer la quizz une fois le client est enregistré la premiere fois-->
         <div align="center">
-           <h5 v-if="!updatemode">إضافة مريض</h5>
-            <h5 v-if="updatemode" v-once>تغيير بيانات {{ patient.firstname}}</h5> 
+           <h2 v-if="!updatemode">إضافة مريض</h2>
+            <h4 v-if="updatemode" v-once>تغيير بيانات {{ patient.firstname}}</h4> 
          </div> 
        <ValidationObserver ref="observer" v-slot="{ invalid }">
-    <div v-if="!addsucces" class="columns grid-xs"  align="right">                  
-      <div class="column col-mx-auto col-4 col-xs-10 col-xl-4 col-l-5 col-md-8">
+    <div v-if="!addsucces" class="columns grid-xs"  >               
+      <div class="column col-mx-auto col-6 col-xs-12 col-xl-5 col-l-5 col-md-12">
     <ValidationProvider rules="required|min:3" immediate v-slot="{ errors }">
-         <label class="form-label" for="email"> * الإسم</label>
+         <label class="form-label" for="email">الإسم *</label>
           <input
             class="form-input"
             id="nom"
             type="text"
-            placeholder="Nom"
+            placeholder="الإسم"
             @keyup="forumalerror = false "
             v-model="patient.firstname"
             required
@@ -26,27 +26,14 @@
           </div>
          
         </ValidationProvider>
-          <label class="form-label" for="lastname">* اللقب</label>
-         <ValidationProvider rules="required|min:3" immediate  v-slot="{ errors }">
-          <input
-            class="form-input"
-            id="lastname"
-            type="text"
-            placeholder="Prénom"
-            @keyup="forumalerror = false "
-            v-model="patient.lastname"
-          />
-          <div align="left">
-             <label class="label label-warning" v-if="errors[0]">   {{ errors[0]}} </label> 
-          </div>
-     </ValidationProvider>
+        
           <ValidationProvider rules="required|telephone" immediate v-slot="{ errors }">
-          <label class="form-label" for="phone">* رقم الجوال</label>
+          <label class="form-label" for="phone">رقم الجوال *</label>
           <input
             class="form-input"
             id="phone"
             type="number"
-            placeholder="Numéro de téléphone"
+            placeholder="رقم الجوال"
             @keyup="forumalerror = false "
             v-model="patient.phone"
           />
@@ -59,18 +46,20 @@
             class="form-input"
             id="backup_phone"
             type="number"
-            placeholder="Numéro de téléphone"
+            placeholder="رقم الجوال احد الاقارب"
             @keyup="forumalerror = false "
             v-model="patient.backup_phone"
           />
-
+            <div align="left">
+             <label class="label label-warning indisplay"> </label> 
+             </div>
           <ValidationProvider rules="required|age" immediate v-slot="{ errors }">
-          <label class="form-label" for="age">* العمر</label>
+          <label class="form-label" for="age">العمر *</label>
           <input
             class="form-input"
             id="nom"
             type="number"
-            placeholder="Age"
+            placeholder="العمر"
             @keyup="forumalerror = false "
             v-model="patient.age"
           />
@@ -80,20 +69,34 @@
          </ValidationProvider>
 
       </div> 
-      <div class="column col-mx-auto col-4 col-xs-10 col-xl-4 col-l-5 col-md-8">
+      <div class="column col-mx-auto col-6 col-xs-12 col-xl-6 col-l-6 col-md-12">
 
   
         <div class="form-group">
         
-
+        <label class="form-label" for="lastname">اللقب *</label>
+         <ValidationProvider rules="required|min:3" immediate  v-slot="{ errors }">
+          <input
+            class="form-input"
+            id="lastname"
+            type="text"
+            placeholder="اللقب"
+            @keyup="forumalerror = false "
+            v-model="patient.lastname"
+          />
+          <div align="left">
+             <label class="label label-warning" v-if="errors[0]">   {{ errors[0]}} </label> 
+          </div>
+     </ValidationProvider>
           <ValidationProvider rules="required" immediate v-slot="{ errors }">
-          <label class="form-label" for="sexe">* الجنس</label>
+          <label class="form-label" for="sexe">الجنس *</label>
           <select
             class="form-select"
-            placeholder="sexe"
+            placeholder="الجنس"
             @keyup="forumalerror = false "
             v-model="patient.gender"
           >
+            <option value="">الجنس</option>
             <option value="MALE">ذكر</option>
             <option value="FEMALE">أنثى</option>
           </select>
@@ -103,13 +106,14 @@
           </ValidationProvider>
 
           <ValidationProvider rules="required" immediate v-slot="{ errors }">
-          <label class="form-label" for="sexe">* الحالة المدنية</label>
+          <label class="form-label" for="sexe">الحالة المدنية</label>
           <select
             class="form-select"
-            placeholder="status"
+            placeholder="الحالة المدنية"
             @keyup="forumalerror = false "
             v-model="patient.civilStatus"
           >
+            <option value="">الحالة المدنية</option>
             <option value="SINGLE">أعزب / عزباء</option>
             <option value="MARRIED">متزوج / متزوجة</option>
             <option value="WIDOWED"> أرمل / أرملة</option>
@@ -121,14 +125,15 @@
           </ValidationProvider>
 
           <div v-if="patient.address!=null">
-            <label class="form-label" for="ville">* الولاية</label>
+            <label class="form-label" for="ville">الولاية *</label>
              <ValidationProvider rules="required" immediate v-slot="{ errors }">
             <select
               class="form-select"
-              placeholder="ville"
+              placeholder="الولاية"
               @keyup="forumalerror = false "
               v-model="patient.address.state"
             >
+              <option value="">الولاية</option>
               <option value="ARIANA">ولاية أريانة</option>
               <option value="BEJA">ولاية باجة</option>
               <option value="BENAROURS">ولاية بن عروس</option>
@@ -158,13 +163,19 @@
               <label class="label label-warning" v-if="errors[0]">   {{ errors[0]}} </label> 
             </div>
             </ValidationProvider>
-             <ValidationProvider rules="required" immediate v-slot="{ errors }">
-            <label class="form-label" for="adresse">* عنوان الإقامة</label>
+            
+          </div>
+        </div>
+       </div>
+        <div class="clearfix"></div>
+        <div class="form-group col-12">
+         <ValidationProvider rules="required" immediate v-slot="{ errors }">
+            <label class="form-label" for="adresse">عنوان الإقامة *</label>
             <input
               class="form-input"
               id="nom"
               type="text"
-              placeholder="Adresse"
+              placeholder="عنوان الإقامة"
               @keyup="forumalerror = false "
               v-model="patient.address.avenue"
             />
@@ -174,22 +185,30 @@
             </ValidationProvider>
 
             <div v-if="patient.location!=null">
-            <button @click="geolocalisation()" class="btn btn-primary"> <i class="icon icon-location"> </i> تحديد الموقع  </button>
+            <button @click="geolocalisation()" class="btn btn-primary btn-top"> <i class="icon icon-location"> </i> تحديد الموقع  </button>
 
             </div>
           </div>
+              
+     
+      <div class="clearfix"></div>
+        <div class="form-group col-12 margin20">
+          <button v-if="!updatemode" @click="save()" :disabled=" invalid == true " class="btn btn-primary col-4">تسجيل</button>
+          <button v-if="!updatemode" @click="exit()" class="btn btn-primary col-4 float-left">خروج</button>
+          <button v-if="updatemode" @click="update()" :disabled=" invalid == true " class="btn btn-primary col-4">تسجيل</button>
         </div>
-        <div class="form-group">
-          <button v-if="!updatemode" @click="save()" :disabled=" invalid == true " class="btn btn-primary">تسجيل</button>
-          <button v-if="!updatemode" @click="exit()" class="btn btn-link">خروج</button>
-          <button v-if="updatemode" @click="update()" :disabled=" invalid == true " class="btn btn-primary">تسجيل</button>
-        </div>
-       
-      </div>
       
     </div>
      </ValidationObserver>
+     
+<footer>
+AMU 190 © 2020
+</footer>
+
+
+
   </div>
+ 
 </template>
 
 <script>
@@ -335,3 +354,16 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+ h2 {margin-top: 30px}
+ .btn-top {margin-top:-30px}
+ .indisplay {opacity:0}
+ .margin20 {margin-top:20px ; margin-bottom:20px}
+ footer{
+   padding : 30px 0 30px 0 ;
+	background-color:#ca3610; 
+  color : #fff;
+	text-align:center;
+}
+</style>

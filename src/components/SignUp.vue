@@ -1,51 +1,55 @@
 <template>
-  <div class="container" id="SignUp">
-    <div class="columns grid-xs">
-      <div class="column col-mx-auto col-4 col-xs-10 col-xl-4 col-l-5 col-md-8">
+  <div class="container grid-lg" id="SignUp">
+    <div class="columns">
+      <div class="column col-4 col-md-12">
+          <img src="img/AMU190.png" alt="AMU 190 " class="img-responsive logo"/>
+      </div>
+      <div class="column col-8  col-md-12 padd20p">
+      <div class="column col-8 col-md-12 col-mx-auto">
         <div v-if="!waitverificationcode">
-           <h1>Créer un compte dans AMU 190</h1>
+           <h2>إنشاء حساب في AMU 190</h2>
         <div class="form-group">
-          <label class="form-label" for="email">Votre Email</label>
+          <label class="form-label" for="email">بريدك الإلكتروني</label>
           <input
             class="form-input"
             id="email"
             type="text"
-            placeholder="Email"
+            placeholder="بريدك الإلكتروني"
             @keyup="signinrror = false "
             v-model="email"
           />
         </div>
         <div class="form-group">
-          <label class="form-label" for="password1">Votre mot de passe</label>
+          <label class="form-label" for="password1">كلمة المرور</label>
           <input
             class="form-input"
             id="password1"
             type="password"
-            placeholder="Password"
+            placeholder="كلمة المرور"
             @keyup="signinrror = false "
             v-model="password1"
           />
-          <label class="form-label" for="password2">Confirmer votre mot de passe</label>
+          <label class="form-label" for="password2">اعادة كلمة المرور</label>
           <input
             class="form-input"
             id="password2"
             type="password"
-            placeholder="Password"
+            placeholder="اعادة كلمة المرور"
             @keyup="signinrror = false "
             v-model="password2"
           />
           <span v-show="signuperror" class="label label-warning">{{ signupmailerrormsg }}</span>
-          <span class="label secondary label">
-            <p>
-              Définir un mot de passe pour votre compte amu190.
-              Le mot de passe doit être au minumum de 6 charactères.
-            </p>
+          <span class="label secondary label-new col-12">
+            
+              قم بتعيين كلمة مرور لحساب amu190 الخاص بك. <br>
+              يجب أن تكون كلمة المرور 6 أحرف على الأقل.
+            
           </span>
         </div>
 
         <div class="form-group">
-          <button @click="subscribe()" :class="{loading:loading}" class="btn btn-primary">Enregistrer</button>
-          <button @click="exit()" class="btn btn-link">Quitter</button>
+          <button @click="subscribe()" :class="{loading:loading}" class="btn btn-primary col-12">ابدأ الآن</button>
+          <button @click="login()" class="btn btn-link col-mx-auto btn-center">هل لديك حساب بالفعل؟ سجل دخول</button>
         </div>
         </div>        
 
@@ -61,9 +65,10 @@
             @keyup="verficationcodeerror = false "
             v-model="verficationcode"
             />
-          <button @click="validate()" :class="{loading:loading}" class="btn btn-primary">Valider</button>
-          <button @click="exit()" class="btn btn-link">Quitter</button>
+          <button @click="validate()" :class="{loading:loading}" class="btn btn-primary col-12">ابدأ الآن</button>
+          <button @click="login()" class="btn btn-link col-mx-auto btn-center">هل لديك حساب بالفعل؟ سجل دخول</button>
          </div> 
+         </div>
       </div>
     </div>
   </div>
@@ -90,6 +95,9 @@ export default {
     };
   },
   methods: {
+    login: function() {
+      this.$router.push("login");
+    },
     subscribe: function() {
       let self = this;
       self.signuperror = false;
@@ -98,13 +106,13 @@ export default {
       self.signupmailerrormsg = "";
       if (this.password1 != this.password2 || (this.password1.length<6))  {
         self.signuperror = true;
-        self.signupmailerrormsg = "Les mots de passes ne sont pas identiques";
+        self.signupmailerrormsg = "كلمات المرور ليست هي نفسها";
         self.loading = false;
       }
       else if(this.password1.length<6)
       {
         self.signuperror = true;
-        self.signupmailerrormsg = "Mot de passe faible";
+        self.signupmailerrormsg = "كلمة مرور ضعيفة";
         self.loading = false;
       }
       else {
@@ -116,7 +124,7 @@ export default {
                 self.loading = false;
                 self.signuperror = true;
                 self.waitverificationcode = false;
-                self.signupmailerrormsg = "Une erreur est survenue";
+                self.signupmailerrormsg = "حدث خطأ";
                 
               }
               else{
@@ -139,7 +147,7 @@ export default {
                 console.log(error);
                 self.loading = false;
                 self.signuperror = true;
-                self.signupmailerrormsg = "Service indisponible essayer plus tard";
+                self.signupmailerrormsg = "الخدمة غير متاحة حاول لاحقًا";
                 
               }
               else{
@@ -164,7 +172,7 @@ export default {
       self.signupmailerrormsg = "";
       if (this.password1 != this.password2) {
         self.signuperror = true;
-        self.signupmailerrormsg = "Les mots de passes ne sont pas identiques";
+        self.signupmailerrormsg = "كلمات المرور ليست هي نفسها";
         self.loading = false;
       } else {
         self.password1 = this.password1;
@@ -177,7 +185,7 @@ export default {
               if (error != null) {
                 self.loading = false;
                 self.signuperror = true;
-                self.signupmailerrormsg = "Service indisponible essayer plus tard";
+                self.signupmailerrormsg = "الخدمة غير متاحة حاول لاحقًا";
               }
               else{
                 self.loading = false;
@@ -200,14 +208,14 @@ export default {
             var errorMessage = error.message;
             self.signuperror = true;
             self.loading = false;
-            self.signupmailerrormsg = "Problème de connexion";
+            self.signupmailerrormsg = "مشكلة اتصال";
             if (error.code == "auth/email-already-in-use") {
-              self.signupmailerrormsg = "Le mail est déja utilisé";
+              self.signupmailerrormsg = "البريد الإلكتروني مستخدم بالفعل";
             } else if (error.code == "auth/weak-password") {
               self.signupmailerrormsg =
-                "Votre mot de passe est faible , il faut 6 charactères au minumum";
+                "كلمة مرورك ضعيفة ، فأنت بحاجة إلى 6 أحرف على الأقل";
             } else if (error.code == "auth/invalid-email") {
-              self.signupmailerrormsg = "Votre mail est non valide";
+              self.signupmailerrormsg = "بريدك الإلكتروني غير صالح";
             }
           });
       }
@@ -221,3 +229,34 @@ export default {
   }
 };
 </script>
+
+<style>
+.logo {
+  max-width:256px;
+  height:auto;
+  margin-top : 40%
+}
+p.label {
+  font-weight: 700;
+  padding-top : 35px;
+  padding-bottom : 35px;
+  padding-right : 20px;
+  padding-left : 20px;
+}
+.form-checkbox .form-icon, .form-radio .form-icon {
+  right : 0
+}
+.form-checkbox, .form-radio, .form-switch {
+  padding-right : 25px
+}
+.label-new {padding : 8px ;margin-top:10px}
+h2 {color : #ca3610;font-weight: 700;}
+h6 {color : #ca3610}
+.btn-center {text-align :center !important;margin-left:auto ;margin-right:auto;display: block;}
+@media (max-width:960px){
+.logo {
+  margin-top : 10%;
+  text-align :center !important;margin-left:auto ;margin-right:auto;display: block;
+}
+}
+</style>

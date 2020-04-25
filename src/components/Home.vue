@@ -1,18 +1,14 @@
 <template>
-  <div align="right">
+   <div class="container grid-lg" >
+
     <HeaderNavigation />
     <div class="topspace" align="center">
-      <img
-        src="img/AMU190.png"
-        alt="AMU 190 "
-        style="width:256px;height:256px;"
-        class="img-responsive"
-      />
+     
       <h5>
      <div>
       <div class="container  justifyparagraph  " align="center"  >
         <div class="columns">
-          <div class="column col-4 col-4 col-xs-10 col-xl-4 col-l-5 col-md-8 col-mx-auto"> 
+          <div class="column col-12  col-xs-10 col-xl-4 col-l-5 col-md-8 col-mx-auto"> 
                  <p class="label default-label" >
 تحتوي هذه التطبيقة على جملة من الأسئلة حول أعراض المريض(ة) والأمراض المزمنة التي يعاني/تعاني منها و يرجو الإجابة عنها بدقة.
 كل المعطيات المسجلة على هذه التطبيقة يتم التعاطي معها من قبل فرق الانعاش الطبي الاستعجالي بتونس.من اجل تنسيق اكبر للجهود في اطار مقاومة فيروس كورونا ، اضافة الى كونها مهمة في تطوير البحث العلمي و متابعة الوضع الوبائي جهويا و وطنيا و فهم ادق لمناطق انتشار الوباء.
@@ -35,11 +31,11 @@
       </section>
       <section class="navbar-center">
         <!-- centered logo or brand -->
-         <img src="img/FMS.png" alt="AMU 190 " style="width:64px;height:64px;" class="img-responsive leftspace " />
-         <img src="img/samu.png" alt="AMU 190 " style="width:64px;height:64px;" class="img-responsive leftspace " />
-         <img src="img/moubedra.jpg" alt="AMU 190 " style="width:90px;height:64px;" class="img-responsive leftspace " />
-         <img src="img/FRS.jpg" alt="AMU 190 " style="width:64px;height:64px;" class="img-responsive leftspace " />
-        <img src="img/UN.png" alt="AMU 190 " style="width:90px;height:64px;" class="img-responsive leftspace" />
+         <img src="img/FMS.png" alt="AMU 190 " style="width:100px;height:auto;" class="img-responsive leftspace " />
+         <img src="img/samu.png" alt="AMU 190 " style="width:100px;height:auto;" class="img-responsive leftspace " />
+         <img src="img/moubedra.jpg" alt="AMU 190 " style="width:100px;height:auto;" class="img-responsive leftspace " />
+         <img src="img/FRS.jpg" alt="AMU 190 " style="width:100px;height:auto;" class="img-responsive leftspace " />
+        <img src="img/UN.png" alt="AMU 190 " style="width:100px;height:auto;" class="img-responsive leftspace" />
       </section>
       <section class="navbar-section">
       </section>
@@ -55,3 +51,7 @@ export default {
   }
 };
 </script>
+
+<style>
+body {background : #F6F6F6}
+</style>

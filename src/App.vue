@@ -19,6 +19,12 @@ export default {
 </script>
 <style >
 
+body {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 14px;
+    direction: rtl;
+    text-align: right;
+}
 .btn{
     background: #fff;
     border: .05rem solid #ca3610;
@@ -74,7 +80,7 @@ export default {
  .justifyparagraph {
   text-align: justify;
   text-justify:auto;
-  padding-top: 50px;
+  padding-top: 20px;
  } 
  .topspace{
    padding-top: 10px;
@@ -82,4 +88,7 @@ export default {
   .leftspace{
    padding-left:10px;
  }
+.padd20p {
+  padding-top : 8%
+}
 </style>

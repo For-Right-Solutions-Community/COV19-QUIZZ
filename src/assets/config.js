@@ -1,8 +1,10 @@
 import axios from 'axios';
 //axios.defaults.headers.common['Authorization'] = `Bearer`;
 
-export const API_PATH="https://api.amu190.maodao.xyz/";
-//export const API_PATH="http://localhost:8080/";
+// export const API_PATH="https://api.amu190.maodao.xyz/";
+//export const API_PATH="http://amu190.tn:8081/";
+
+export const API_PATH="http://localhost:8080/";
 //export const API_PATH="http://192.168.1.14:8080/";
 const LOGIN_URL = "/v2/register";
 const SUBSCRIPE_URL =  "/m/account/subscribe";
@@ -122,7 +124,7 @@ export default Object.assign( {
         patient.user = {"id": this.getuser().id};//passer tous l objet user cree un probleme
         return axiosapi.put(UPDATE_PATIEN_URL+patient.id,patient,this.getHeaderConfig());
     },
-    createsymantecedent: function(patientin,symp,antecendt,callback)  {
+    createsymantecedentold: function(patientin,symp,antecendt,callback)  {
         let patient = {"id":patientin.id};
         symp.patient = patient;//passer tous l objet user cree un probleme
         antecendt.patient = patient;//passer tous l objet user cree un probleme
@@ -139,6 +141,25 @@ export default Object.assign( {
             console.log(error);
             callback(error);
         })
+    },
+    createsymantecedent: async function(patientin,symp,antecendt,callback)  {
+        let patient = {"id":patientin.id};
+        symp.patient = patient;//passer tous l objet user cree un probleme
+        antecendt.patient = patient;//passer tous l objet user cree un probleme
+        console.log(symp);
+        console.log(antecendt);
+        try{
+            await this.updateantecedent(antecendt);
+            await this.updatepatientlight(patientin);
+            await axiosapi.post(ADD_SYMPTOM_URL,symp,this.getHeaderConfig());
+            console.log("second call succes add antecedant");
+            callback();
+        }
+        catch(error){
+                console.error(error.response);
+                console.log(error);
+                callback(error);
+        } 
     },
     fetchpatientsall: function(callback)  {
         let userid= this.getuser().id

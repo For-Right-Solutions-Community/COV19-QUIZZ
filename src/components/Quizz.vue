@@ -53,12 +53,13 @@
                       v-for="(response, index) in quiz.questions[questionIndex].responses"
                       :key="index"
                     >
-                      {{ reponsetext(response) }}
-                      <input
+                     <input
                         type="checkbox"
                         @click="selectMulipleOption(index)"
                         v-model="quiz.questions[questionIndex].responses[index].selected"
                       />
+                      {{ reponsetext(response) }}
+
                     </div>
                   </div>
                 </div>
@@ -107,6 +108,20 @@
               <header class="navbar">
                 <section class="navbar-section">
                   <button
+                    v-show="!succeenvoie"
+                    v-on:click="prev();"
+                    :disabled="questionIndex < 1"
+                    class="btn"
+                  >
+                  <i class="icon icon-arrow-right"></i>
+                    السابق
+                  </button>
+                </section>
+                <section class="navbar-center">
+                  <!-- centered logo or brand    || userResponses[questionIndex]==null -->
+                </section>
+                <section class="navbar-section">
+                 <button
                     v-if="questionIndex<quiz.questions.length"
                     :class="(userResponses[questionIndex]==null)?'':'is-active'"
                     v-on:click="next();"
@@ -115,11 +130,11 @@
                     ||(!quiz.questions[questionIndex].minselected && quiz.questions[questionIndex].QUIZZ_TYPE=='MULTIPLECHOICES')"
                     class="btn btn-primary"
                   >
-                    <i class="icon icon-arrow-left"></i>
                     الموالي
-                  </button>
+                    <i class="icon icon-arrow-left"></i>
 
-                  <button
+                  </button>
+                 <button
                     v-if="questionIndex>=quiz.questions.length"
                     v-show="!succeenvoie"
                     v-on:click="save();"
@@ -128,20 +143,6 @@
                   >
                     <i class="icon icon-mail"></i>
                     أرسل البيانات الآن
-                  </button>
-                </section>
-                <section class="navbar-center">
-                  <!-- centered logo or brand    || userResponses[questionIndex]==null -->
-                </section>
-                <section class="navbar-section">
-                  <button
-                    v-show="!succeenvoie"
-                    v-on:click="prev();"
-                    :disabled="questionIndex < 1"
-                    class="btn"
-                  >
-                    السابق
-                    <i class="icon icon-arrow-right"></i>
                   </button>
                 </section>
               </header>

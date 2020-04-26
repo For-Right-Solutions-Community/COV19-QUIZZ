@@ -54,12 +54,60 @@
       <div class="container justifyparagraph" align="center">
         <div class="columns">
           <div class="column col-12 col-lg-8 col-md-12 col-sm-12 col-mx-auto">
-            <p class="label default-label">
+            <p class="label ">
               هذه التطبيقة تم إنشاؤها من قبل مجموعة من الأطباء و المهندسين التونسيين في إطار دعم الجهود الوطنية لمقاومة فيروس كورونا.
               و تهدف إلى تخفيف العبئ المسجل على خطوط 190 التابعة للإنعاش الطبي الاستعجالي و تحديد الحالات المصابة الأكثر خطورة و التي هي بحاجة ماسة لتدخل طبي عاجل و تنسيق ذلك إضافة إلى إرشاد المريض(ة) إلى أنجع الحلول من اجل متابعة حالته(ا) المرضية في حالة وجود أعراض غير خطيرة ..
               كل المعطيات المسجلة على هذه التطبيقة يتعامل معها فرق الإنعاش الطبي الاستعجالي بالمستشفيات العمومية التابعة لوزارة الصحة التونسية و يتم الاتصال بالمرضى المسجلين في الإبان مع مراعاة درجة خطورة الحالات.
               يمكن للمسجل على هذا الموقع إضافة أكثر من مريض(ة) و متابعة حالتهم(ن).
             </p>
+
+
+            <div>
+    <h1>المساهمون :</h1>
+   </div>
+    <div   class="card  topspace"  >
+      <div class="card-header">
+        <div class="card-title h2">كلية الطب بصفاقس</div>
+      </div>
+      <div class="card-image">
+      <img src="img/fmsf.png" alt="AMU 190 " style="width:200px;height:180px;" class="img-responsive leftspace " />
+      </div>
+    </div>
+    <div   class="card  topspace"  >
+      <div class="card-header">
+        <div class="card-title h2">هيئة الأمم المتحدة للمرأة</div>
+      </div>
+      <div class="card-image">
+      <img src="img/UN_Women_Arabic_No_Tag_Blue.png" alt="AMU 190 " style="width:200px;height:180px;" class="img-responsive leftspace" />
+      </div>
+    </div>
+    <div   class="card  topspace"  >
+      <div class="card-header">
+        <div class="card-title h2">خدمة الإستعجالي الطبي بصفاقس</div>
+      </div>
+      <div class="card-image">
+         <img src="img/samu.png" alt="AMU 190 " style="width:200px;height:180px;" class="img-responsive leftspace " />
+      </div>
+    </div>
+
+    <div   class="card  topspace"  >
+      <div class="card-header">
+        <div class="card-title h2"> المبادرة الشعبية للتصدي لوباء كورونا </div>
+      </div>
+      <div class="card-image">
+         <img src="img/moubedra.jpg" alt="AMU 190 " style="width:200px;height:180px;" class="img-responsive leftspace " />
+      </div>
+    </div>
+
+     <div   class="card  topspace"  >
+       <div class="card-header">
+        <div class="card-title h2">شركة الحلول الصحيحة</div>
+      </div>
+      <div class="card-image">
+       <img src="img/FRS.jpg" alt="AMU 190 " style="width:200px;height:180px;" class="img-responsive leftspace " />
+      </div>
+    </div>
+    
           </div>
         </div>
       </div>
@@ -140,6 +188,9 @@ p.label {
   padding-bottom : 35px;
   padding-right : 20px;
   padding-left : 20px;
+}
+.label {
+ background-color: rgba(0,0,0,.0);
 }
 .form-checkbox .form-icon, .form-radio .form-icon {
   right : 0

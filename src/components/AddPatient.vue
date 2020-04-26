@@ -25,8 +25,22 @@
              <label class="label label-warning" v-if="errors[0]">   {{ errors[0]}} </label> 
           </div>
          
-        </ValidationProvider>
-        
+     </ValidationProvider>
+               
+         <ValidationProvider rules="required|min:3" immediate  v-slot="{ errors }">
+            <label class="form-label" for="lastname">اللقب *</label>
+          <input
+            class="form-input"
+            id="lastname"
+            type="text"
+            placeholder="اللقب"
+            @keyup="forumalerror = false "
+            v-model="patient.lastname"
+          />
+          <div align="left">
+             <label class="label label-warning" v-if="errors[0]">   {{ errors[0]}} </label> 
+          </div>
+     </ValidationProvider>
           <ValidationProvider rules="required|telephone" immediate v-slot="{ errors }">
           <label class="form-label" for="phone">رقم الجوال *</label>
           <input
@@ -53,6 +67,14 @@
             <div align="left">
              <label class="label label-warning indisplay"> </label> 
              </div>
+
+
+      </div> 
+      <div class="column col-mx-auto col-6 col-xs-12 col-xl-6 col-l-6 col-md-12">
+
+  
+        <div class="form-group">
+        
           <ValidationProvider rules="required|age" immediate v-slot="{ errors }">
           <label class="form-label" for="age">العمر *</label>
           <input
@@ -67,27 +89,6 @@
              <label class="label label-warning" v-if="errors[0]">   {{ errors[0]}} </label> 
           </div>
          </ValidationProvider>
-
-      </div> 
-      <div class="column col-mx-auto col-6 col-xs-12 col-xl-6 col-l-6 col-md-12">
-
-  
-        <div class="form-group">
-        
-        <label class="form-label" for="lastname">اللقب *</label>
-         <ValidationProvider rules="required|min:3" immediate  v-slot="{ errors }">
-          <input
-            class="form-input"
-            id="lastname"
-            type="text"
-            placeholder="اللقب"
-            @keyup="forumalerror = false "
-            v-model="patient.lastname"
-          />
-          <div align="left">
-             <label class="label label-warning" v-if="errors[0]">   {{ errors[0]}} </label> 
-          </div>
-     </ValidationProvider>
           <ValidationProvider rules="required" immediate v-slot="{ errors }">
           <label class="form-label" for="sexe">الجنس *</label>
           <select
@@ -184,6 +185,7 @@
             </div>
             </ValidationProvider>
 
+            <br>
             <div v-if="patient.location!=null">
             <button @click="geolocalisation()" class="btn btn-primary btn-top"> <i class="icon icon-location"> </i> تحديد الموقع  </button>
 
@@ -201,11 +203,6 @@
     </div>
      </ValidationObserver>
      
-<footer>
-AMU 190 © 2020
-</footer>
-
-
 
   </div>
  

@@ -26,20 +26,51 @@
 
     </div>
 
-    <footer class="navbar">
-      <section class="navbar-section">
-      </section>
-      <section class="navbar-center">
-        <!-- centered logo or brand -->
-         <img src="img/FMS.png" alt="AMU 190 " style="width:100px;height:auto;" class="img-responsive leftspace " />
-         <img src="img/samu.png" alt="AMU 190 " style="width:100px;height:auto;" class="img-responsive leftspace " />
-         <img src="img/moubedra.jpg" alt="AMU 190 " style="width:100px;height:auto;" class="img-responsive leftspace " />
-         <img src="img/FRS.jpg" alt="AMU 190 " style="width:100px;height:auto;" class="img-responsive leftspace " />
-        <img src="img/UN.png" alt="AMU 190 " style="width:100px;height:auto;" class="img-responsive leftspace" />
-      </section>
-      <section class="navbar-section">
-      </section>
-    </footer>
+   <div>
+    <h1>المساهمون :</h1>
+   </div>
+    <div   class="card  topspace"  >
+      <div class="card-header">
+        <div class="card-title h2">كلية الطب بصفاقس</div>
+      </div>
+      <div class="card-image">
+      <img src="img/fmsf.png" alt="AMU 190 " style="width:200px;height:180px;" class="img-responsive leftspace " />
+      </div>
+    </div>
+    <div   class="card  topspace"  >
+      <div class="card-header">
+        <div class="card-title h2">هيئة الأمم المتحدة للمرأة</div>
+      </div>
+      <div class="card-image">
+      <img src="img/UN_Women_Arabic_No_Tag_Blue.png" alt="AMU 190 " style="width:200px;height:180px;" class="img-responsive leftspace" />
+      </div>
+    </div>
+    <div   class="card  topspace"  >
+      <div class="card-header">
+        <div class="card-title h2">خدمة الإستعجالي الطبي بصفاقس</div>
+      </div>
+      <div class="card-image">
+         <img src="img/samu.png" alt="AMU 190 " style="width:200px;height:180px;" class="img-responsive leftspace " />
+      </div>
+    </div>
+
+    <div   class="card  topspace"  >
+      <div class="card-header">
+        <div class="card-title h2"> المبادرة الشعبية للتصدي لوباء كورونا </div>
+      </div>
+      <div class="card-image">
+         <img src="img/moubedra.jpg" alt="AMU 190 " style="width:200px;height:180px;" class="img-responsive leftspace " />
+      </div>
+    </div>
+
+     <div   class="card  topspace"  >
+       <div class="card-header">
+        <div class="card-title h2">شركة الحلول الصحيحة</div>
+      </div>
+      <div class="card-image">
+       <img src="img/FRS.jpg" alt="AMU 190 " style="width:200px;height:180px;" class="img-responsive leftspace " />
+      </div>
+    </div>
   </div>
 </template>
 <script>

@@ -1,24 +1,51 @@
 <template>
-  <div id="app">
+  <div id="app">     
+    <div v-for="msg in unreadmessages" class="toast toast-primary sticky"  :key="msg">
+    <button class="btn btn-clear float-right"></button>
+       {{unreadmessages.length}} {{ msg }}
+    </div>
+
     <router-view> </router-view>
+
   </div>
+  
 </template>  
 
 
 <script>
+import config from "./assets/config";
 
 export default {
   name: 'App',
   data ()
   {
     return{
-      routingdisabled : false
+      routingdisabled : false,
+      unreadmessages:[]
     }
+  },
+   created() {
+       this.initchannel();
+    },
+   methods: {
+
+    initchannel: function() {    
+      let self = this;  
+      config.monitornews((message)=>{
+        self.unreadmessages.push(message);
+      });
+    }
+
   }
 }
+
 </script>
 <style >
-
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 50%
+}
 body {
     font-family: 'Tajawal', sans-serif;
     font-size: 14px;

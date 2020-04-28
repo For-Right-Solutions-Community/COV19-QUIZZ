@@ -1,8 +1,9 @@
 import axios from 'axios';
 //axios.defaults.headers.common['Authorization'] = `Bearer`;
 
- export const API_PATH="https://api.amu190.maodao.xyz/";
+export const API_PATH="https://api.amu190.maodao.xyz/";
 //export const API_PATH="http://amu190.tn:8081/";
+
 
 //export const API_PATH="http://localhost:8080/";
 //export const API_PATH="http://192.168.1.14:8080/";
@@ -16,9 +17,11 @@ const ADD_SYMPTOM_URL = "/m/symptom/create";
 const UPDATE_ANTECEDENT_URL = "/m/antecedent/";
 const axiosapi = axios.create({
     baseURL: API_PATH,
-    timeout: 50000,
+    timeout: 60000,
     headers: {'Authorization': 'Bearer '}
   });
+const longpollingtimeout = 60000 * 15;
+const delay = ms => new Promise(res => setTimeout(res, ms));
 export default Object.assign( {   
         user: {
             username:'',
@@ -206,6 +209,39 @@ export default Object.assign( {
        let user = JSON.parse(localStorage.getItem("user"));
        console.log(user);
        return user;
+    },
+    monitornews : async function( callback )
+    {
+        let counter=0;
+        let errorcount = 0;
+        while(counter<10000)
+        {
+            counter++;
+            try{
+                console.log("Start monitring news "+counter);
+                var config = this.getHeaderConfig();
+                config.timeout = longpollingtimeout;
+                let reponse = await axiosapi.get('/m/events/async-deferredresult',config);
+                console.log("News Captured");
+                console.log(reponse.data);
+                callback(reponse.data);
+           }
+           catch(error){
+                   console.error(error.response);
+                   console.log(error);
+                   errorcount++;
+                   if(errorcount>5)
+                   {
+                    errorcount =0;
+                    await delay(60000); //wait one minute
+                   }
+                   else
+                   {
+                    await delay(1000); //wait one second 
+                   }
+           }
+        }
+
     }
 
 

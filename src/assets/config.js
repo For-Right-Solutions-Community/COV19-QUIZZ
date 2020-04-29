@@ -214,11 +214,10 @@ export default Object.assign( {
     {
         let counter=0;
         let errorcount = 0;
-        while(counter<10000)
+        while(counter<2)
         {
-            counter++;
             try{
-                console.log("Start monitring news "+counter);
+                console.log("Start monitring news ");
                 var config = this.getHeaderConfig();
                 config.timeout = longpollingtimeout;
                 let reponse = await axiosapi.get('/m/events/async-deferredresult',config);

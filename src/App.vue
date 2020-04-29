@@ -1,10 +1,19 @@
 <template>
-  <div id="app">     
-    <div v-for="msg in unreadmessages" class="toast toast-primary sticky"  :key="msg">
-    <button class="btn btn-clear float-right"></button>
-       {{unreadmessages.length}} {{ msg }}
+  <div id="app">  
+    <div v-if="notificationenable">
+    <button class="btn " @click="play()"> play</button>
+    <audio id="mySound" src="./assets/redalert.mp3"></audio>
+    <div class="sticky">
+      <ul v-if=" unreadmessages.length>0" >
+        <li v-for="(msg,index) in unreadmessages" :key="index">
+          <div class="toast toast-primary ">
+              <button class="btn btn-clear float-right" @click="clearnotification(index)"></button>
+              {{ msg }}
+        </div>
+       </li>
+    </ul>
+    </div> 
     </div>
-
     <router-view> </router-view>
 
   </div>
@@ -21,18 +30,30 @@ export default {
   {
     return{
       routingdisabled : false,
+      notificationenable:false,
       unreadmessages:[]
     }
   },
    created() {
-       this.initchannel();
+       if(this.notificationenable)
+       {
+        this.initchannel();
+       }
+
     },
    methods: {
-
+    play(){
+      document.getElementById("mySound").play();
+    },
+    clearnotification(index)
+    {
+        this.unreadmessages.splice(index,  1);
+    },
     initchannel: function() {    
       let self = this;  
       config.monitornews((message)=>{
         self.unreadmessages.push(message);
+        self.play();
       });
     }
 
